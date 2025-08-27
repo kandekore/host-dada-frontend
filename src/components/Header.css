@@ -1,0 +1,116 @@
+/* src/components/Header.css */
+
+/* ====== ACTION BAR ====== */
+.action-bar {
+  font-size: 0.8rem;
+}
+
+.action-bar .nav-link,
+.action-bar .dropdown-toggle,
+.action-bar .dropdown-item {
+  color: rgba(255, 255, 255, 0.75) !important;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.action-bar .nav-link:hover,
+.action-bar .dropdown-item:hover {
+  color: #fff !important;
+}
+
+.action-bar .dropdown-menu {
+  background-color: #343a40;
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.country-selector .dropdown-toggle::after {
+  /* Hides the default bootstrap caret */
+  display: none;
+}
+
+/* ====== MAIN NAVIGATION ====== */
+.main-navbar {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.logo {
+  height: 45px;
+}
+
+.main-navbar .nav-link,
+.main-navbar .dropdown-toggle {
+  font-weight: 500;
+  color: #343a40 !important;
+}
+
+/* ====== MEGA MENU ====== */
+.mega-menu {
+  position: static !important;
+}
+
+.mega-menu .dropdown-menu {
+  width: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 1rem !important; /* Pushes the dropdown down a bit */
+  border: none;
+  border-top: 1px solid #dee2e6;
+  border-radius: 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 0;
+}
+
+.mega-menu-content {
+  padding: 2rem;
+}
+
+.mega-menu-description h4 {
+  font-weight: bold;
+  color: #212529;
+}
+
+.mega-menu-description p {
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+
+.mega-menu-item {
+  display: flex !important;
+  align-items: center;
+  padding: 0.75rem 1rem !important;
+  border-radius: 0.3rem;
+  margin-bottom: 0.5rem;
+  white-space: normal !important; /* Allow text to wrap */
+}
+
+.mega-menu-item:hover {
+  background-color: #f8f9fa;
+  color: #C19A6B !important; /* Using a bronze color from your logo */
+}
+
+.mega-menu-item .icon {
+  font-size: 1.5rem;
+  margin-right: 1rem;
+  width: 30px;
+  text-align: center;
+}
+
+.mega-menu-item .item-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.mega-menu-item .item-content strong {
+  font-weight: 600;
+  color: #212529;
+}
+
+.mega-menu-item:hover .item-content strong {
+  color: inherit;
+}
+
+.mega-menu-item .item-content small {
+  color: #6c757d;
+}

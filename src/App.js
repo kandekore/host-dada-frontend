@@ -41,15 +41,10 @@ function App() {
 
   return (
     <Router>
-      {/* Header with Login / Register button */}
-      <div className="container py-2 d-flex justify-content-end">
-        <button className="btn btn-primary" onClick={handleLoginShow}>
-          Login / Register
-        </button>
-      </div>
+
 
       <Routes>
-        <Route path="/" element={<MainLayout />}>
+        <Route path="/" element={<MainLayout handleLoginShow={handleLoginShow} />}>
           <Route index element={<Home />} />
 
           {/* About Us Routes */}

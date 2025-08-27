@@ -1,0 +1,51 @@
+/* src/components/HeroSlider.css */
+
+.hero-slider {
+  height: calc(100vh - 200px); /* Adjust 200px based on header + domain search height */
+  min-height: 500px;
+  width: 100%;
+  position: relative;
+  background-color: #333;
+}
+
+.hero-slider .carousel-item {
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+.carousel-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Dark overlay for text readability */
+}
+
+.video-background {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: 0;
+  transform: translateX(-50%) translateY(-50%);
+  object-fit: cover;
+}
+
+
+.hero-slider .container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.hero-slider .carousel-caption {
+  position: static; /* Override bootstrap's absolute positioning */
+  color: #fff;
+  z-index: 2;
+}

@@ -1,0 +1,45 @@
+/* src/components/DomainSearch.css */
+.domain-search-section {
+  background-color: #f8f9fa;
+  padding: 3rem 0;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.domain-search-title {
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.domain-search-form .form-control {
+  border-radius: 50px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1.1rem;
+  border: 1px solid #ced4da;
+}
+
+.domain-search-form .btn {
+  border-radius: 50px;
+  padding: 0.75rem 2rem;
+  font-size: 1.1rem;
+  background-color: #C19A6B; /* Bronze from your logo */
+  border-color: #C19A6B;
+}
+
+.domain-search-form .btn:hover {
+  background-color: #a5835a;
+  border-color: #a5835a;
+}
+
+.tld-item {
+  padding: 0.5rem;
+}
+
+.tld-logo {
+  height: 40px;
+  margin-bottom: 0.5rem;
+}
+
+.tld-price {
+  font-weight: 600;
+  color: #495057;
+}
