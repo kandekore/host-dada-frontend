@@ -1,11 +1,11 @@
-// src/pages/EmailExchange.js
+// src/pages/EmailMicrosoft365.js
 import React from 'react';
 
-const EmailExchange = () => (
+const EmailMicrosoft365 = () => (
   <div>
-    <h2>Exchange Secure Email Hosting</h2>
-    <p>Robust and secure email hosting with Microsoft Exchange.</p>
+    <h2>Microsoft 365</h2>
+    <p>Productivity and email hosting with Microsoft 365.</p>
   </div>
 );
 
-export default EmailExchange;
+export default EmailMicrosoft365;

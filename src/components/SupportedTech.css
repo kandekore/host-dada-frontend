@@ -1,0 +1,23 @@
+/* src/components/SupportedTech.css */
+.supported-tech-section {
+  padding: 3rem 0;
+  background-color: #fff;
+  border-top: 1px solid #e9ecef;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.tech-logo-col {
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tech-logo {
+  max-height: 50px;
+  transition: all 0.3s ease;
+}
+
+.tech-logo:hover {
+  transform: scale(1.1);
+}

@@ -1,0 +1,46 @@
+/* src/components/WhyChooseUs.css */
+.why-choose-us-section {
+  padding: 4rem 0;
+  background-color: #f8f9fa; /* Light grey background */
+}
+
+.section-title {
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.section-subtitle {
+  color: #6c757d;
+  font-size: 1.1rem;
+}
+
+.feature-card {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  text-align: center;
+  border: 1px solid #e9ecef;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+}
+
+.feature-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+}
+
+.feature-icon i {
+  font-size: 3rem;
+  color: #C19A6B; /* Brand bronze color */
+  margin-bottom: 1.5rem;
+}
+
+.feature-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.feature-description {
+  color: #495057;
+}

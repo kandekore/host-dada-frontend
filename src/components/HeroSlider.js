@@ -16,7 +16,8 @@ const HeroSlider = () => {
         <Container>
           <Row className="align-items-center">
             <Col md={6} className="text-start">
-              <Carousel.Caption className="text-start">
+              {/* The className is removed from the caption itself */}
+              <Carousel.Caption>
                 <h1 className="display-4 fw-bold">Reliable Web Hosting</h1>
                 <p className="lead">
                   Experience blazing fast speeds and 99.9% uptime with our
@@ -38,7 +39,8 @@ const HeroSlider = () => {
         <Container>
            <Row className="align-items-center justify-content-end">
             <Col md={6} className="text-end">
-              <Carousel.Caption className="text-end">
+              {/* The className is removed from the caption itself */}
+              <Carousel.Caption>
                 <h1 className="display-4 fw-bold">Seamless Video Integration</h1>
                 <p className="lead">
                   Engage your audience with stunning video backgrounds and
@@ -57,7 +59,8 @@ const HeroSlider = () => {
         <Container>
           <Row className="align-items-center justify-content-end">
             <Col md={6} className="text-end">
-              <Carousel.Caption className="text-end">
+              {/* The className is removed from the caption itself */}
+              <Carousel.Caption>
                 <h1 className="display-4 fw-bold">24/7 Expert Support</h1>
                 <p className="lead">
                   Our award-winning support team is here to help you around the clock,

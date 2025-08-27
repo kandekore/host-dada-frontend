@@ -1,0 +1,61 @@
+/* src/components/Footer.css */
+.footer-section {
+  background-color: #2c3034; /* Slightly lighter than the action bar */
+  color: #adb5bd;
+  font-size: 0.9rem;
+}
+
+.footer-info h5,
+.footer-section h5 {
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+  letter-spacing: 0.5px;
+}
+
+/* This is the updated section for the partner logos */
+.partner-logos {
+    margin-bottom: 1.5rem;
+}
+
+.partner-logo {
+  max-width: 200px; /* Set a max-width to prevent stretching */
+  display: block;
+  margin-bottom: 1rem;
+  background-color: #fff;
+  padding: 8px;
+  border-radius: 5px;
+}
+
+.company-motto {
+    color: #6c757d;
+}
+
+.footer-links li {
+  margin-bottom: 0.6rem;
+}
+
+.footer-links a {
+  color: #adb5bd;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.footer-links a:hover {
+  color: #C19A6B; /* Brand bronze color */
+  padding-left: 5px; /* Adds a nice indent effect on hover */
+}
+
+.sub-footer {
+  border-top: 1px solid #495057;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  text-align: center;
+  font-size: 0.8rem;
+  color: #6c757d;
+}
+
+.sub-footer p {
+  margin: 0;
+  padding: 0.2rem 0;
+}

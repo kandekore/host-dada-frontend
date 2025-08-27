@@ -1,0 +1,32 @@
+/* src/components/EmailHosting.css */
+
+/* We'll use a shared class for the alternating sections for consistency */
+.alternating-section {
+  padding: 4rem 0;
+}
+
+.alternating-section .text-content h2 {
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.alternating-section .text-content p {
+  color: #6c757d;
+  line-height: 1.7;
+}
+
+.alternating-section .btn-primary {
+    background-color: #C19A6B;
+    border-color: #C19A6B;
+    font-weight: 500;
+}
+
+.alternating-section .btn-primary:hover {
+    background-color: #a5835a;
+    border-color: #a5835a;
+}
+
+.alternating-section .section-image {
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}

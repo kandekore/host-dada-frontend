@@ -1,7 +1,7 @@
 /* src/components/HeroSlider.css */
 
 .hero-slider {
-  height: calc(100vh - 200px); /* Adjust 200px based on header + domain search height */
+  height: calc(100vh - 235px); /* Adjust this value if needed */
   min-height: 500px;
   width: 100%;
   position: relative;
@@ -12,7 +12,12 @@
   height: 100%;
   width: 100%;
   background-size: cover;
-  background-position: center;
+  background-position: center center; /* Explicitly center both ways */
+  background-repeat: no-repeat;
+  
+  /* This is the fix for the image positioning */
+  display: flex;
+  align-items: center;
 }
 
 .carousel-overlay {
@@ -21,7 +26,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Dark overlay for text readability */
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .video-background {
@@ -40,12 +45,18 @@
 
 .hero-slider .container {
   height: 100%;
-  display: flex;
-  align-items: center;
+  /* The parent .carousel-item is now a flex container, so we don't need this */
+  /* display: flex; */
+  /* align-items: center; */
 }
 
 .hero-slider .carousel-caption {
-  position: static; /* Override bootstrap's absolute positioning */
+  position: static;
   color: #fff;
   z-index: 2;
+  padding: 0;
+  width: 100%;
+  
+  /* This is the fix for the text alignment */
+  text-align: inherit;
 }

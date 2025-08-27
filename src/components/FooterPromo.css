@@ -1,0 +1,34 @@
+/* src/components/FooterPromo.css */
+.footer-promo-section {
+  padding: 4rem 0;
+  background-color: #343a40; /* Dark background */
+  color: #fff;
+}
+
+.footer-promo-section h2 {
+  font-weight: 700;
+  font-size: 2.5rem;
+}
+
+.footer-promo-section p {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+.promo-button {
+  background-color: #C19A6B;
+  border-color: #C19A6B;
+  color: #fff;
+  padding: 0.75rem 2.5rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+}
+
+.promo-button:hover {
+  background-color: #fff;
+  border-color: #fff;
+  color: #343a40;
+}

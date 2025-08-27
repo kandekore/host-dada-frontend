@@ -1,0 +1,30 @@
+/* src/components/HostingFeatures.css */
+.hosting-features-section {
+  padding: 4rem 0;
+  background-color: #fff; /* White background */
+}
+
+.plan-item {
+  display: flex;
+  align-items: flex-start;
+  padding: 1.5rem;
+}
+
+.plan-item i {
+  font-size: 2rem;
+  color: #C19A6B; /* Brand bronze color */
+  margin-right: 1.5rem;
+  margin-top: 0.25rem;
+  width: 40px;
+  text-align: center;
+}
+
+.item-content h4 {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.item-content p {
+  color: #6c757d;
+  margin-bottom: 0;
+}
