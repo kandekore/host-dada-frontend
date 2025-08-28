@@ -28,6 +28,14 @@
   display: none;
 }
 
+.action-bar .account-menu .dropdown-toggle {
+    color: rgba(255, 255, 255, 0.75) !important;
+}
+
+.action-bar .account-menu .dropdown-toggle:hover {
+    color: #fff !important;
+}
+
 /* ====== MAIN NAVIGATION ====== */
 .main-navbar {
   padding-top: 1rem;
