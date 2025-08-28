@@ -15,16 +15,23 @@
 
 /* This is the updated section for the partner logos */
 .partner-logos {
+    /* This container doesn't need special styling anymore */
     margin-bottom: 1.5rem;
 }
 
 .partner-logo {
-  max-width: 200px; /* Set a max-width to prevent stretching */
-  display: block;
-  margin-bottom: 1rem;
+  display: block; /* This makes each logo take its own line, forcing them to stack */
+  margin: 0 auto;  /* This horizontally centers the block-level logo */
+  max-width: 150px;
   background-color: #fff;
   padding: 8px;
   border-radius: 5px;
+  margin-bottom: 1rem; /* Add space between the stacked logos */
+}
+
+/* Make sure the last logo doesn't have extra margin at the bottom */
+.partner-logo:last-child {
+    margin-bottom: 0;
 }
 
 .company-motto {

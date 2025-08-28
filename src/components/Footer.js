@@ -9,17 +9,19 @@ import microsoftLogo from '../assets/images/microsoft-partner.png';
 import nominetLogo from '../assets/images/nominet-partner.png';
 
 const Footer = () => {
-  const productLinks = siteStructure.filter(item => 
+  // ... link extraction logic remains the same ...
+  const productLinks = siteStructure.filter(item =>
     ["Domains", "Hosting", "Email Hosting", "SSL", "Websites", "VPN"].includes(item.title)
   );
   const companyLinks = siteStructure.find(item => item.title === "About Us");
 
+
   return (
     <footer className="footer-section">
       <Container>
-        <Row className="py-5">
+        <Row className="py-5 justify-content-center">
           {/* Column 1: Logos and Brand Info */}
-          <Col lg={4} md={6} className="mb-4 footer-info">
+          <Col lg={4} md={6} className="mb-4 footer-info text-center">
             <h5>Accredited Partners</h5>
             <div className="partner-logos">
                 <Image src={microsoftLogo} alt="Microsoft Partner" className="partner-logo" />
@@ -29,7 +31,7 @@ const Footer = () => {
           </Col>
 
           {/* Column 2: Product Links */}
-          <Col lg={2} md={3} sm={6} className="mb-4">
+          <Col lg={2} md={3} sm={6} className="mb-4 text-center text-md-start">
             <h5>Products</h5>
             <ul className="list-unstyled footer-links">
               {productLinks.map(item => (
@@ -39,7 +41,7 @@ const Footer = () => {
           </Col>
           
           {/* Column 3: Company Links */}
-          <Col lg={3} md={3} sm={6} className="mb-4">
+          <Col lg={3} md={3} sm={6} className="mb-4 text-center text-md-start">
             <h5>Company</h5>
             <ul className="list-unstyled footer-links">
               {companyLinks.subItems.map(sub => (
@@ -49,16 +51,14 @@ const Footer = () => {
           </Col>
 
           {/* Column 4: Support & Legal Links */}
-          <Col lg={3} md={12} className="mb-4">
+          <Col lg={3} md={12} className="mb-4 text-center text-md-start">
              <h5>Support</h5>
             <ul className="list-unstyled footer-links">
-                {/* Use Link component for internal navigation */}
                 <li><Link to="/support">Contact Us</Link></li>
                 <li><Link to="/knowledge-base">Knowledge Base</Link></li>
             </ul>
             <h5>Legal</h5>
             <ul className="list-unstyled footer-links">
-                {/* Use Link component for internal navigation */}
                 <li><Link to="/terms">Terms & Conditions</Link></li>
                 <li><Link to="/privacy">Privacy Policy</Link></li>
             </ul>

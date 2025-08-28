@@ -135,3 +135,58 @@
     padding: 0.2em 0.4em;
     background-color: #C19A6B !important;
 }
+/* === MOBILE OPTIMIZATION === */
+@media (max-width: 991px) {
+  .action-bar .container {
+    flex-direction: column;
+    align-items: center;
+    padding: 0.5rem 0;
+  }
+  
+  /* This is the key fix: Make the nav group full-width to allow centering */
+  .action-bar .nav {
+    width: 100%;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap; /* Allow items to wrap if needed */
+  }
+
+  /* Target the first Nav group (country/phone) */
+  .action-bar .nav.me-auto {
+    margin-right: 0 !important; /* Override Bootstrap's push */
+    margin-bottom: 0.5rem;
+  }
+
+  .mobile-nav-group {
+    padding: 0;
+    border-bottom: 1px solid #e9ecef;
+  }
+  
+  .mobile-nav-header {
+    font-weight: bold;
+    padding: 0.75rem 0.5rem;
+    color: #495057;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    width: 100%;
+  }
+
+  .mobile-nav-header i {
+    font-size: 0.8rem;
+  }
+
+  .mobile-nav-links {
+    padding-left: 1rem;
+    background-color: #f8f9fa;
+  }
+  
+  .mobile-nav-link {
+    padding-top: 0.6rem !important;
+    padding-bottom: 0.6rem !important;
+    border-top: 1px solid #e9ecef;
+  }
+}
+
