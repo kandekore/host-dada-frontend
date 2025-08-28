@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import MainLayout from './components/MainLayout';
 import LoginModal from './components/LoginModal';
+import AllTlds from './pages/AllTlds';
+import CartPage from './pages/CartPage';
 
 // Example page components:
 import Home from './pages/Home';
@@ -104,6 +106,9 @@ function App() {
           <Route path="knowledge-base" element={<KnowledgeBase />} />
           <Route path="terms" element={<Terms />} />
           <Route path="privacy" element={<Privacy />} />
+
+           <Route path="domains/all-tlds" element={<AllTlds />} />
+          <Route path="cart" element={<CartPage />} />
         </Route>
       </Routes>
       <LoginModal show={showLogin} handleClose={handleLoginClose} />

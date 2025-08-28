@@ -20,6 +20,8 @@ const siteStructure = [
     {
       title: "Domains",
       url: "/domains",
+          megaMenuDescription: 'From registration to transfer, find everything you need to manage your domain names with our powerful and easy-to-use tools.', // New property
+
       subItems: [
         { title: "Search & Register", url: "/domains/search-register", icon: "🔍", description: "Find and register domains" },
         { title: "Transfer", url: "/domains/transfer", icon: "🔄", description: "Transfer your domain" },
@@ -29,6 +31,8 @@ const siteStructure = [
     {
       title: "Hosting",
       url: "/hosting",
+          megaMenuDescription: 'Explore our wide range of hosting solutions, from shared Linux hosting to powerful cloud applications, all with 99.9% uptime.', // New property
+
       subItems: [
         { title: "Linux Hosting", url: "/hosting/linux-hosting", icon: "🐧", description: "Linux based hosting" },
         { title: "Windows Hosting", url: "/hosting/windows-hosting", icon: "🪟", description: "Windows based hosting" },
@@ -41,6 +45,8 @@ const siteStructure = [
     {
       title: "Email Hosting",
       url: "/email-hosting",
+          megaMenuDescription: 'Get professional, business-class email hosting with robust security features and support for your favorite clients.', // New property
+
       subItems: [
         { title: "IMAP/POP3 Email Hosting", url: "/email-hosting/imap-pop3", icon: "📧", description: "Reliable email hosting" },
         { title: "Exchange Secure Email Hosting", url: "/email-hosting/exchange", icon: "🔒", description: "Secure email solution" },

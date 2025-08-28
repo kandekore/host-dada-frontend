@@ -99,6 +99,72 @@ app.post('/api/sso', async (req, res) => {
     }
 });
 
+app.post('/api/domain-check', async (req, res) => {
+  const { domain } = req.body;
+  if (!domain) {
+    return res.status(400).json({ error: 'Domain name is required.' });
+  }
+
+  const params = new URLSearchParams({
+    action: 'DomainWhois',
+    domain: domain,
+    identifier: process.env.WHMCS_API_IDENTIFIER,
+    secret: process.env.WHMCS_API_SECRET,
+    responsetype: 'json',
+  });
+
+  try {
+    const { data } = await axios.post(process.env.WHMCS_API_URL, params);
+    if (data.result === 'success') {
+      res.json(data); // Send the full WHMCS response back
+    } else {
+      res.status(400).json({ error: data.message || `Could not check status of ${domain}.` });
+    }
+  } catch (error) {
+    res.status(500).json({ error: 'An error occurred while checking the domain.' });
+  }
+});
+
+
+// --- Advanced Multi-Domain Search Endpoint ---
+app.post('/api/domain-search', async (req, res) => {
+  const { searchTerm } = req.body;
+  if (!searchTerm) {
+    return res.status(400).json({ error: 'Search term is required.' });
+  }
+
+  // Correctly defined primary TLDs
+  const primaryTlds = ['.com', '.uk', '.co.uk', '.net', '.io'];
+  const promises = [];
+
+  primaryTlds.forEach(tld => {
+    const domain = `${searchTerm}${tld}`;
+    const params = new URLSearchParams({
+      action: 'DomainWhois',
+      domain: domain,
+      identifier: process.env.WHMCS_API_IDENTIFIER,
+      secret: process.env.WHMCS_API_SECRET,
+      responsetype: 'json',
+    });
+    promises.push(axios.post(process.env.WHMCS_API_URL, params));
+  });
+
+  try {
+    const results = await Promise.allSettled(promises); // Use allSettled to avoid failing on a single error
+    const statuses = results.map((result, index) => {
+      const domain = `${searchTerm}${primaryTlds[index]}`;
+      if (result.status === 'fulfilled' && result.value.data.result === 'success') {
+        return { domain, status: result.value.data.status };
+      }
+      return { domain, status: 'error' }; // Handle cases where an individual API call fails
+    });
+    res.json({ results: statuses });
+  } catch (error) {
+    res.status(500).json({ error: 'An error occurred during the domain search.' });
+  }
+});
+
+
 app.listen(PORT, () => {
   console.log(`BFF Server is running on http://localhost:${PORT}`);
 });

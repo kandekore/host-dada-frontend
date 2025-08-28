@@ -122,3 +122,16 @@
 .mega-menu-item .item-content small {
   color: #6c757d;
 }
+.cart-icon-link {
+    position: relative;
+    font-size: 1.1rem;
+}
+
+.cart-badge {
+    position: absolute;
+    top: 2px;
+    right: -5px;
+    font-size: 0.6rem;
+    padding: 0.2em 0.4em;
+    background-color: #C19A6B !important;
+}

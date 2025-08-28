@@ -1,14 +1,16 @@
 // src/components/Header.js
 import React, { useContext } from 'react';
-import { Navbar, Nav, NavDropdown, Container, Image } from 'react-bootstrap';
+import { Navbar, Nav, NavDropdown, Container, Image, Row, Col, Badge } from 'react-bootstrap';
 import { Link, useLocation } from 'react-router-dom';
 import AuthContext from '../context/AuthContext';
+import CartContext from '../context/CartContext'; 
 import siteStructure from '../data/siteStructure';
 import logo from '../assets/images/host-dada-logo.png';
 import './Header.css';
 
 const Header = ({ handleLoginShow }) => {
   const { isLoggedIn, user, logout } = useContext(AuthContext);
+    const { cartItems } = useContext(CartContext);
   const location = useLocation();
 
   const countries = [
@@ -59,8 +61,13 @@ const Header = ({ handleLoginShow }) => {
           <Nav>
             <Link to="/support" className="nav-link">Support</Link>
             <Link to="/knowledge-base" className="nav-link">Knowledge Base</Link>
+             <Link to="/cart" className="nav-link cart-icon-link">
+              <i className="fas fa-shopping-cart"></i>
+              {cartItems.length > 0 && 
+                <Badge pill bg="primary" className="cart-badge">{cartItems.length}</Badge>
+              }
+            </Link>
             
-            {/* === USER MENU MOVED HERE === */}
             {isLoggedIn ? (
               <NavDropdown title={`Welcome, ${user?.firstName || ''}`} id="account-menu" className="account-menu" align="end">
                 <NavDropdown.Item onClick={() => handleSsoRedirect('clientarea.php?action=dashboard')}>Dashboard</NavDropdown.Item>
@@ -90,7 +97,32 @@ const Header = ({ handleLoginShow }) => {
                   const isActive = location.pathname.startsWith(item.url) && item.url !== '/';
                   return (
                     <NavDropdown key={item.title} title={item.title} id={`megamenu-${item.title}`} className="mega-menu" active={isActive}>
-                      {/* Mega Menu Content would be here */}
+                     <div className="mega-menu-content">
+                        <Container>
+                          <Row>
+                            <Col md={3} className="mega-menu-description">
+                              <h4>{item.title}</h4>
+                                      <p>{item.megaMenuDescription}</p> 
+
+                            </Col>
+                            <Col md={9}>
+                              <Row>
+                                {item.subItems.map((subItem) => (
+                                  <Col md={4} key={subItem.title}>
+                                    <NavDropdown.Item as={Link} to={subItem.url} className="mega-menu-item">
+                                      <div className="icon">{subItem.icon}</div>
+                                      <div className="item-content">
+                                        <strong>{subItem.title}</strong>
+                                        <small>{subItem.description}</small>
+                                      </div>
+                                    </NavDropdown.Item>
+                                  </Col>
+                                ))}
+                              </Row>
+                            </Col>
+                          </Row>
+                        </Container>
+                      </div>
                     </NavDropdown>
                   );
                 }
@@ -101,7 +133,6 @@ const Header = ({ handleLoginShow }) => {
                 );
               })}
             </Nav>
-            {/* The user menu logic has been removed from here */}
           </Navbar.Collapse>
         </Container>
       </Navbar>
