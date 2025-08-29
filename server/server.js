@@ -175,7 +175,7 @@ app.get('/api/get-all-tlds', async (req, res) => {
         
         return {
           tld: `.${tld}`,
-          price: registerPrice ? `${currency.prefix}${registerPrice}${currency.suffix}` : 'N/A'
+          price: registerPrice ? `${currency.prefix}${registerPrice}` : 'N/A'
         };
       });
       res.json({ tlds });
@@ -225,7 +225,6 @@ app.post('/api/full-domain-search', async (req, res) => {
     res.status(500).json({ error: 'An error occurred during the full domain search.' });
   }
 });
-
 
 app.listen(PORT, () => {
   console.log(`BFF Server is running on http://localhost:${PORT}`);

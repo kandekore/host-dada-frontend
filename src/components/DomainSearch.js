@@ -1,24 +1,29 @@
 // src/components/DomainSearch.js
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Container, Row, Col, Form, Button, Spinner, Alert, Image } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import CartContext from '../context/CartContext';
 import WhoisModal from './WhoisModal';
 import './DomainSearch.css';
 
+// Import logos
 import comLogo from '../assets/tlds/com.png';
 import ukLogo from '../assets/tlds/uk.png';
 import coUkLogo from '../assets/tlds/co-uk.png';
 import netLogo from '../assets/tlds/net.png';
 import ioLogo from '../assets/tlds/io.png';
 
-const tldInfo = {
-  '.com': { logo: comLogo, price: '$8.99' },
-  '.uk': { logo: ukLogo, price: '$6.99' },
-  '.co.uk': { logo: coUkLogo, price: '$7.99' },
-  '.net': { logo: netLogo, price: '$9.99' },
-  '.io': { logo: ioLogo, price: '$14.99' },
+// Create a mapping for logos only, removing the hardcoded prices
+const tldLogos = {
+  '.com': comLogo,
+  '.uk': ukLogo,
+  '.co.uk': coUkLogo,
+  '.net': netLogo,
+  '.io': ioLogo,
 };
+
+// Define the primary TLDs in a constant
+const PRIMARY_TLDS = ['.com', '.uk', '.co.uk', '.net', '.io'];
 
 const DomainSearch = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -26,12 +31,33 @@ const DomainSearch = () => {
   const [mainResult, setMainResult] = useState(null);
   const [suggestions, setSuggestions] = useState([]);
   const [error, setError] = useState('');
+  // Initialize prices as an empty object
+  const [tldPrices, setTldPrices] = useState({});
 
   const [showWhois, setShowWhois] = useState(false);
   const [whoisDomain, setWhoisDomain] = useState('');
 
   const { addToCart } = useContext(CartContext);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchTldPrices = async () => {
+      try {
+        const response = await fetch('http://localhost:3001/api/get-all-tlds');
+        const data = await response.json();
+        if (response.ok) {
+          const priceMap = data.tlds.reduce((acc, tld) => {
+            acc[tld.tld] = { price: tld.price };
+            return acc;
+          }, {});
+          setTldPrices(priceMap);
+        }
+      } catch (error) {
+        console.error("Could not fetch TLD prices");
+      }
+    };
+    fetchTldPrices();
+  }, []);
 
   const handleSearch = async (e) => {
     e.preventDefault();
@@ -41,15 +67,20 @@ const DomainSearch = () => {
       return;
     }
 
-    const primaryTlds = ['.com', '.uk', '.co.uk', '.net', '.io'];
-    const hasPrimaryTld = primaryTlds.some(tld => fullSearchTerm.endsWith(tld));
+    const hasPrimaryTld = PRIMARY_TLDS.some(tld => fullSearchTerm.endsWith(tld));
     
-    // If it doesn't have a primary TLD, and it has a dot, we do a single search
+    let name = fullSearchTerm;
+    if (name.includes('.')) {
+        const parts = name.split('.');
+        name = parts[0];
+    }
+
+    setIsLoading(true);
+    setMainResult(null);
+    setSuggestions([]);
+    setError('');
+
     if (!hasPrimaryTld && fullSearchTerm.includes('.')) {
-      setIsLoading(true);
-      setMainResult(null);
-      setSuggestions([]);
-      setError('');
       try {
         const response = await fetch('http://localhost:3001/api/domain-check', {
           method: 'POST',
@@ -62,34 +93,9 @@ const DomainSearch = () => {
         setMainResult({ domain: fullSearchTerm, status: data.status });
       } catch (err) {
         setError(err.message);
-      } finally {
-        setIsLoading(false);
       }
-      return;
     }
-
-
-    if (!fullSearchTerm.includes('.')) {
-      fullSearchTerm += '.co.uk';
-    }
-
-    let name = fullSearchTerm;
-    Object.keys(tldInfo).forEach(tld => {
-        if (name.endsWith(tld)) {
-            name = name.slice(0, -tld.length);
-        }
-    });
-    if (name.includes('.')) {
-        const parts = name.split('.');
-        parts.pop();
-        name = parts.join('.');
-    }
-
-    setIsLoading(true);
-    setMainResult(null);
-    setSuggestions([]);
-    setError('');
-
+    
     try {
       const response = await fetch('http://localhost:3001/api/domain-search', {
         method: 'POST',
@@ -99,10 +105,16 @@ const DomainSearch = () => {
       const data = await response.json();
       if (!response.ok) throw new Error(data.error);
 
+      if (!fullSearchTerm.includes('.')) {
+        fullSearchTerm += '.co.uk';
+      }
+
       const main = data.results.find(res => res.domain === fullSearchTerm);
       const otherSuggestions = data.results.filter(res => res.domain !== fullSearchTerm);
       
-      setMainResult(main);
+      if(!mainResult) {
+        setMainResult(main);
+      }
       setSuggestions(otherSuggestions);
 
     } catch (err) {
@@ -129,7 +141,6 @@ const DomainSearch = () => {
     <>
       <div className="domain-search-section">
         <Container>
-          {/* --- THIS IS THE RESTORED 2-COLUMN LAYOUT --- */}
           <Row className="align-items-center">
             <Col lg={7} className="mb-4 mb-lg-0">
               <h2 className="domain-search-title">Find Your Perfect Domain Name</h2>
@@ -150,29 +161,38 @@ const DomainSearch = () => {
             </Col>
             <Col lg={5}>
               <Row className="justify-content-center">
-                {Object.entries(tldInfo).map(([tld, info]) => (
-                  <Col key={tld} xs={4} sm className="text-center tld-item">
-                    <Image src={info.logo} alt={`${tld} logo`} className="tld-logo" />
-                    <div className="tld-price">{info.price}</div>
-                  </Col>
-                ))}
+                {PRIMARY_TLDS.map((tld) => {
+                  const logo = tldLogos[tld];
+                  const price = tldPrices[tld]?.price;
+                  if (!logo) return null;
+                  return (
+                    <Col key={tld} xs={4} sm className="text-center tld-item">
+                      <Image src={logo} alt={`${tld} logo`} className="tld-logo" />
+                      <div className="tld-price">{price || <Spinner size="sm" />}</div>
+                    </Col>
+                  );
+                })}
               </Row>
             </Col>
           </Row>
-          {/* --- END OF RESTORED LAYOUT --- */}
-
-          {/* Results Area (appears underneath on search) */}
           <Row className="justify-content-center mt-4">
             <Col lg={10}>
               {error && <Alert variant="danger">{error}</Alert>}
               
               {mainResult && (
-                <Alert variant={mainResult.status === 'available' ? 'success' : 'danger'}>
-                  <strong>{mainResult.domain}</strong> is {mainResult.status}.
+                <Alert variant={mainResult.status === 'available' ? 'success' : 'danger'} className="d-flex justify-content-between align-items-center">
+                  <span>
+                    <strong>{mainResult.domain}</strong> is {mainResult.status}.
+                  </span>
                   {mainResult.status === 'available' ? (
-                    <Button variant="outline-success" className="float-end" onClick={() => addToCart(mainResult)}>Add to Cart</Button>
+                    <div>
+                      <strong className="mx-3">
+                        {tldPrices[mainResult.domain.substring(mainResult.domain.indexOf('.'))]?.price}
+                      </strong>
+                      <Button variant="outline-success" onClick={() => addToCart(mainResult)}>Add to Cart</Button>
+                    </div>
                   ) : (
-                    <Button variant="outline-secondary" className="float-end" onClick={() => handleWhoisClick(mainResult.domain)}>WHOIS</Button>
+                    <Button variant="outline-secondary" onClick={() => handleWhoisClick(mainResult.domain)}>WHOIS</Button>
                   )}
                 </Alert>
               )}
@@ -181,8 +201,9 @@ const DomainSearch = () => {
                 <Row className="tld-suggestions-row mt-3">
                   {suggestions.map(sugg => (
                     <Col key={sugg.domain} className="text-center tld-suggestion-item">
-                      <Image src={tldInfo[sugg.domain.substring(sugg.domain.indexOf('.'))]?.logo} className="tld-logo" />
+                      <Image src={tldLogos[sugg.domain.substring(sugg.domain.indexOf('.'))]} className="tld-logo" />
                       <div className="domain-name">{sugg.domain}</div>
+                      <div className="tld-price">{tldPrices[sugg.domain.substring(sugg.domain.indexOf('.'))]?.price}</div>
                       {sugg.status === 'available' ? (
                         <Button variant="success" size="sm" onClick={() => addToCart(sugg)}>Register</Button>
                       ) : (
