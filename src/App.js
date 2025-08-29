@@ -39,6 +39,8 @@ import Support from './pages/Support';
 import KnowledgeBase from './pages/KnowledgeBase';
 import Terms from './pages/Terms';
 import Privacy from './pages/Privacy';
+import AllTldsSearch from './pages/AllTldsSearch';
+
 
 function App() {
   const [showLogin, setShowLogin] = useState(false);
@@ -106,6 +108,7 @@ function App() {
           <Route path="knowledge-base" element={<KnowledgeBase />} />
           <Route path="terms" element={<Terms />} />
           <Route path="privacy" element={<Privacy />} />
+          <Route path="/domains/all-tlds-search/:searchTerm?" element={<AllTldsSearch />} />
 
            <Route path="domains/all-tlds" element={<AllTlds />} />
           <Route path="cart" element={<CartPage />} />
