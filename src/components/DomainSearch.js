@@ -1,7 +1,7 @@
 // src/components/DomainSearch.js
 import React, { useState, useContext } from 'react';
 import { Container, Row, Col, Form, Button, Spinner, Alert, Image } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import CartContext from '../context/CartContext';
 import WhoisModal from './WhoisModal';
 import './DomainSearch.css';
@@ -31,6 +31,7 @@ const DomainSearch = () => {
   const [whoisDomain, setWhoisDomain] = useState('');
 
   const { addToCart } = useContext(CartContext);
+  const navigate = useNavigate();
 
   const handleSearch = async (e) => {
     e.preventDefault();
@@ -39,6 +40,34 @@ const DomainSearch = () => {
       setError('Please enter a domain name.');
       return;
     }
+
+    const primaryTlds = ['.com', '.uk', '.co.uk', '.net', '.io'];
+    const hasPrimaryTld = primaryTlds.some(tld => fullSearchTerm.endsWith(tld));
+    
+    // If it doesn't have a primary TLD, and it has a dot, we do a single search
+    if (!hasPrimaryTld && fullSearchTerm.includes('.')) {
+      setIsLoading(true);
+      setMainResult(null);
+      setSuggestions([]);
+      setError('');
+      try {
+        const response = await fetch('http://localhost:3001/api/domain-check', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ domain: fullSearchTerm }),
+        });
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error);
+
+        setMainResult({ domain: fullSearchTerm, status: data.status });
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setIsLoading(false);
+      }
+      return;
+    }
+
 
     if (!fullSearchTerm.includes('.')) {
       fullSearchTerm += '.co.uk';
@@ -87,6 +116,14 @@ const DomainSearch = () => {
     setWhoisDomain(domain);
     setShowWhois(true);
   };
+  
+  const handleCheckAllExtensions = () => {
+    const baseName = searchTerm.trim().split('.')[0];
+    if (baseName) {
+      navigate(`/domains/all-tlds-search/${baseName}`);
+    }
+  };
+
 
   return (
     <>
@@ -154,6 +191,13 @@ const DomainSearch = () => {
                     </Col>
                   ))}
                 </Row>
+              )}
+               {mainResult && (
+                <div className="text-center mt-4">
+                  <Button variant="link" onClick={handleCheckAllExtensions}>
+                    Check all extensions
+                  </Button>
+                </div>
               )}
             </Col>
           </Row>

@@ -3,6 +3,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Container, Form, Button, Spinner, Alert, ListGroup } from 'react-bootstrap';
 import CartContext from '../context/CartContext';
+import WhoisModal from '../components/WhoisModal';
 
 const AllTldsSearch = () => {
   const { searchTerm: initialSearchTerm } = useParams();
@@ -12,6 +13,8 @@ const AllTldsSearch = () => {
   const [results, setResults] = useState([]);
   const [error, setError] = useState('');
   const { addToCart } = useContext(CartContext);
+  const [showWhois, setShowWhois] = useState(false);
+  const [whoisDomain, setWhoisDomain] = useState('');
 
   useEffect(() => {
     if (initialSearchTerm) {
@@ -45,52 +48,58 @@ const AllTldsSearch = () => {
     }
   };
 
+  const handleWhoisClick = (domain) => {
+    setWhoisDomain(domain);
+    setShowWhois(true);
+  };
+
   const handleFormSubmit = (e) => {
     e.preventDefault();
     const term = searchTerm.trim();
     if (term) {
-      // --- THIS IS THE FIX ---
-      // Remove any potential TLD before navigating to the new URL
       const baseName = term.split('.')[0];
       navigate(`/domains/all-tlds-search/${baseName}`);
-      // ----------------------
     }
   };
 
   return (
-    <Container className="my-5">
-      <h2>Full Domain Extension Search</h2>
-      <p>Check the availability of your domain name across all our TLDs.</p>
-      <Form onSubmit={handleFormSubmit} className="d-flex mb-4">
-        <Form.Control
-          type="search"
-          placeholder="e.g., myawesomeidea"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-        <Button type="submit" disabled={isLoading} className="ms-2">
-          {isLoading ? <Spinner size="sm" /> : 'Search'}
-        </Button>
-      </Form>
+    <>
+      <Container className="my-5">
+        <h2>Full Domain Extension Search</h2>
+        <p>Check the availability of your domain name across all our TLDs.</p>
+        <Form onSubmit={handleFormSubmit} className="d-flex mb-4">
+          <Form.Control
+            type="search"
+            placeholder="e.g., myawesomeidea"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <Button type="submit" disabled={isLoading} className="ms-2">
+            {isLoading ? <Spinner size="sm" /> : 'Search'}
+          </Button>
+        </Form>
 
-      {error && <Alert variant="danger">{error}</Alert>}
-      
-      {results.length > 0 && (
-        <ListGroup>
-          {results.filter(res => res.status === 'available').map(res => (
-            <ListGroup.Item key={res.domain} variant="success" className="d-flex justify-content-between align-items-center">
-              <span><strong>{res.domain}</strong> is available!</span>
-              <Button size="sm" onClick={() => addToCart(res)}>Add to Cart</Button>
-            </ListGroup.Item>
-          ))}
-          {results.filter(res => res.status !== 'available').map(res => (
-            <ListGroup.Item key={res.domain} variant="danger">
-              <strong>{res.domain}</strong> is unavailable.
-            </ListGroup.Item>
-          ))}
-        </ListGroup>
-      )}
-    </Container>
+        {error && <Alert variant="danger">{error}</Alert>}
+        
+        {results.length > 0 && (
+          <ListGroup>
+            {results.filter(res => res.status === 'available').map(res => (
+              <ListGroup.Item key={res.domain} variant="success" className="d-flex justify-content-between align-items-center">
+                <span><strong>{res.domain}</strong> is available! - {res.price}</span>
+                <Button size="sm" onClick={() => addToCart(res)}>Add to Cart</Button>
+              </ListGroup.Item>
+            ))}
+            {results.filter(res => res.status !== 'available').map(res => (
+              <ListGroup.Item key={res.domain} variant="danger" className="d-flex justify-content-between align-items-center">
+                <strong>{res.domain}</strong> is unavailable.
+                <Button variant="secondary" size="sm" onClick={() => handleWhoisClick(res.domain)}>WHOIS</Button>
+              </ListGroup.Item>
+            ))}
+          </ListGroup>
+        )}
+      </Container>
+      <WhoisModal domain={whoisDomain} show={showWhois} handleClose={() => setShowWhois(false)} />
+    </>
   );
 };
 

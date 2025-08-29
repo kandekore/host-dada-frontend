@@ -5,11 +5,10 @@ const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
-const PORT = 3001; // We'll run our backend on a different port
+const PORT = 3001;
 
-// Middleware setup
-app.use(cors({ origin: 'http://localhost:3000' })); // Allow requests from our React app
-app.use(express.json()); // Allow the server to understand JSON request bodies
+app.use(cors({ origin: 'http://localhost:3000' }));
+app.use(express.json());
 
 // --- ValidateLogin Endpoint ---
 app.post('/api/login', async (req, res) => {
@@ -18,7 +17,6 @@ app.post('/api/login', async (req, res) => {
     return res.status(400).json({ error: 'Email and password are required.' });
   }
 
-  // First, validate the user's credentials
   const validationParams = new URLSearchParams({
     action: 'ValidateLogin',
     email: email,
@@ -32,12 +30,9 @@ app.post('/api/login', async (req, res) => {
     const { data: validationData } = await axios.post(process.env.WHMCS_API_URL, validationParams);
 
     if (validationData.result === 'success') {
-      // --- THIS IS THE FIX ---
-      // If login is successful, use the user's EMAIL to get their client details,
-      // not the userid from the previous call. This is more reliable.
       const clientParams = new URLSearchParams({
         action: 'GetClientsDetails',
-        email: email, // Use the email address directly
+        email: email,
         identifier: process.env.WHMCS_API_IDENTIFIER,
         secret: process.env.WHMCS_API_SECRET,
         responsetype: 'json',
@@ -49,7 +44,6 @@ app.post('/api/login', async (req, res) => {
         res.json({
           result: 'success',
           user: {
-            // WHMCS returns client details under `client[0]` when searching by email
             id: clientData.client.userid,
             firstName: clientData.client.firstname,
             lastName: clientData.client.lastname,
@@ -57,7 +51,6 @@ app.post('/api/login', async (req, res) => {
           }
         });
       } else {
-         // This can happen if a user exists but isn't linked to a client account
          throw new Error(clientData.message || 'Could not find a client account for this user.');
       }
     } else {
@@ -99,6 +92,7 @@ app.post('/api/sso', async (req, res) => {
     }
 });
 
+// --- Single Domain Whois Endpoint ---
 app.post('/api/domain-check', async (req, res) => {
   const { domain } = req.body;
   if (!domain) {
@@ -116,7 +110,7 @@ app.post('/api/domain-check', async (req, res) => {
   try {
     const { data } = await axios.post(process.env.WHMCS_API_URL, params);
     if (data.result === 'success') {
-      res.json(data); // Send the full WHMCS response back
+      res.json(data);
     } else {
       res.status(400).json({ error: data.message || `Could not check status of ${domain}.` });
     }
@@ -125,15 +119,13 @@ app.post('/api/domain-check', async (req, res) => {
   }
 });
 
-
-// --- Advanced Multi-Domain Search Endpoint ---
+// --- Homepage Domain Suggestions Endpoint ---
 app.post('/api/domain-search', async (req, res) => {
   const { searchTerm } = req.body;
   if (!searchTerm) {
     return res.status(400).json({ error: 'Search term is required.' });
   }
 
-  // Correctly defined primary TLDs
   const primaryTlds = ['.com', '.uk', '.co.uk', '.net', '.io'];
   const promises = [];
 
@@ -150,17 +142,86 @@ app.post('/api/domain-search', async (req, res) => {
   });
 
   try {
-    const results = await Promise.allSettled(promises); // Use allSettled to avoid failing on a single error
+    const results = await Promise.allSettled(promises);
     const statuses = results.map((result, index) => {
       const domain = `${searchTerm}${primaryTlds[index]}`;
       if (result.status === 'fulfilled' && result.value.data.result === 'success') {
         return { domain, status: result.value.data.status };
       }
-      return { domain, status: 'error' }; // Handle cases where an individual API call fails
+      return { domain, status: 'error' };
     });
     res.json({ results: statuses });
   } catch (error) {
     res.status(500).json({ error: 'An error occurred during the domain search.' });
+  }
+});
+
+// --- Get All TLDs Endpoint ---
+app.get('/api/get-all-tlds', async (req, res) => {
+  const params = new URLSearchParams({
+    action: 'GetTLDPricing',
+    identifier: process.env.WHMCS_API_IDENTIFIER,
+    secret: process.env.WHMCS_API_SECRET,
+    responsetype: 'json',
+  });
+
+  try {
+    const { data } = await axios.post(process.env.WHMCS_API_URL, params);
+    if (data.result === 'success') {
+      const currency = data.currency; // Get the currency info
+      const tlds = Object.keys(data.pricing).map(tld => {
+        const pricingInfo = data.pricing[tld] && data.pricing[tld]['1'];
+        return {
+          tld: `.${tld}`,
+          // Format the price with the currency symbol
+          price: pricingInfo ? `${currency.prefix}${pricingInfo.register}${currency.suffix}` : 'N/A'
+        };
+      });
+      res.json({ tlds });
+    } else {
+      res.status(500).json({ error: 'Failed to get TLD list.' });
+    }
+  } catch (error) {
+    console.error('WHMCS API Error:', error.message);
+    res.status(500).json({ error: 'An error occurred while getting the TLD list.' });
+  }
+});
+
+// --- Full Domain Search Endpoint ---
+app.post('/api/full-domain-search', async (req, res) => {
+  const { searchTerm, tlds } = req.body;
+
+  if (!searchTerm || !tlds || !Array.isArray(tlds)) {
+    return res.status(400).json({ error: 'Search term and a list of TLDs are required.' });
+  }
+
+  const promises = tlds.map(tldInfo => {
+    const domain = `${searchTerm}${tldInfo.tld}`;
+    const params = new URLSearchParams({
+      action: 'DomainWhois',
+      domain: domain,
+      identifier: process.env.WHMCS_API_IDENTIFIER,
+      secret: process.env.WHMCS_API_SECRET,
+      responsetype: 'json',
+    });
+    return axios.post(process.env.WHMCS_API_URL, params)
+      .then(response => ({
+        domain,
+        status: response.data.status,
+        price: tldInfo.price
+      }))
+      .catch(() => ({
+        domain,
+        status: 'error',
+        price: tldInfo.price
+      }));
+  });
+
+  try {
+    const results = await Promise.all(promises);
+    res.json({ results });
+  } catch (error) {
+    res.status(500).json({ error: 'An error occurred during the full domain search.' });
   }
 });
 
