@@ -168,13 +168,14 @@ app.get('/api/get-all-tlds', async (req, res) => {
   try {
     const { data } = await axios.post(process.env.WHMCS_API_URL, params);
     if (data.result === 'success') {
-      const currency = data.currency; // Get the currency info
+      const currency = data.currency;
       const tlds = Object.keys(data.pricing).map(tld => {
-        const pricingInfo = data.pricing[tld] && data.pricing[tld]['1'];
+        const pricingInfo = data.pricing[tld];
+        const registerPrice = pricingInfo && pricingInfo.register && pricingInfo.register['1'];
+        
         return {
           tld: `.${tld}`,
-          // Format the price with the currency symbol
-          price: pricingInfo ? `${currency.prefix}${pricingInfo.register}${currency.suffix}` : 'N/A'
+          price: registerPrice ? `${currency.prefix}${registerPrice}${currency.suffix}` : 'N/A'
         };
       });
       res.json({ tlds });
