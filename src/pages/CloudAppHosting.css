@@ -1,0 +1,53 @@
+/* src/pages/CloudAppHosting.css */
+
+.plan-card {
+    border: 1px solid #dee2e6;
+    border-top: 4px solid #00729B;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.plan-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.plan-card .card-header {
+    background-color: transparent;
+    border-bottom: 0;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.plan-card .card-body ul {
+    padding-left: 0;
+    list-style-position: inside;
+}
+
+.plan-card .card-body ul li {
+    margin-bottom: 0.5rem;
+}
+
+.plan-card .card-footer {
+    background-color: transparent;
+    border-top: 0;
+}
+
+.feature-card .card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.feature-icon-top {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #00729B;
+    width: 60px;
+    height: 60px;
+    background-color: #eaf6fa;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
