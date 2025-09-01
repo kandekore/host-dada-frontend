@@ -13,7 +13,6 @@ import coUkLogo from '../assets/tlds/co-uk.png';
 import netLogo from '../assets/tlds/net.png';
 import ioLogo from '../assets/tlds/io.png';
 
-// Create a mapping for logos only, removing the hardcoded prices
 const tldLogos = {
   '.com': comLogo,
   '.uk': ukLogo,
@@ -22,7 +21,6 @@ const tldLogos = {
   '.io': ioLogo,
 };
 
-// Define the primary TLDs in a constant
 const PRIMARY_TLDS = ['.com', '.uk', '.co.uk', '.net', '.io'];
 
 const DomainSearch = () => {
@@ -90,7 +88,7 @@ const DomainSearch = () => {
   
         setMainResult({ domain: fullSearchTerm, status: data.status });
   
-      } catch (err) { // FIX: Removed the incorrect "=>" from this line
+      } catch (err) {
         setError(err.message);
       }
     }
@@ -123,6 +121,19 @@ const DomainSearch = () => {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleAddToCart = (domainResult) => {
+    const tld = domainResult.domain.substring(domainResult.domain.indexOf('.'));
+    const price = tldPrices[tld]?.price;
+
+    const item = {
+      id: domainResult.domain, // Use domain as a unique ID
+      type: 'domain',
+      domain: domainResult.domain,
+      price: price, // Pass the price
+    };
+    addToCart(item);
   };
 
   const handleWhoisClick = (domain) => {
@@ -191,7 +202,7 @@ const DomainSearch = () => {
                       <strong className="mx-3">
                         {tldPrices[mainResult.domain.substring(mainResult.domain.indexOf('.'))]?.price}
                       </strong>
-                      <Button variant="outline-success" onClick={() => addToCart(mainResult)}>Add to Cart</Button>
+                      <Button variant="outline-success" onClick={() => handleAddToCart(mainResult)}>Add to Cart</Button>
                     </div>
                   ) : (
                     <Button variant="outline-secondary" onClick={() => handleWhoisClick(mainResult.domain)}>WHOIS</Button>
@@ -207,7 +218,7 @@ const DomainSearch = () => {
                       <div className="domain-name">{sugg.domain}</div>
                       <div className="tld-price">{tldPrices[sugg.domain.substring(sugg.domain.indexOf('.'))]?.price}</div>
                       {sugg.status === 'available' ? (
-                        <Button variant="success" size="sm" onClick={() => addToCart(sugg)}>Register</Button>
+                        <Button variant="success" size="sm" onClick={() => handleAddToCart(sugg)}>Register</Button>
                       ) : (
                         <Button variant="secondary" size="sm" onClick={() => handleWhoisClick(sugg.domain)}>WHOIS</Button>
                       )}

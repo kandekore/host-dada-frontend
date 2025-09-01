@@ -48,6 +48,16 @@ const AllTldsSearch = () => {
     }
   };
 
+  const handleAddToCart = (domainResult) => {
+    const item = {
+      id: domainResult.domain, // Use domain as a unique ID
+      type: 'domain',
+      domain: domainResult.domain,
+      price: domainResult.price, // Price is already in the result here
+    };
+    addToCart(item);
+  };
+
   const handleWhoisClick = (domain) => {
     setWhoisDomain(domain);
     setShowWhois(true);
@@ -86,7 +96,7 @@ const AllTldsSearch = () => {
             {results.filter(res => res.status === 'available').map(res => (
               <ListGroup.Item key={res.domain} variant="success" className="d-flex justify-content-between align-items-center">
                 <span><strong>{res.domain}</strong> is available! - {res.price}</span>
-                <Button size="sm" onClick={() => addToCart(res)}>Add to Cart</Button>
+                <Button size="sm" onClick={() => handleAddToCart(res)}>Add to Cart</Button>
               </ListGroup.Item>
             ))}
             {results.filter(res => res.status !== 'available').map(res => (

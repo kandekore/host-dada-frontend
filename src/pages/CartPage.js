@@ -8,20 +8,46 @@ const CartPage = () => {
 
   // Calculate the total price
   const totalPrice = cartItems.reduce((total, item) => {
-    // Extract the numeric value from the price string (e.g., "£18.07 GBP")
-    const price = parseFloat(item.price.replace(/[^0-9.-]+/g,""));
-    return total + (isNaN(price) ? 0 : price);
+    if (item.price && typeof item.price === 'string') {
+      const price = parseFloat(item.price.replace(/[^0-9.-]+/g,""));
+      return total + (isNaN(price) ? 0 : price);
+    }
+    return total;
   }, 0);
 
   const handleCheckout = () => {
-    // Base URL for the WHMCS cart
-    const baseUrl = 'https://my.hostdada.co.uk/cart.php?a=add&domain=register';
-    
-    // Create an array of domain parameters
-    const domainParams = cartItems.map(item => `domains[]=${item.domain}`);
-    
-    // Combine the base URL with the domain parameters
-    const checkoutUrl = `${baseUrl}&${domainParams.join('&')}`;
+    const baseUrl = 'https://my.hostdada.co.uk/cart.php?a=add';
+    const params = [];
+
+    // Separate domains and hosting products
+    const domains = cartItems.filter(item => item.type === 'domain');
+    const products = cartItems.filter(item => item.type === 'hosting');
+
+    // Add domain parameters
+    if (domains.length > 0) {
+      params.push('domain=register');
+      domains.forEach(item => {
+        // Assuming a 1-year registration period for all domains
+        params.push(`domains[]=${encodeURIComponent(item.domain)}`);
+        params.push(`domainsregperiod[${item.domain}]=1`);
+      });
+    }
+
+    // Add hosting product parameters
+    products.forEach(item => {
+      params.push(`pid[]=${item.pid}`);
+      // Add the billing cycle for each product
+      if (item.cycle) {
+        params.push(`billingcycle[]=${item.cycle}`);
+      }
+    });
+
+    if (params.length === 0) {
+        alert("Your cart is empty.");
+        return;
+    }
+
+    const checkoutUrl = `${baseUrl}&${params.join('&')}`;
     
     // Redirect the user to the WHMCS checkout page
     window.location.href = checkoutUrl;
@@ -34,17 +60,21 @@ const CartPage = () => {
         <Alert variant="info">Your cart is currently empty.</Alert>
       ) : (
         <ListGroup>
-          {cartItems.map(item => (
-            <ListGroup.Item key={item.domain}>
+          {cartItems.map((item) => (
+            <ListGroup.Item key={item.id}>
               <Row className="align-items-center">
-                <Col md={8}>
-                  <strong>{item.domain}</strong>
+                <Col md={6}>
+                  <strong>{item.name || item.domain}</strong>
+                  {/* Display the selected cycle for hosting products */}
+                  {item.type === 'hosting' && item.cycle && (
+                    <div className="text-muted" style={{textTransform: 'capitalize'}}>{item.cycle}</div>
+                  )}
                 </Col>
-                <Col md={2} className="text-md-end">
-                  <span>{item.price}</span>
+                <Col md={3} className="text-md-end">
+                  <span>{item.price || 'N/A'}</span>
                 </Col>
-                <Col md={2} className="text-md-end">
-                  <Button variant="danger" size="sm" onClick={() => removeFromCart(item.domain)}>
+                <Col md={3} className="text-md-end">
+                  <Button variant="danger" size="sm" onClick={() => removeFromCart(item.id)}>
                     Remove
                   </Button>
                 </Col>
@@ -53,10 +83,10 @@ const CartPage = () => {
           ))}
           <ListGroup.Item>
             <Row>
-              <Col md={10} className="text-end">
+              <Col md={9} className="text-end">
                 <strong>Total:</strong>
               </Col>
-              <Col md={2} className="text-md-end">
+              <Col md={3} className="text-md-end">
                 <strong>£{totalPrice.toFixed(2)}</strong>
               </Col>
             </Row>

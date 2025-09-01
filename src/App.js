@@ -18,7 +18,7 @@ import DomainsSearchRegister from './pages/DomainsSearchRegister';
 import DomainsTransfer from './pages/DomainsTransfer';
 import DomainsWhois from './pages/DomainsWhois';
 import LinuxHosting from './pages/LinuxHosting';
-import WindowsHosting from './pages/WindowsHosting';
+
 import WordPressHosting from './pages/WordPressHosting';
 import LiteSpeedHosting from './pages/LiteSpeedHosting';
 import CloudAppHosting from './pages/CloudAppHosting';
@@ -80,7 +80,7 @@ function App() {
 
           {/* Hosting Routes */}
           <Route path="hosting/linux-hosting" element={<LinuxHosting />} />
-          <Route path="hosting/windows-hosting" element={<WindowsHosting />} />
+         
           <Route path="hosting/wordpress-hosting" element={<WordPressHosting />} />
           <Route path="hosting/litespeed-hosting" element={<LiteSpeedHosting />} />
           <Route path="hosting/cloud-app-hosting" element={<CloudAppHosting />} />
