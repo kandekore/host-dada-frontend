@@ -66,7 +66,7 @@ const DomainSearch = () => {
       setError('Please enter a domain name.');
       return;
     }
-
+  
     const hasPrimaryTld = PRIMARY_TLDS.some(tld => fullSearchTerm.endsWith(tld));
     
     let name = fullSearchTerm;
@@ -74,12 +74,13 @@ const DomainSearch = () => {
         const parts = name.split('.');
         name = parts[0];
     }
-
+  
     setIsLoading(true);
     setMainResult(null);
     setSuggestions([]);
     setError('');
-
+  
+    // Check for non-primary TLD first
     if (!hasPrimaryTld && fullSearchTerm.includes('.')) {
       try {
         const response = await fetch('http://localhost:3001/api/domain-check', {
@@ -89,13 +90,15 @@ const DomainSearch = () => {
         });
         const data = await response.json();
         if (!response.ok) throw new Error(data.error);
-
+  
         setMainResult({ domain: fullSearchTerm, status: data.status });
+  
       } catch (err) {
         setError(err.message);
       }
     }
     
+    // Now, handle the primary TLDs search
     try {
       const response = await fetch('http://localhost:3001/api/domain-search', {
         method: 'POST',
@@ -104,19 +107,21 @@ const DomainSearch = () => {
       });
       const data = await response.json();
       if (!response.ok) throw new Error(data.error);
-
-      if (!fullSearchTerm.includes('.')) {
-        fullSearchTerm += '.co.uk';
+  
+      let searchDomain = fullSearchTerm;
+      if (!searchDomain.includes('.')) {
+        searchDomain += '.co.uk';
       }
-
-      const main = data.results.find(res => res.domain === fullSearchTerm);
-      const otherSuggestions = data.results.filter(res => res.domain !== fullSearchTerm);
+  
+      const main = data.results.find(res => res.domain === searchDomain);
+      const otherSuggestions = data.results.filter(res => res.domain !== searchDomain);
       
-      if(!mainResult) {
+      // If we didn't search for a primary TLD, we don't want to overwrite the mainResult
+      if (hasPrimaryTld) {
         setMainResult(main);
       }
       setSuggestions(otherSuggestions);
-
+  
     } catch (err) {
       setError(err.message);
     } finally {
@@ -213,7 +218,7 @@ const DomainSearch = () => {
                   ))}
                 </Row>
               )}
-               {mainResult && (
+               {(mainResult || suggestions.length > 0) && (
                 <div className="text-center mt-4">
                   <Button variant="link" onClick={handleCheckAllExtensions}>
                     Check all extensions
