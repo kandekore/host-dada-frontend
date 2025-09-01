@@ -6,7 +6,6 @@ import CartContext from '../context/CartContext';
 const CartPage = () => {
   const { cartItems, removeFromCart } = useContext(CartContext);
 
-  // Calculate the total price
   const totalPrice = cartItems.reduce((total, item) => {
     if (item.price && typeof item.price === 'string') {
       const price = parseFloat(item.price.replace(/[^0-9.-]+/g,""));
@@ -15,41 +14,49 @@ const CartPage = () => {
     return total;
   }, 0);
 
- const handleCheckout = () => {
-    const baseUrl = 'https://my.hostdada.co.uk/cart.php?a=add';
-    const params = [];
-
-    // Separate domains and hosting products
-    const domains = cartItems.filter(item => item.type === 'domain');
-    const products = cartItems.filter(item => item.type === 'hosting');
-
-    // Add domain parameters
-    if (domains.length > 0) {
-      params.push('domain=register');
-      domains.forEach(item => {
-        // Assuming a 1-year registration period for all domains
-        params.push(`domains[]=${encodeURIComponent(item.domain)}`);
-        params.push(`domainsregperiod[${item.domain}]=1`);
-      });
-    }
-
-    // Add hosting product parameters
-    if (products.length > 0) {
-      const pids = products.map(item => item.pid).join(',');
-      params.push(`pid=${pids}`);
-    }
-
-    if (params.length === 0) {
+  const handleCheckout = () => {
+    const baseUrl = 'https://my.hostdada.co.uk/index.php?rp=';
+    if (cartItems.length === 0) {
         alert("Your cart is empty.");
         return;
     }
 
-    const checkoutUrl = `${baseUrl}&${params.join('&')}`;
-    
-    // Redirect the user to the WHMCS checkout page
-    window.location.href = checkoutUrl;
-  };
+    const domains = cartItems.filter(item => item.type === 'domain');
+    const products = cartItems.filter(item => item.type === 'hosting');
 
+    let checkoutUrl = '';
+
+    if (products.length > 0) {
+        // --- THE DEFINITIVE FIX ---
+        // If there's a hosting product, we go directly to its configuration page.
+        const product = products[0]; // Take the first hosting product
+        
+        // The slug from the API often looks like "product-group/product-name"
+        // If your slug doesn't contain the group, you may need to adjust this.
+        const productPath = product.slug; 
+
+        checkoutUrl = `${baseUrl}/store/${productPath}`;
+
+        if (domains.length > 0) {
+            // If a domain is also in the cart, pass it as a query parameter.
+            // WHMCS will pre-fill the domain on the configuration page.
+            const domain = domains[0];
+            checkoutUrl += `?domain=${domain.domain}`;
+        }
+
+    } else if (domains.length > 0) {
+        // --- Scenario 2: Only Domain(s) in Cart ---
+        const whmcsCartUrl = 'https://my.hostdada.co.uk/cart.php';
+        const domainParams = domains.map(d => `domains[]=${encodeURIComponent(d.domain)}&domainsregperiod[${d.domain}]=1`).join('&');
+        checkoutUrl = `${whmcsCartUrl}?a=add&domain=register&${domainParams}`;
+    }
+
+    if (checkoutUrl) {
+        window.location.href = checkoutUrl;
+    } else {
+        alert("Could not determine the checkout URL.");
+    }
+  }; 
   return (
     <Container className="my-5">
       <h2>Shopping Cart</h2>
@@ -62,7 +69,6 @@ const CartPage = () => {
               <Row className="align-items-center">
                 <Col md={6}>
                   <strong>{item.name || item.domain}</strong>
-                  {/* Display the selected cycle for hosting products */}
                   {item.type === 'hosting' && item.cycle && (
                     <div className="text-muted" style={{textTransform: 'capitalize'}}>{item.cycle}</div>
                   )}

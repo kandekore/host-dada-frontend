@@ -5,7 +5,7 @@ import MainLayout from './components/MainLayout';
 import LoginModal from './components/LoginModal';
 import AllTlds from './pages/AllTlds';
 import CartPage from './pages/CartPage';
-
+import { ToastContainer } from 'react-toastify';
 // Example page components:
 import Home from './pages/Home';
 import AboutWhoWeAre from './pages/AboutWhoWeAre';
@@ -117,7 +117,9 @@ function App() {
           <Route path="cart" element={<CartPage />} />
         </Route>
       </Routes>
+       <ToastContainer />
       <LoginModal show={showLogin} handleClose={handleLoginClose} />
+      
     </Router>
   );
 }

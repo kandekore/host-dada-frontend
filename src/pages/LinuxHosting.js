@@ -136,7 +136,7 @@ const LinuxHosting = () => {
                     ) : error ? (
                         <Alert variant="danger">{error}</Alert>
                     ) : (
-                        <PricingTable products={products} />
+                        <PricingTable products={products} groupSlug="linuxhosting"/>
                     )}
                 </Container>
             </Container>

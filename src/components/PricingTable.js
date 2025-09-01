@@ -14,7 +14,7 @@ const CYCLE_NAMES = {
 };
 const CYCLE_ORDER = ['monthly', 'quarterly', 'semiannually', 'annually', 'biennially', 'triennially'];
 
-const ProductCard = ({ product, cycle, currency }) => {
+const ProductCard = ({ product, cycle, currency, groupSlug }) => {
     const { addToCart } = useContext(CartContext);
     
     // NOTE: Corrected data path to look inside the currency object
@@ -37,6 +37,8 @@ const ProductCard = ({ product, cycle, currency }) => {
             type: 'hosting',
             name: product.name,
             pid: product.pid,
+            slug: product.slug,
+            groupSlug: groupSlug,
             cycle: cycle,
             price: fullPriceString, // Use the formatted price
         };
@@ -63,7 +65,7 @@ const ProductCard = ({ product, cycle, currency }) => {
     );
 };
 
-const PricingTable = ({ products }) => {
+const PricingTable = ({ products, groupSlug }) => {
     // NOTE: For now, we'll select the first currency found. This can be expanded to a dropdown.
     const [selectedCurrency, setSelectedCurrency] = useState(() => {
         return products?.[0] ? Object.keys(products[0].pricing)[0] : null;
@@ -123,6 +125,7 @@ const PricingTable = ({ products }) => {
                         product={product}
                         cycle={activeCycle}
                         currency={selectedCurrency}
+                        groupSlug={groupSlug} // <-- PASS IT DOWN
                     />
                 ))}
             </Row>

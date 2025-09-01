@@ -8,6 +8,8 @@ import { HelmetProvider } from 'react-helmet-async'; // 1. Import HelmetProvider
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { CartProvider } from './context/CartContext'; // Import CartProvider
+import 'react-toastify/dist/ReactToastify.css'; // <-- Add this line
+
 
 
 const container = document.getElementById('root');
