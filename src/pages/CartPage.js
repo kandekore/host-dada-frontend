@@ -15,7 +15,7 @@ const CartPage = () => {
     return total;
   }, 0);
 
-  const handleCheckout = () => {
+ const handleCheckout = () => {
     const baseUrl = 'https://my.hostdada.co.uk/cart.php?a=add';
     const params = [];
 
@@ -34,13 +34,10 @@ const CartPage = () => {
     }
 
     // Add hosting product parameters
-    products.forEach(item => {
-      params.push(`pid[]=${item.pid}`);
-      // Add the billing cycle for each product
-      if (item.cycle) {
-        params.push(`billingcycle[]=${item.cycle}`);
-      }
-    });
+    if (products.length > 0) {
+      const pids = products.map(item => item.pid).join(',');
+      params.push(`pid=${pids}`);
+    }
 
     if (params.length === 0) {
         alert("Your cart is empty.");
