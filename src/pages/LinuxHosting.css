@@ -1,0 +1,69 @@
+/* src/pages/LinuxHosting.css */
+
+/* This ensures the fluid container touches the browser edges */
+.section-container.container-fluid {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.bg-light {
+    background-color: #f8f9fa !important;
+}
+
+.feature-list li {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.feature-card {
+    border: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.accordion-button:not(.collapsed) {
+    color: #fff;
+    /* Dark Blue from your logo */
+    background-color: #00529b; 
+}
+
+.cta-section {
+    /* Gradient using colours from your logo */
+    background: linear-gradient(90deg, #00529b, #00a9e0);
+}
+/* Add these new styles to your LinuxHosting.css file */
+
+.pillar-card .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.pillar-card .card-title {
+    font-weight: bold;
+}
+
+.feature-card .card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.feature-icon-top {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #00529b;
+    width: 60px;
+    height: 60px;
+    background-color: #e6f4ff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

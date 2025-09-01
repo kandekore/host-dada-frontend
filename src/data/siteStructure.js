@@ -35,7 +35,6 @@ const siteStructure = [
 
       subItems: [
         { title: "Linux Hosting", url: "/hosting/linux-hosting", icon: "🐧", description: "Linux based hosting" },
-        { title: "Windows Hosting", url: "/hosting/windows-hosting", icon: "🪟", description: "Windows based hosting" },
         { title: "WordPress Hosting", url: "/hosting/wordpress-hosting", icon: "📝", description: "Managed WordPress" },
         { title: "LiteSpeed Hosting", url: "/hosting/litespeed-hosting", icon: "⚡", description: "High-performance hosting" },
         { title: "Cloud App Hosting", url: "/hosting/cloud-app-hosting", icon: "☁️", description: "Cloud based hosting" },

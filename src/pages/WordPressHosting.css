@@ -1,17 +1,81 @@
 /* src/pages/WordPressHosting.css */
-.feature-grid .feature-item {
-  display: flex;
-  align-items: flex-start;
-  margin-bottom: 1.5rem;
+
+.section-container.container-fluid {
+    padding-left: 0;
+    padding-right: 0;
 }
 
-.feature-grid .feature-icon {
-  font-size: 1.5rem;
-  color: #C19A6B; /* Brand bronze color */
-  margin-right: 1rem;
-  width: 30px;
+.feature-card {
+    border: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.feature-grid h5 {
-  font-weight: 600;
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.accordion-button:not(.collapsed) {
+    color: #fff;
+    /* WordPress Blue */
+    background-color: #00729B; 
+}
+
+.use-case-item {
+    padding: 1.5rem;
+    border-left: 4px solid #00729B;
+    height: 100%;
+}
+
+.use-case-item h5 {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+
+.feature-card .card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.feature-icon-top {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #00729B; /* WordPress Blue */
+    width: 60px;
+    height: 60px;
+    background-color: #eaf6fa;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+/* Add these styles for the new security section */
+
+.security-feature-item {
+    padding: 1.5rem;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    height: 100%;
+    text-align: center;
+}
+
+.security-feature-icon {
+    font-size: 1.5rem;
+    color: #00729B; /* WordPress Blue */
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    background-color: #eaf6fa;
+    border-radius: 50%;
+    margin: 0 auto 1rem auto;
+}
+
+.security-feature-item h5 {
+    font-weight: bold;
+    margin-bottom: 0.75rem;
 }

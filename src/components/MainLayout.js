@@ -3,19 +3,16 @@ import React from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 import Header from './Header';
-import Footer from './Footer'; // Import the new Footer component
+import Footer from './Footer';
 import SubMenuTabs from './SubMenuTabs';
 import siteStructure from '../data/siteStructure';
 
 const MainLayout = ({ handleLoginShow }) => {
   const location = useLocation();
-  const isHomePage = location.pathname === '/';
 
   const currentCategory = siteStructure.find(
     (menuItem) =>
-      !isHomePage &&
-      (location.pathname === menuItem.url ||
-      location.pathname.startsWith(menuItem.url + '/'))
+      location.pathname.startsWith(menuItem.url + '/')
   );
 
   return (
@@ -30,17 +27,12 @@ const MainLayout = ({ handleLoginShow }) => {
           </Container>
         )}
 
+      {/* This <main> section no longer adds a container, allowing all pages to be full-width */}
       <main className="flex-grow-1">
-        {isHomePage ? (
-          <Outlet />
-        ) : (
-          <Container className="mt-4">
-            <Outlet />
-          </Container>
-        )}
+        <Outlet />
       </main>
 
-      <Footer /> {/* Add the Footer component here */}
+      <Footer />
     </div>
   );
 };
