@@ -40,6 +40,7 @@ import KnowledgeBase from './pages/KnowledgeBase';
 import Terms from './pages/Terms';
 import Privacy from './pages/Privacy';
 import AllTldsSearch from './pages/AllTldsSearch';
+import DomainExtensionPage from './pages/DomainExtensionPage';
 
 
 function App() {
@@ -111,6 +112,8 @@ function App() {
           <Route path="/domains/all-tlds-search/:searchTerm?" element={<AllTldsSearch />} />
 
            <Route path="domains/all-tlds" element={<AllTlds />} />
+                     <Route path="/domains/:extension" element={<DomainExtensionPage />} />
+
           <Route path="cart" element={<CartPage />} />
         </Route>
       </Routes>

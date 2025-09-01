@@ -225,6 +225,88 @@ app.post('/api/full-domain-search', async (req, res) => {
     res.status(500).json({ error: 'An error occurred during the full domain search.' });
   }
 });
+// --- Get Products Endpoint (New) ---
+app.post('/api/products', async (req, res) => {
+  const { gid } = req.body; // gid is the Product Group ID
+  if (!gid) {
+    return res.status(400).json({ error: 'Product Group ID (gid) is required.' });
+  }
+
+  const params = new URLSearchParams({
+    action: 'GetProducts',
+    gid: gid,
+    identifier: process.env.WHMCS_API_IDENTIFIER,
+    secret: process.env.WHMCS_API_SECRET,
+    responsetype: 'json',
+  });
+
+  try {
+    const { data } = await axios.post(process.env.WHMCS_API_URL, params);
+    if (data.result === 'success') {
+      res.json({ products: data.products.product });
+    } else {
+      res.status(500).json({ error: data.message || 'Could not fetch products.' });
+    }
+  } catch (error) {
+    console.error('WHMCS GetProducts Error:', error.message);
+    res.status(500).json({ error: 'An error occurred while fetching products.' });
+  }
+});
+
+// --- Add Product to Cart Endpoint (New) ---
+app.post('/api/add-product-to-cart', async (req, res) => {
+  const { userId, productId } = req.body;
+  if (!productId) {
+    return res.status(400).json({ error: 'Product ID is required.' });
+  }
+
+  const params = new URLSearchParams({
+    action: 'AddOrder',
+    clientid: userId, // Can be null if user is not logged in
+    pid: productId,
+    billingcycle: 'monthly', // You can make this dynamic later
+    responsetype: 'json',
+    identifier: process.env.WHMCS_API_IDENTIFIER,
+    secret: process.env.WHMCS_API_SECRET,
+  });
+
+  try {
+    const { data } = await axios.post(process.env.WHMCS_API_URL, params);
+    if (data.result === 'success') {
+      // Construct the URL to the WHMCS cart
+      const checkoutUrl = `${process.env.WHMCS_API_URL.replace('/includes/api.php', '')}/cart.php?a=view`;
+      res.json({ redirectTo: checkoutUrl });
+    } else {
+      res.status(500).json({ error: data.message || 'Could not add product to cart.' });
+    }
+  } catch (error) {
+    console.error('WHMCS AddOrder Error:', error.message);
+    res.status(500).json({ error: 'An error occurred while creating the order.' });
+  }
+});
+
+// --- Get All TLDs with Pricing Endpoint (This was missing) ---
+app.get('/api/get-tld-pricing', async (req, res) => {
+  const params = new URLSearchParams({
+    action: 'GetTLDPricing',
+    identifier: process.env.WHMCS_API_IDENTIFIER,
+    secret: process.env.WHMCS_API_SECRET,
+    responsetype: 'json',
+  });
+
+  try {
+    const { data } = await axios.post(process.env.WHMCS_API_URL, params);
+    if (data.result === 'success' && data.pricing) {
+      res.json({ pricing: data.pricing });
+    } else {
+      res.status(500).json({ error: data.message || 'Could not fetch TLD list.' });
+    }
+  } catch (error) {
+    console.error('WHMCS GetTLDPricing Error:', error.message);
+    res.status(500).json({ error: 'A server error occurred while fetching TLDs.' });
+  }
+});
+
 
 app.listen(PORT, () => {
   console.log(`BFF Server is running on http://localhost:${PORT}`);

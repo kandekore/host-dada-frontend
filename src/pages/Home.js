@@ -10,6 +10,7 @@ import SupportedTech from '../components/SupportedTech'; // Import new component
 import Testimonials from '../components/Testimonials';
 import FooterPromo from '../components/FooterPromo';
 import { Helmet } from 'react-helmet-async'; // Import the Helmet component
+import WordPressPromo from '../components/WordPressPromo'; // Import the new component
 
 
 function Home() {
@@ -45,6 +46,7 @@ function Home() {
       <Hero />
       <WhyChooseUs />
       <HostingFeatures />
+       <WordPressPromo />
       <EmailHosting />
       <VpsHosting />
       <SupportedTech />

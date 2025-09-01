@@ -1,0 +1,17 @@
+/* src/pages/WordPressHosting.css */
+.feature-grid .feature-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+.feature-grid .feature-icon {
+  font-size: 1.5rem;
+  color: #C19A6B; /* Brand bronze color */
+  margin-right: 1rem;
+  width: 30px;
+}
+
+.feature-grid h5 {
+  font-weight: 600;
+}

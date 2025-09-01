@@ -1,0 +1,24 @@
+/* src/pages/AllTlds.css */
+.pricing-table th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+}
+
+.pricing-table .tld-name {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.pricing-table .price {
+  font-weight: 500;
+}
+
+.pricing-table .btn-primary {
+    background-color: #C19A6B;
+    border-color: #C19A6B;
+}
+
+.pricing-table .btn-primary:hover {
+    background-color: #a5835a;
+    border-color: #a5835a;
+}

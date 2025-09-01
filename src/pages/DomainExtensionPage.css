@@ -1,0 +1,22 @@
+.domain-extension {
+ color: #FFFFFF;
+    font-family: "Arial", Sans-serif;
+    font-size: 3.5rem;
+    font-weight: 600;
+}
+.domain-extension-container {
+    text-align: center;
+    width: auto;
+    margin: 0px 0px 050px 0px;
+    padding: 0px 0px 0px 0px;
+    background-color: #81A0B0;
+    border-style: solid;
+    border-width: 7px 7px 7px 7px;
+    border-color: #FFFFFF;
+    border-radius: 75px 75px 75px 75px;
+    box-shadow: 3px 3px 10px 0px rgba(0, 0, 0, 0);
+}
+.my-5.domains {
+    margin-top: -1rem !important;
+    margin-bottom: 3rem !important;
+}

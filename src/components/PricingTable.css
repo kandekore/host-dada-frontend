@@ -1,0 +1,53 @@
+/* src/components/PricingTable.css */
+.pricing-card {
+  border: 1px solid #dee2e6;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.pricing-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.pricing-card .card-header {
+  background-color: #f8f9fa;
+  font-weight: 600;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.price-tag {
+  margin: 1.5rem 0;
+}
+
+.price-tag .price {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #C19A6B; /* Brand color */
+}
+
+.price-tag .period {
+  font-size: 1rem;
+  color: #6c757d;
+  margin-left: 0.25rem;
+}
+
+.product-description ul {
+  list-style: none;
+  padding: 0;
+}
+
+.product-description li {
+  margin-bottom: 0.5rem;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.product-description li::before {
+  content: '\f00c'; /* Font Awesome check icon */
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  color: #198754; /* Bootstrap success green */
+  position: absolute;
+  left: 0;
+}
