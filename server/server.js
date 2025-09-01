@@ -306,6 +306,31 @@ app.get('/api/get-tld-pricing', async (req, res) => {
     res.status(500).json({ error: 'A server error occurred while fetching TLDs.' });
   }
 });
+app.post('/api/whois', async (req, res) => {
+    const { domain } = req.body;
+    if (!domain) {
+        return res.status(400).json({ error: 'Domain is required' });
+    }
+    try {
+        const response = await axios.post(process.env.WHMCS_API_URL, new URLSearchParams({
+            action: 'DomainWhois',
+            domain: domain,
+            identifier: process.env.WHMCS_API_IDENTIFIER,
+            secret: process.env.WHMCS_API_SECRET,
+            responsetype: 'json',
+        }));
+
+          // FIX: Clean the raw WHOIS data to remove HTML line breaks
+        const rawData = response.data.whois || '';
+        const cleanedData = rawData.replace(/<br\s*\/?>/gi, '\n');
+
+        res.json({ whoisData: cleanedData });
+    } catch (error) {
+        console.error('WHOIS Error:', error.response ? error.response.data : error.message);
+        res.status(500).json({ error: 'Failed to fetch WHOIS data from the registrar.' });
+    }
+});
+
 
 
 app.listen(PORT, () => {

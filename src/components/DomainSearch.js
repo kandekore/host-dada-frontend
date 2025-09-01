@@ -31,12 +31,9 @@ const DomainSearch = () => {
   const [mainResult, setMainResult] = useState(null);
   const [suggestions, setSuggestions] = useState([]);
   const [error, setError] = useState('');
-  // Initialize prices as an empty object
   const [tldPrices, setTldPrices] = useState({});
-
   const [showWhois, setShowWhois] = useState(false);
   const [whoisDomain, setWhoisDomain] = useState('');
-
   const { addToCart } = useContext(CartContext);
   const navigate = useNavigate();
 
@@ -68,9 +65,10 @@ const DomainSearch = () => {
     }
   
     const hasPrimaryTld = PRIMARY_TLDS.some(tld => fullSearchTerm.endsWith(tld));
+    const hasAnyTld = fullSearchTerm.includes('.');
     
     let name = fullSearchTerm;
-    if (name.includes('.')) {
+    if (hasAnyTld) {
         const parts = name.split('.');
         name = parts[0];
     }
@@ -80,8 +78,7 @@ const DomainSearch = () => {
     setSuggestions([]);
     setError('');
   
-    // Check for non-primary TLD first
-    if (!hasPrimaryTld && fullSearchTerm.includes('.')) {
+    if (!hasPrimaryTld && hasAnyTld) {
       try {
         const response = await fetch('http://localhost:3001/api/domain-check', {
           method: 'POST',
@@ -93,12 +90,11 @@ const DomainSearch = () => {
   
         setMainResult({ domain: fullSearchTerm, status: data.status });
   
-      } catch (err) {
+      } catch (err) { // FIX: Removed the incorrect "=>" from this line
         setError(err.message);
       }
     }
     
-    // Now, handle the primary TLDs search
     try {
       const response = await fetch('http://localhost:3001/api/domain-search', {
         method: 'POST',
@@ -109,17 +105,17 @@ const DomainSearch = () => {
       if (!response.ok) throw new Error(data.error);
   
       let searchDomain = fullSearchTerm;
-      if (!searchDomain.includes('.')) {
+      if (!hasAnyTld) {
         searchDomain += '.co.uk';
       }
   
       const main = data.results.find(res => res.domain === searchDomain);
       const otherSuggestions = data.results.filter(res => res.domain !== searchDomain);
       
-      // If we didn't search for a primary TLD, we don't want to overwrite the mainResult
-      if (hasPrimaryTld) {
+      if (hasPrimaryTld || !hasAnyTld) {
         setMainResult(main);
       }
+      
       setSuggestions(otherSuggestions);
   
     } catch (err) {
@@ -146,6 +142,7 @@ const DomainSearch = () => {
     <>
       <div className="domain-search-section">
         <Container>
+          {/* ... rest of the JSX remains the same ... */}
           <Row className="align-items-center">
             <Col lg={7} className="mb-4 mb-lg-0">
               <h2 className="domain-search-title">Find Your Perfect Domain Name</h2>
@@ -229,7 +226,6 @@ const DomainSearch = () => {
           </Row>
         </Container>
       </div>
-
       <WhoisModal domain={whoisDomain} show={showWhois} handleClose={() => setShowWhois(false)} />
     </>
   );
