@@ -10,7 +10,7 @@ const PORT = 3001;
 const allowedOrigins = [
   'http://localhost:3000', 
   'http://192.168.1.9:3000',// Your IP address
-  'https://6bea31d08a77.ngrok-free.app'
+  'https://8f864848fe78.ngrok-free.app'
   // Add your production domain here when you go live, e.g., 'https://www.your-site.com'
 ];
 
