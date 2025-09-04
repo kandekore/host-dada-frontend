@@ -4,31 +4,42 @@ import { Container, Row, Col, Card, Button, Accordion, Spinner, Alert } from 're
 import { Helmet } from 'react-helmet-async';
 import PricingTable from '../components/PricingTable';
 import './LinuxHosting.css';
-
+import { API_BASE } from '../config';
+console.log('API_BASE =', API_BASE);
 const LinuxHosting = () => {
     const [products, setProducts] = useState([]);
     const [loading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    useEffect(() => {
-        const fetchProducts = async () => {
-            try {
-                const response = await fetch('http://localhost:3001/api/products', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ gid: 38 }),
-                });
-                const data = await response.json();
-                if (!response.ok) throw new Error(data.error || 'Failed to fetch products.');
-                setProducts(data.products);
-            } catch (err) {
-                setError(err.message);
-            } finally {
-                setIsLoading(false);
-            }
-        };
-        fetchProducts();
-    }, []);
+
+        useEffect(() => {
+                const fetchProducts = async () => {
+                    try {
+                        const res = await fetch(`${API_BASE}/products`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ gid: 38 }),
+        });
+        
+        const ct = res.headers.get('content-type') || '';
+        if (!ct.includes('application/json')) {
+          const text = await res.text();
+          throw new Error(`Non-JSON response (${res.status}) from ${API_BASE}/products: ${text.slice(0,200)}`);
+        }
+        
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || `Failed to fetch products (status ${res.status})`);
+        
+        setProducts(data.products);
+        
+                    } catch (err) {
+                        setError(err.message);
+                    } finally {
+                        setIsLoading(false);
+                    }
+                };
+                fetchProducts();
+            }, []);
 
     const pageTitle = "Linux Hosting | True Autoscaling Cloud Platform | Host Dada";
     const pageDescription = "Discover our next-generation Linux Hosting platform, featuring true autoscaling technology, a free global CDN, and optimised PHP for maximum performance and reliability.";

@@ -7,6 +7,7 @@ import CartContext from '../context/CartContext';
 import siteStructure from '../data/siteStructure';
 import logo from '../assets/images/host-dada-logo.png';
 import './Header.css';
+import { API_BASE } from '../config';
 
 const Header = ({ handleLoginShow }) => {
   const { isLoggedIn, user, logout } = useContext(AuthContext);
@@ -39,7 +40,7 @@ const Header = ({ handleLoginShow }) => {
         return;
     }
     try {
-        const response = await fetch('http://localhost:3001/api/sso', {
+        const response = await fetch(`${API_BASE}/sso`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ userId: user.id }),

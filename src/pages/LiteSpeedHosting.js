@@ -4,6 +4,7 @@ import { Container, Row, Col, Card, Button, Spinner, Alert, Accordion } from 're
 import { Helmet } from 'react-helmet-async';
 import PricingTable from '../components/PricingTable'; // Ensure this component is imported
 import './LiteSpeedHosting.css';
+import { API_BASE } from '../config';
 
 const LiteSpeedHosting = () => {
     const [products, setProducts] = useState([]);
@@ -13,7 +14,7 @@ const LiteSpeedHosting = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await fetch('http://localhost:3001/api/products', {
+                const response = await fetch(`${API_BASE}/products`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ gid: 39 }), // WHMCS Product Group ID for LiteSpeed

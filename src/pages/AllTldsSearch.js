@@ -4,6 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { Container, Form, Button, Spinner, Alert, ListGroup } from 'react-bootstrap';
 import CartContext from '../context/CartContext';
 import WhoisModal from '../components/WhoisModal';
+import { API_BASE } from '../config';
 
 const AllTldsSearch = () => {
   const { searchTerm: initialSearchTerm } = useParams();
@@ -28,11 +29,11 @@ const AllTldsSearch = () => {
     setResults([]);
     setError('');
     try {
-      const tldRes = await fetch('http://localhost:3001/api/get-all-tlds');
+      const tldRes = await fetch(`${API_BASE}/get-all-tlds`);
       const tldData = await tldRes.json();
       if (!tldRes.ok) throw new Error('Could not fetch TLD list.');
 
-      const searchRes = await fetch('http://localhost:3001/api/full-domain-search', {
+      const searchRes = await fetch(`${API_BASE}/full-domain-search`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ searchTerm: term, tlds: tldData.tlds }),

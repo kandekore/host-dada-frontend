@@ -5,6 +5,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import CartContext from '../context/CartContext';
 import WhoisModal from './WhoisModal';
 import './DomainSearch.css';
+import { API_BASE } from '../config';
+
 
 // Import logos
 import comLogo from '../assets/tlds/com.png';
@@ -38,7 +40,7 @@ const DomainSearch = () => {
   useEffect(() => {
     const fetchTldPrices = async () => {
       try {
-        const response = await fetch('http://localhost:3001/api/get-all-tlds');
+        const response = await fetch(`${API_BASE}/get-all-tlds`);
         const data = await response.json();
         if (response.ok) {
           const priceMap = data.tlds.reduce((acc, tld) => {
@@ -78,7 +80,7 @@ const DomainSearch = () => {
   
     if (!hasPrimaryTld && hasAnyTld) {
       try {
-        const response = await fetch('http://localhost:3001/api/domain-check', {
+        const response = await fetch(`${API_BASE}/domain-check`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ domain: fullSearchTerm }),
@@ -94,7 +96,7 @@ const DomainSearch = () => {
     }
     
     try {
-      const response = await fetch('http://localhost:3001/api/domain-search', {
+      const response = await fetch(`${API_BASE}/domain-search`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ searchTerm: name }),

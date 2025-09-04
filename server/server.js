@@ -7,10 +7,17 @@ require('dotenv').config();
 const app = express();
 const PORT = 3001;
 
+app.set('trust proxy', true);            // you already have this
+
+
 const allowedOrigins = [
   'http://localhost:3000', 
-  'http://192.168.1.9:3000',// Your IP address
-  'https://8f864848fe78.ngrok-free.app'
+  'http://192.168.1.9:3000',
+  'http://185.137.39.98:3000',
+  'https://96a5b127e1f9.ngrok-free.app',
+    'https://hostdada.co.uk',
+  'https://www.hostdada.co.uk',
+  'https://my.hostdada.co.uk'
   // Add your production domain here when you go live, e.g., 'https://www.your-site.com'
 ];
 
@@ -244,15 +251,16 @@ app.post('/api/full-domain-search', async (req, res) => {
   }
 });
 // --- Get Products Endpoint (New) ---
+// --- Get Products Endpoint ---
 app.post('/api/products', async (req, res) => {
-  const { gid } = req.body; // gid is the Product Group ID
+  const { gid, currencyid } = req.body;
   if (!gid) {
     return res.status(400).json({ error: 'Product Group ID (gid) is required.' });
   }
 
   const params = new URLSearchParams({
     action: 'GetProducts',
-    gid: gid,
+    gid: String(gid),
     identifier: process.env.WHMCS_API_IDENTIFIER,
     secret: process.env.WHMCS_API_SECRET,
     responsetype: 'json',
@@ -260,16 +268,51 @@ app.post('/api/products', async (req, res) => {
 
   try {
     const { data } = await axios.post(process.env.WHMCS_API_URL, params);
-    if (data.result === 'success') {
-      res.json({ products: data.products.product });
-    } else {
-      res.status(500).json({ error: data.message || 'Could not fetch products.' });
+
+    if (data.result !== 'success') {
+      return res.status(500).json({ error: data.message || 'Could not fetch products.' });
     }
+
+    // Normalise to array
+    const raw = Array.isArray(data.products?.product)
+      ? data.products.product
+      : (data.products?.product ? [data.products.product] : []);
+
+    // WHMCS sets an unavailable cycle price to -1 (often as a string: "-1.00")
+    const hasValidPrice = (p) => {
+      const pr = p.pricing || {};
+      // If the API returned currency-specific object (rare), fall back to the first object
+      const priceObj = (typeof pr.monthly === 'undefined' && typeof pr.USD === 'object')
+        ? pr.USD
+        : pr;
+
+      const cycles = ['monthly', 'quarterly', 'semiannually', 'annually', 'biennially', 'triennially'];
+      return cycles.some((c) => {
+        const v = priceObj[c];
+        if (v === undefined || v === null || v === '') return false;
+        const n = parseFloat(v);
+        return !Number.isNaN(n) && n >= 0; // accept "0.00", "5.99", etc. reject "-1.00"
+      });
+    };
+
+    const products = raw.filter(hasValidPrice);
+
+    // If still empty, return raw for debugging once (comment out later)
+    if (!products.length) {
+      return res.json({
+        products: [],
+        note: 'No products with valid pricing found after filtering.',
+        // debug: raw, // <-- uncomment temporarily if you need to inspect the structure
+      });
+    }
+
+    res.json({ products });
   } catch (error) {
     console.error('WHMCS GetProducts Error:', error.message);
     res.status(500).json({ error: 'An error occurred while fetching products.' });
   }
 });
+
 
 // --- Add Product to Cart Endpoint (New) ---
 app.post('/api/add-product-to-cart', async (req, res) => {

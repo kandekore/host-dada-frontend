@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Container, Row, Col, Form, Button, Card, Spinner, Alert } from 'react-bootstrap';
+import { API_BASE } from '../config';
 
 const DomainsWhois = () => {
     const [domain, setDomain] = useState('');
@@ -19,7 +20,7 @@ const DomainsWhois = () => {
         setResult('');
 
         try {
-            const response = await fetch('http://localhost:3001/api/whois', {
+            const response = await fetch(`${API_BASE}/whois`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ domain }),

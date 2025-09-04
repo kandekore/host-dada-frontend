@@ -4,6 +4,8 @@ import { Container, Row, Col, Card, Accordion, Spinner, Alert } from 'react-boot
 import { Helmet } from 'react-helmet-async';
 import PricingTable from '../components/PricingTable';
 import './WordPressHosting.css';
+import { API_BASE } from '../config'; // or wherever
+console.log('API_BASE =', API_BASE);
 
 const WordPressHosting = () => {
     const [products, setProducts] = useState([]);
@@ -13,16 +15,23 @@ const WordPressHosting = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await fetch('http://localhost:3001/api/products', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ gid: 36 }), // WordPress Hosting Group ID
-                });
-                const data = await response.json();
-                if (!response.ok) {
-                    throw new Error(data.error || 'Failed to fetch products.');
-                }
-                setProducts(data.products);
+                const res = await fetch(`${API_BASE}/products`, {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ gid: 36 }),
+});
+
+const ct = res.headers.get('content-type') || '';
+if (!ct.includes('application/json')) {
+  const text = await res.text();
+  throw new Error(`Non-JSON response (${res.status}) from ${API_BASE}/products: ${text.slice(0,200)}`);
+}
+
+const data = await res.json();
+if (!res.ok) throw new Error(data.error || `Failed to fetch products (status ${res.status})`);
+
+setProducts(data.products);
+
             } catch (err) {
                 setError(err.message);
             } finally {

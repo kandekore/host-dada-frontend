@@ -1,6 +1,7 @@
 // src/components/WhoisModal.js
 import React, { useState, useEffect } from 'react';
 import { Modal, Button, Spinner, Alert } from 'react-bootstrap';
+import { API_BASE } from '../config';
 
 const WhoisModal = ({ domain, show, handleClose }) => {
   const [whoisData, setWhoisData] = useState('');
@@ -13,7 +14,7 @@ const WhoisModal = ({ domain, show, handleClose }) => {
         setIsLoading(true);
         setError('');
         try {
-          const response = await fetch('http://localhost:3001/api/domain-check', {
+          const response = await fetch(`${API_BASE}/domain-check`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ domain }),

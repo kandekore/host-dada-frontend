@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Table, Form, Spinner, Alert, Button } from 'react-bootstrap';
 import { Helmet } from 'react-helmet-async';
 import './AllTlds.css';
-
+import { API_BASE } from '../config';
 const AllTlds = () => {
   const [pricing, setPricing] = useState({});
   const [isLoading, setIsLoading] = useState(true);
@@ -13,7 +13,7 @@ const AllTlds = () => {
   useEffect(() => {
     const fetchTldPricing = async () => {
       try {
-        const response = await fetch('http://localhost:3001/api/get-tld-pricing');
+        const response = await fetch(`${API_BASE}/get-tld-pricing`);
         
         // --- THIS IS THE FIX: Resilient JSON parsing ---
         const resText = await response.text();

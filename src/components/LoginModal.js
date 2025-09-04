@@ -2,6 +2,7 @@
 import React, { useState, useContext } from 'react';
 import { Modal, Button, Form, Alert } from 'react-bootstrap';
 import AuthContext from '../context/AuthContext';
+import { API_BASE } from '../config';
 
 const LoginModal = ({ show, handleClose }) => {
   const [email, setEmail] = useState('');
@@ -21,7 +22,7 @@ const LoginModal = ({ show, handleClose }) => {
     setError('');
 
     try {
-      const response = await fetch('http://localhost:3001/api/login', {
+      const response = await fetch(`${API_BASE}/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
