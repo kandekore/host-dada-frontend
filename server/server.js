@@ -14,7 +14,7 @@ const allowedOrigins = [
   'http://localhost:3000', 
   'http://192.168.1.9:3000',
   'http://185.137.39.98:3000',
-  'https://hostdada.dadadns.uk/',
+  'https://hostdada.dadadns.uk',
     'https://hostdada.co.uk',
   'https://www.hostdada.co.uk',
   'https://my.hostdada.co.uk'
