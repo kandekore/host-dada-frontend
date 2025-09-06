@@ -5,7 +5,11 @@ const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
+// Bind to loopback so it isn't public
+app.listen(PORT, '127.0.0.1', () => {
+  console.log(`API listening on http://127.0.0.1:${PORT}`);
+});
 
 app.set('trust proxy', true);            // you already have this
 
