@@ -5,12 +5,6 @@ const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
-const PORT = process.env.PORT || 3001;
-const HOST = process.env.HOST || '127.0.0.1';
-
-app.listen(PORT, HOST, () => {
-  console.log(`API listening on http://${HOST}:${PORT}`);
-});
 
 
 app.set('trust proxy', true);            // you already have this
@@ -398,8 +392,9 @@ app.post('/api/whois', async (req, res) => {
     }
 });
 
+const PORT = process.env.PORT || 3001;
+const HOST = process.env.HOST || '127.0.0.1';
 
-
-app.listen(PORT, () => {
-  console.log(`BFF Server is running on http://localhost:${PORT}`);
+app.listen(PORT, HOST, () => {
+  console.log(`API listening on http://${HOST}:${PORT}`);
 });
