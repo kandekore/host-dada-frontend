@@ -27,6 +27,11 @@ const Header = ({ handleLoginShow }) => {
     setOpenMobileMenu(openMobileMenu === title ? null : title);
   };
 
+  // NEW: Function to close the mobile menu
+  const closeMobileMenu = () => {
+    setOpenMobileMenu(null);
+  };
+
   const countries = [
     { code: 'GB', name: 'UK', flag: '🇬🇧' },
     { code: 'US', name: 'USA', flag: '🇺🇸' },
@@ -122,7 +127,13 @@ const Header = ({ handleLoginShow }) => {
                         {isOpen && (
                           <div className="mobile-nav-links">
                             {item.subItems.map(subItem => (
-                              <Nav.Link as={Link} to={subItem.url} key={subItem.title} className="mobile-nav-link">
+                              <Nav.Link 
+                                as={Link} 
+                                to={subItem.url} 
+                                key={subItem.title} 
+                                className="mobile-nav-link"
+                                onClick={closeMobileMenu} // NEW: Close menu on link click
+                              >
                                 {subItem.title}
                               </Nav.Link>
                             ))}
