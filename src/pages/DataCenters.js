@@ -1,7 +1,8 @@
 // src/pages/DataCenters.js
 import React from 'react';
 import './DataCenters.css';
-import dataCenterMap from '../assets/images/data-center-map.jpg'; // Placeholder image for the map
+import dataCenterMap from '../assets/images/data-center-map.jpg'; 
+import DataCenterrMap from '../components/DataCenterMap';
 
 const DataCenters = () => (
   <div className="data-centers-container">
@@ -11,6 +12,7 @@ const DataCenters = () => (
       <p>
         Speed and reliability are key to a great online experience. Our free Content Delivery Network (CDN) is proven to boost website load times by delivering your content from a server closest to your visitors, no matter where they are in the world. This not only improves user experience but also leads to higher search engine rankings and more conversions.
       </p>
+      <DataCenterrMap />
       <div className="image-container">
         <img src={dataCenterMap} alt="A global map showing Host Dada's data center locations" className="data-center-map-image" />
       </div>

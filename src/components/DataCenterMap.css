@@ -1,0 +1,58 @@
+/* src/components/DataCenterMap.css */
+.data-center-map-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 237 / 150;
+  overflow: hidden;
+}
+
+.data-center-map {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.map-pin {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  transition: transform 0.2s ease-in-out;
+}
+
+.map-pin:hover {
+  transform: scale(1.2) translate(-50%, -50%);
+}
+
+.pin-flag {
+  font-size: 24px;
+  border-radius: 50%; /* Makes the flags round */
+  overflow: hidden; /* Ensures the flags are clipped to a circle */
+}
+
+.pin-tooltip {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  white-space: nowrap;
+}
+
+.map-pin:hover .pin-tooltip {
+  visibility: visible;
+  opacity: 1;
+}
