@@ -1,0 +1,54 @@
+/* src/pages/DataCenters.css */
+.data-centers-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+.main-title {
+  text-align: center;
+  font-size: 2.5em;
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+.sub-title {
+  text-align: center;
+  font-size: 1.5em;
+  color: #7f8c8d;
+  margin-bottom: 30px;
+}
+
+.content-section {
+  text-align: justify;
+  line-height: 1.6;
+}
+
+.content-section p {
+  margin-bottom: 20px;
+}
+
+.image-container {
+  text-align: center;
+  margin: 30px 0;
+}
+
+.data-center-map-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+
+
+li strong {
+  color: #2c3e50;
+}

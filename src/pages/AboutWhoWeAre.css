@@ -1,0 +1,22 @@
+/* src/pages/AboutWhoWeAre.css */
+.who-we-are-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+.about-values-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+.about-image {
+  max-width: 50%;
+  height: auto;
+  display: block;
+  float: left;
+  margin: 0px 10px;
+  border-radius: 2%;
+}
+p{
+  text-align: justify;
+}
