@@ -1,5 +1,5 @@
 // src/components/Header.js
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, useRef } from 'react';
 import { Navbar, Nav, NavDropdown, Container, Image, Row, Col, Badge } from 'react-bootstrap';
 import { Link, useLocation } from 'react-router-dom';
 import AuthContext from '../context/AuthContext';
@@ -15,7 +15,8 @@ const Header = ({ handleLoginShow }) => {
   const location = useLocation();
 
   const [isMobile, setIsMobile] = useState(window.innerWidth < 992);
-  const [openMobileMenu, setOpenMobileMenu] = useState(null); // State for mobile accordion
+  const [openMobileMenu, setOpenMobileMenu] = useState(null);
+  const navToggleRef = useRef(null); // NEW: Create a ref for the Navbar.Toggle button
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 992);
@@ -27,9 +28,16 @@ const Header = ({ handleLoginShow }) => {
     setOpenMobileMenu(openMobileMenu === title ? null : title);
   };
 
-  // NEW: Function to close the mobile menu
   const closeMobileMenu = () => {
     setOpenMobileMenu(null);
+  };
+
+  // NEW: Handle a link click, closing both the sub-menu and the main menu
+  const handleLinkClick = () => {
+    if (navToggleRef.current && navToggleRef.current.classList.contains('collapsed') === false) {
+        navToggleRef.current.click();
+    }
+    closeMobileMenu();
   };
 
   const countries = [
@@ -78,8 +86,8 @@ const Header = ({ handleLoginShow }) => {
             <Nav.Link href="tel:+441215555555">+44 121 555 5555</Nav.Link>
           </Nav>
           <Nav>
-            <Link to="/support" className="nav-link">Support</Link>
-            <Link to="/knowledge-base" className="nav-link">Knowledge Base</Link>
+            <Link to="/support" className="nav-link" onClick={handleLinkClick}>Support</Link>
+            <Link to="/knowledge-base" className="nav-link" onClick={handleLinkClick}>Knowledge Base</Link>
             <Link to="/cart" className="nav-link cart-icon-link">
               <i className="fas fa-shopping-cart"></i>
               {cartItems.length > 0 && 
@@ -107,7 +115,7 @@ const Header = ({ handleLoginShow }) => {
           <Navbar.Brand as={Link} to="/">
             <Image src={logo} alt="Host Dada Logo" className="logo" />
           </Navbar.Brand>
-          <Navbar.Toggle aria-controls="main-navbar-nav" />
+          <Navbar.Toggle aria-controls="main-navbar-nav" ref={navToggleRef} />
           <Navbar.Collapse id="main-navbar-nav" className="justify-content-end">
             <Nav>
               {siteStructure.map((item) => {
@@ -132,7 +140,7 @@ const Header = ({ handleLoginShow }) => {
                                 to={subItem.url} 
                                 key={subItem.title} 
                                 className="mobile-nav-link"
-                                onClick={closeMobileMenu} // NEW: Close menu on link click
+                                onClick={handleLinkClick} // NEW: Use the new handler for both menus
                               >
                                 {subItem.title}
                               </Nav.Link>
@@ -175,7 +183,7 @@ const Header = ({ handleLoginShow }) => {
                   }
                 }
                 return (
-                  <Nav.Link as={Link} to={item.url} key={item.title} active={location.pathname === item.url}>
+                  <Nav.Link as={Link} to={item.url} key={item.title} active={location.pathname === item.url} onClick={handleLinkClick}>
                     {item.title}
                   </Nav.Link>
                 );
