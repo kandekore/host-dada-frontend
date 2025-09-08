@@ -252,8 +252,12 @@ app.post('/api/full-domain-search', async (req, res) => {
 });
 // --- Get Products Endpoint (New) ---
 // --- Get Products Endpoint ---
+// server/server.js
+
+// --- Get Products Endpoint ---
+// REFLACE the existing '/api/products' function with this one.
 app.post('/api/products', async (req, res) => {
-  const { gid, currencyid } = req.body;
+  const { gid } = req.body;
   if (!gid) {
     return res.status(400).json({ error: 'Product Group ID (gid) is required.' });
   }
@@ -270,44 +274,21 @@ app.post('/api/products', async (req, res) => {
     const { data } = await axios.post(process.env.WHMCS_API_URL, params);
 
     if (data.result !== 'success') {
+      // If WHMCS reports an error, pass it along.
       return res.status(500).json({ error: data.message || 'Could not fetch products.' });
     }
 
-    // Normalise to array
-    const raw = Array.isArray(data.products?.product)
+    // The WHMCS API can return a single product object or an array.
+    // This simple logic ensures we always work with an array for consistency on the frontend.
+    const products = Array.isArray(data.products?.product)
       ? data.products.product
       : (data.products?.product ? [data.products.product] : []);
 
-    // WHMCS sets an unavailable cycle price to -1 (often as a string: "-1.00")
-    const hasValidPrice = (p) => {
-      const pr = p.pricing || {};
-      // If the API returned currency-specific object (rare), fall back to the first object
-      const priceObj = (typeof pr.monthly === 'undefined' && typeof pr.USD === 'object')
-        ? pr.USD
-        : pr;
-
-      const cycles = ['monthly', 'quarterly', 'semiannually', 'annually', 'biennially', 'triennially'];
-      return cycles.some((c) => {
-        const v = priceObj[c];
-        if (v === undefined || v === null || v === '') return false;
-        const n = parseFloat(v);
-        return !Number.isNaN(n) && n >= 0; // accept "0.00", "5.99", etc. reject "-1.00"
-      });
-    };
-
-    const products = raw.filter(hasValidPrice);
-
-    // If still empty, return raw for debugging once (comment out later)
-    if (!products.length) {
-      return res.json({
-        products: [],
-        note: 'No products with valid pricing found after filtering.',
-        // debug: raw, // <-- uncomment temporarily if you need to inspect the structure
-      });
-    }
-
+    // Send the clean, unfiltered product array to the frontend.
     res.json({ products });
+    
   } catch (error) {
+    // Catch any network or other errors.
     console.error('WHMCS GetProducts Error:', error.message);
     res.status(500).json({ error: 'An error occurred while fetching products.' });
   }

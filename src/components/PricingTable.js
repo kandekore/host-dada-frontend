@@ -1,5 +1,5 @@
 // src/components/PricingTable.js
-import React, { useState, useMemo, useContext } from 'react';
+import React, { useState, useMemo, useContext, useEffect } from 'react';
 import { Row, Col, Card, Button, Tabs, Tab } from 'react-bootstrap';
 import CartContext from '../context/CartContext';
 import './PricingTable.css';
@@ -17,15 +17,12 @@ const CYCLE_ORDER = ['monthly', 'quarterly', 'semiannually', 'annually', 'bienni
 const ProductCard = ({ product, cycle, currency, groupSlug }) => {
     const { addToCart } = useContext(CartContext);
     
-    // NOTE: Corrected data path to look inside the currency object
     const currencyPricing = product.pricing?.[currency];
     const currentPrice = currencyPricing?.[cycle];
 
-    // NOTE: Corrected setup fee logic to match WHMCS format (e.g., 'msetupfee')
     const setupFeeKey = `${cycle.charAt(0)}setupfee`;
     const setupFee = currencyPricing?.[setupFeeKey] ?? '0.00';
     
-    // This check is a safeguard
     if (!currentPrice || currentPrice === '-1.00') {
         return null;
     }
@@ -40,7 +37,7 @@ const ProductCard = ({ product, cycle, currency, groupSlug }) => {
             slug: product.slug,
             groupSlug: groupSlug,
             cycle: cycle,
-            price: fullPriceString, // Use the formatted price
+            price: fullPriceString,
         };
         addToCart(item);
     };
@@ -66,10 +63,9 @@ const ProductCard = ({ product, cycle, currency, groupSlug }) => {
 };
 
 const PricingTable = ({ products, groupSlug }) => {
-    // NOTE: For now, we'll select the first currency found. This can be expanded to a dropdown.
-    const [selectedCurrency, setSelectedCurrency] = useState(() => {
-        return products?.[0] ? Object.keys(products[0].pricing)[0] : null;
-    });
+    // --- THIS LOGIC IS NOW MORE ROBUST ---
+    const [selectedCurrency, setSelectedCurrency] = useState(null);
+    const [activeCycle, setActiveCycle] = useState(null);
 
     const availableCycles = useMemo(() => {
         if (!products || !selectedCurrency) return [];
@@ -77,12 +73,10 @@ const PricingTable = ({ products, groupSlug }) => {
         products.forEach(product => {
             const currencyPricing = product.pricing?.[selectedCurrency];
             if (currencyPricing && typeof currencyPricing === 'object') {
-                // NOTE: Now iterating over the keys WITHIN the currency object
                 Object.keys(currencyPricing).forEach(key => {
-                    // We only want keys that are actual billing cycles
                     if (CYCLE_ORDER.includes(key)) {
                         const price = currencyPricing[key];
-                        if (price && price !== '-1.00') {
+                        if (price && parseFloat(price) >= 0) { // More robust check
                             cycles.add(key);
                         }
                     }
@@ -91,22 +85,39 @@ const PricingTable = ({ products, groupSlug }) => {
         });
         return Array.from(cycles).sort((a, b) => CYCLE_ORDER.indexOf(a) - CYCLE_ORDER.indexOf(b));
     }, [products, selectedCurrency]);
+    
+    useEffect(() => {
+        if (products && products.length > 0) {
+            // Intelligently find the first product that has pricing data
+            const productWithPricing = products.find(p => p.pricing && Object.keys(p.pricing).length > 0);
+            if (productWithPricing) {
+                // Prefer GBP, then USD, then fall back to the first available currency
+                const pricingKeys = Object.keys(productWithPricing.pricing);
+                const currency = pricingKeys.includes('GBP') ? 'GBP' : pricingKeys.includes('USD') ? 'USD' : pricingKeys[0];
+                setSelectedCurrency(currency);
+            }
+        }
+    }, [products]);
 
-    const [activeCycle, setActiveCycle] = useState(availableCycles[0] || null);
+    useEffect(() => {
+        // Set the active cycle ONLY after availableCycles has been calculated
+        if (availableCycles.length > 0) {
+            setActiveCycle(availableCycles[0]);
+        }
+    }, [availableCycles]);
 
+    // This is the condition that shows the error message.
     if (!activeCycle || !selectedCurrency) {
         return <p className="text-center">No products with valid pricing found.</p>;
     }
 
-    // Filter products that have a valid price for the active currency AND cycle
     const filteredProducts = products.filter(p => {
         const price = p.pricing?.[selectedCurrency]?.[activeCycle];
-        return price && price !== '-1.00';
+        return price && parseFloat(price) >= 0;
     });
 
     return (
         <>
-            {/* TODO: Add a currency selector here to change the `selectedCurrency` state */}
             <Tabs
                 id="billing-cycle-tabs"
                 activeKey={activeCycle}
@@ -125,7 +136,7 @@ const PricingTable = ({ products, groupSlug }) => {
                         product={product}
                         cycle={activeCycle}
                         currency={selectedCurrency}
-                        groupSlug={groupSlug} // <-- PASS IT DOWN
+                        groupSlug={groupSlug}
                     />
                 ))}
             </Row>
