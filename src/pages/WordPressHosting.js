@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Card, Accordion, Spinner, Alert } from 'react-bootstrap';
 import { Helmet } from 'react-helmet-async';
-import PricingTable from '../components/PricingTable';
+import PricingTable from '../components/PricingTableThreeCol';
 import './WordPressHosting.css';
 import { API_BASE } from '../config'; // or wherever
 console.log('API_BASE =', API_BASE);
@@ -18,7 +18,7 @@ const WordPressHosting = () => {
                 const res = await fetch(`${API_BASE}/products`, {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ gid: 36 }),
+  body: JSON.stringify({ gid: 62 }),
 });
 
 const ct = res.headers.get('content-type') || '';
