@@ -18,7 +18,7 @@ const LinuxHosting = () => {
                         const res = await fetch(`${API_BASE}/products`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ gid: 38 }),
+          body: JSON.stringify({ gid: 61 }),
         });
         
         const ct = res.headers.get('content-type') || '';

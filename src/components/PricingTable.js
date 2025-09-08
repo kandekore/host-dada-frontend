@@ -46,7 +46,7 @@ const ProductCard = ({ product, cycle, currency, groupSlug }) => {
     };
 
     return (
-        <Col md={6} lg={4} className="mb-4 d-flex">
+        <Col xs={12} sm={12} md={6} lg={3} className="mb-4 d-flex">
             <Card className="h-100 text-center w-100">
                 <Card.Header as="h5">{product.name}</Card.Header>
                 <Card.Body className="d-flex flex-column">

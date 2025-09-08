@@ -67,3 +67,41 @@
     align-items: center;
     justify-content: center;
 }
+/**Feature list section**/
+.features-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.features-list li {
+  margin-bottom: 6px;
+  line-height: 1.5;
+  position: relative;
+}
+
+/* add tick after the text */
+.features-list li::after {
+  content: " ✅";
+  color: #28a745!important; /* green tick */
+  font-weight: bold;
+}
+
+/* remove ticks from headers */
+.features-list li.header::after {
+  content: "";
+}
+
+.features-list li.header {
+  font-size: 1.05em;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.setup {
+  display: block;
+  margin-top: 15px;
+  font-size: 1.5em;
+  color: #28a745;
+  text-align: center; /* center align */
+}
