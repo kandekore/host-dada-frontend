@@ -1,66 +1,31 @@
-// src/pages/DomainsTransfer.js
 import React, { useState } from 'react';
+import { Container, Row, Col, Button, Card, Form, Alert } from 'react-bootstrap';
 import { Helmet } from 'react-helmet-async';
-import { Container, Row, Col, Form, Button, Card, Spinner, Alert } from 'react-bootstrap';
+import './DomainsTransfer.css'; 
 
 const DomainsTransfer = () => {
-    const [step, setStep] = useState(1);
-    const [domain, setDomain] = useState('');
-    const [authCode, setAuthCode] = useState('');
-    const [isUkDomain, setIsUkDomain] = useState(false);
-    const [loading, setLoading] = useState(false);
-    const [result, setResult] = useState(null);
+    const pageTitle = "Transfer Your Domain | Host Dada";
+    const pageDescription = "Transfer your domain to Host Dada easily. Enjoy competitive pricing, reliable DNS management, and expert UK support. Start your transfer today.";
+
+    const [domainName, setDomainName] = useState('');
     const [error, setError] = useState('');
 
-    const pageTitle = "Transfer Your Domain | Host Dada";
-    const pageDescription = "Transfer your domain to Host Dada for simple management, competitive pricing, and expert support. Get started with our easy transfer process.";
-
-    const UK_TLDS = ['.uk', '.co.uk', '.org.uk', '.me.uk'];
-
-    const handleDomainCheck = (e) => {
+    const handleTransfer = (e) => {
         e.preventDefault();
-        if (!domain) {
-            setError('Please enter a domain name to begin.');
+        if (!domainName.trim()) {
+            setError('Please enter the domain name you wish to transfer.');
             return;
         }
         setError('');
 
-        const isUk = UK_TLDS.some(tld => domain.toLowerCase().endsWith(tld));
-        setIsUkDomain(isUk);
-        setStep(2); // Move to the next step
-    };
+        // The base URL for your WHMCS installation
+        const whmcsBaseUrl = 'https://my.hostdada.co.uk'; 
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setLoading(true);
-        setError('');
-        setResult(null);
+        // Construct the WHMCS cart URL for a domain transfer, without the EPP code
+        const transferUrl = `${whmcsBaseUrl}/cart.php?a=add&domain=transfer&query=${encodeURIComponent(domainName)}`;
 
-        // This is a placeholder for your actual API call to WHMCS
-        // You would pass the domain and, if not a UK domain, the authCode
-        try {
-            // const response = await fetch('/api/initiate-transfer', { 
-            //     method: 'POST',
-            //     body: JSON.stringify({ domain, eppCode: isUkDomain ? null : authCode }) 
-            // });
-            // const data = await response.json();
-
-            // Simulate API call success
-            setTimeout(() => {
-                setResult(`Transfer for ${domain} has been initiated successfully! Please check your email for verification.`);
-                setLoading(false);
-            }, 1500);
-
-        } catch (err) {
-            setError('There was an error initiating the transfer. Please check the details and try again.');
-            setLoading(false);
-        }
-    };
-
-    const handleBack = () => {
-        setStep(1);
-        setError('');
-        setResult(null);
+        // Redirect the user to WHMCS
+        window.location.href = transferUrl;
     };
 
     return (
@@ -71,74 +36,73 @@ const DomainsTransfer = () => {
             </Helmet>
 
             <Container className="my-5">
+                {/* --- Hero Section --- */}
+                <Row className="text-center mb-5">
+                    <Col lg={8} className="mx-auto">
+                        <h1>Transfer Your Domain to Host Dada</h1>
+                        <p className="lead text-muted">
+                            Consolidate your domains with an easy and secure transfer process. Enjoy competitive renewal rates and manage all your services in one place.
+                        </p>
+                    </Col>
+                </Row>
+
+                {/* --- Transfer Form Section --- */}
                 <Row className="justify-content-center">
-                    <Col lg={8}>
-                        <div className="text-center mb-5">
-                            <h1>Transfer Your Domain to Host Dada</h1>
-                            <p className="lead text-muted">Consolidate your domains with our easy-to-use management tools, competitive renewal prices, and expert support.</p>
-                        </div>
-
-                        <Card>
-                            <Card.Header as="h5">Start Your Transfer</Card.Header>
+                    <Col md={8} lg={6}>
+                        <Card className="transfer-card shadow-sm">
                             <Card.Body>
-                                {step === 1 && (
-                                    <Form onSubmit={handleDomainCheck}>
-                                        <Form.Group className="mb-3" controlId="domainToTransfer">
-                                            <Form.Label>Enter the Domain Name You Wish to Transfer</Form.Label>
-                                            <Form.Control 
-                                                type="text" 
-                                                placeholder="e.g., mydomain.com"
-                                                value={domain}
-                                                onChange={(e) => setDomain(e.target.value)}
-                                                required 
-                                            />
-                                        </Form.Group>
-                                        <Button variant="primary" type="submit">Check Domain</Button>
-                                    </Form>
-                                )}
+                                <Card.Title as="h3" className="text-center mb-4">Start Your Transfer</Card.Title>
+                                {error && <Alert variant="danger">{error}</Alert>}
+                                <Form onSubmit={handleTransfer}>
+                                    <Form.Group className="mb-3" controlId="domainName">
+                                        <Form.Label>Domain Name to Transfer</Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            placeholder="e.g., mydomain.com"
+                                            value={domainName}
+                                            onChange={(e) => setDomainName(e.target.value)}
+                                            required
+                                        />
+                                    </Form.Group>
 
-                                {step === 2 && (
-                                    <Form onSubmit={handleSubmit}>
-                                        <h5>Transferring: <strong>{domain}</strong></h5>
-                                        
-                                        {isUkDomain ? (
-                                            <Alert variant="info" className="mt-4">
-                                                <Alert.Heading><i className="fas fa-info-circle"></i> Action Required for .UK Domains</Alert.Heading>
-                                                <p>
-                                                    To transfer a <strong>.uk</strong> domain, you do not need an EPP code. Instead, you must log in to your current domain registrar and change the **IPS Tag** to:
-                                                </p>
-                                                <h4 className="text-center my-3"><code>HOSTDADA</code></h4>
-                                                <p className="mb-0">
-                                                    Once you have done this, the transfer will proceed automatically. Click the button below once you have updated the IPS Tag.
-                                                </p>
-                                            </Alert>
-                                        ) : (
-                                            <Form.Group className="my-4" controlId="authCode">
-                                                <Form.Label>Authorization (EPP) Code</Form.Label>
-                                                <Form.Control 
-                                                    type="text" 
-                                                    placeholder="Get this from your current registrar"
-                                                    value={authCode}
-                                                    onChange={(e) => setAuthCode(e.target.value)}
-                                                    required 
-                                                />
-                                                <Form.Text className="text-muted">
-                                                    Before you proceed, please ensure your domain is unlocked at your current registrar.
-                                                </Form.Text>
-                                            </Form.Group>
-                                        )}
-                                        
-                                        <div className="d-flex justify-content-between">
-                                            <Button variant="secondary" onClick={handleBack}>Back</Button>
-                                            <Button variant="primary" type="submit" disabled={loading}>
-                                                {loading ? <Spinner as="span" animation="border" size="sm" /> : 'Initiate Transfer'}
-                                            </Button>
-                                        </div>
-                                    </Form>
-                                )}
+                                    <div className="d-grid mt-4">
+                                        <Button variant="primary" type="submit" size="lg">
+                                            Check Availability & Transfer
+                                        </Button>
+                                    </div>
+                                </Form>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                </Row>
 
-                                {error && <Alert variant="danger" className="mt-4">{error}</Alert>}
-                                {result && <Alert variant="success" className="mt-4">{result}</Alert>}
+                {/* --- Prerequisites Section --- */}
+                <Row className="mt-5 pt-4 text-center">
+                    <Col>
+                        <h2>Before You Begin</h2>
+                        <p className="text-muted">To ensure a smooth transfer, please complete the following steps with your current registrar:</p>
+                    </Col>
+                </Row>
+                <Row className="mt-4">
+                    <Col md={{ span: 4, offset: 2 }} className="mb-4">
+                        <Card className="h-100 text-center feature-card">
+                             <Card.Body>
+                                <div className="feature-icon mb-3">1</div>
+                                <Card.Title as="h5">Unlock Your Domain</Card.Title>
+                                <Card.Text>
+                                    Log in to your current domain provider and disable the registrar lock or theft protection for the domain you wish to transfer.
+                                </Card.Text>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                     <Col md={4} className="mb-4">
+                         <Card className="h-100 text-center feature-card">
+                             <Card.Body>
+                                <div className="feature-icon mb-3">2</div>
+                                <Card.Title as="h5">Check Admin Email</Card.Title>
+                                <Card.Text>
+                                    Ensure you have access to the administrator email address listed on your domain's WHOIS record, as a confirmation email will be sent there.
+                                </Card.Text>
                             </Card.Body>
                         </Card>
                     </Col>

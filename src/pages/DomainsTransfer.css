@@ -1,0 +1,37 @@
+/* src/pages/DomainsTransfer.css */
+
+.transfer-card {
+    border: none;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+}
+
+.transfer-card .form-label {
+    font-weight: 500;
+}
+
+.feature-card {
+    border: 1px solid #e9ecef;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+}
+
+.feature-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: #0d6efd; /* Bootstrap primary color */
+    border-radius: 50%;
+}
+.text-muted {
+    text-align: center;
+}

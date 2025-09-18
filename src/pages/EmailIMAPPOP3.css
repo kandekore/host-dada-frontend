@@ -1,0 +1,46 @@
+/* src/pages/EmailIMAPPOP3.css */
+
+.email-hero-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../assets/images/slider-2.jpg'); /* You can replace with a more relevant background image */
+    background-size: cover;
+    background-position: center;
+    padding: 4rem 0;
+    margin-bottom: -1px; /* Overlap slightly with next section */
+}
+
+.placeholder-image {
+    background-color: #f8f9fa;
+    border: 1px dashed #ced4da;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 250px;
+    color: #6c757d;
+    font-weight: 500;
+}
+
+.feature-card-email {
+    border: 1px solid #e9ecef;
+    border-top: 4px solid #C19A6B; /* Your brand's bronze color */
+    text-align: center;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.feature-card-email:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+}
+
+.security-section {
+    background-color: #f8f9fa;
+    padding: 3rem 0;
+    border-radius: 0.75rem;
+}
+
+.premium-section {
+    background-color: #e8f5e9; /* A light green to indicate an upgrade */
+    padding: 3rem 1.5rem;
+    border-radius: 0.75rem;
+    border: 1px solid #c8e6c9;
+}

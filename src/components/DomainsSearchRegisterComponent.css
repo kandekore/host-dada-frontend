@@ -1,0 +1,87 @@
+/* src/components/DomainsSearchRegisterComponent.css */
+.domain-search-register-section {
+  background-color: #fff;
+  padding: 4rem 0;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.domain-search-title {
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.tld-item {
+  padding: 0.5rem 1rem;
+}
+
+.tld-logo {
+  height: 25px;
+  margin-bottom: 0.5rem;
+}
+
+.tld-price {
+  font-weight: 600;
+  color: #495057;
+}
+
+.domain-search-form .input-group {
+  display: flex;
+}
+
+.domain-search-form .form-control {
+  flex-grow: 1;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1.1rem;
+  border: 1px solid #ced4da;
+}
+
+.domain-search-form .btn {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+  padding: 0.75rem 2rem;
+  font-size: 1.1rem;
+  background-color: #C19A6B; /* Bronze from your logo */
+  border-color: #C19A6B;
+  z-index: 2; 
+}
+
+.domain-search-form .btn:hover {
+  background-color: #a5835a;
+  border-color: #a5835a;
+}
+
+/* Styles for the suggestions grid */
+.tld-suggestions-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  border-top: 1px solid #dee2e6;
+  padding-top: 1.5rem;
+}
+
+.tld-suggestion-item {
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  padding: 1rem;
+  flex: 1 1 150px; /* Flex properties for a nice wrap */
+  max-width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tld-suggestion-item .domain-name {
+  font-weight: 500;
+}
+.lead {
+ text-align: center;
+}

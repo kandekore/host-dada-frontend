@@ -1,0 +1,19 @@
+/* src/pages/SSLPage.css */
+
+.ssl-hero-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../assets/images/slider-1.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 4rem 0;
+}
+
+.feature-card-ssl {
+    border: 1px solid #e9ecef;
+    border-top: 4px solid #28a745; /* Green for SSL */
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.feature-card-ssl:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+}

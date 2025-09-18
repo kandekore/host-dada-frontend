@@ -1,0 +1,21 @@
+/* src/pages/EmailMicrosoft365.css */
+
+.m365-hero-section {
+    background: linear-gradient(to right, #0078d4, #2b88d8); /* Microsoft blue gradient */
+}
+
+.feature-card-m365 {
+    border: 1px solid #e9ecef;
+    text-align: center;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.feature-card-m365:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+}
+
+.section-container h5 {
+    color: #333;
+    font-weight: 600;
+}

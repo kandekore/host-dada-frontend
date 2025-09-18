@@ -48,7 +48,6 @@ const siteStructure = [
 
       subItems: [
         { title: "IMAP/POP3 Email Hosting", url: "/email-hosting/imap-pop3", icon: "📧", description: "Reliable email hosting" },
-        { title: "Exchange Secure Email Hosting", url: "/email-hosting/exchange", icon: "🔒", description: "Secure email solution" },
         { title: "Microsoft 365", url: "/email-hosting/microsoft-365", icon: "🗂", description: "Microsoft 365 hosting" },
       ],
     },
