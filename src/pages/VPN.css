@@ -1,0 +1,42 @@
+/* src/pages/VPN.css */
+
+.vpn-hero-section {
+    background: linear-gradient(rgba(18, 28, 41, 0.7), rgba(18, 28, 41, 0.7)), url('https://images.unsplash.com/photo-1614036357413-a419206f47f2?q=80&w=2070&auto=format&fit=crop'); /* A dark, tech-themed background */
+    background-size: cover;
+    background-position: center;
+    padding: 5rem 0;
+}
+
+.feature-card-vpn {
+    border: 1px solid #e9ecef;
+    border-radius: 0.5rem;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.feature-card-vpn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+}
+
+.threat-protection-section {
+    background-color: #f8f9fa;
+    padding: 3rem 1.5rem;
+    border-radius: 1rem;
+}
+
+.placeholder-image-vpn {
+    background-color: #e9ecef;
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+    color: #6c757d;
+    font-weight: 500;
+}
+
+.included-list-vpn li {
+    font-size: 1.1rem;
+    padding: 0.5rem 0;
+    color: #495057;
+}
