@@ -1,0 +1,42 @@
+/* src/pages/StackWebsiteBuilder.css */
+
+.stack-hero-section {
+    background: linear-gradient(to right, #0052D4, #4364F7, #6FB1FC); /* A cool blue gradient */
+    padding: 5rem 0;
+}
+
+.placeholder-image-stack {
+    background-color: #e9ecef;
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 350px;
+    color: #6c757d;
+    font-weight: 500;
+}
+
+.features-section {
+    background-color: #f8f9fa;
+    padding: 3rem 1.5rem;
+    border-radius: 1rem;
+}
+
+.feature-card-stack {
+    border: 1px solid #e9ecef;
+    transition: box-shadow 0.3s ease;
+}
+
+.feature-card-stack:hover {
+    box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.08);
+}
+
+.all-features-section {
+    padding: 3rem 0;
+}
+
+.feature-list li {
+    padding: 0.5rem 0;
+    font-size: 1.1rem;
+    color: #495057;
+}

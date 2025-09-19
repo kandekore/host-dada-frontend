@@ -1,0 +1,81 @@
+/* src/pages/HireDeveloper.css */
+
+.hire-hero-section {
+    background: linear-gradient(to right, #4A00E0, #8E2DE2); /* A vibrant purple gradient */
+    padding: 5rem 0;
+}
+
+.service-card {
+    border: none;
+    border-radius: 0.75rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.12);
+}
+
+.service-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.process-section {
+    background-color: #f8f9fa;
+    padding: 4rem 0;
+    border-radius: 1rem;
+}
+
+.process-card {
+    background-color: #ffffff;
+    border: 1px solid #e9ecef;
+    text-align: center;
+    padding-top: 2rem;
+    position: relative;
+}
+
+.process-number {
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 50px;
+    background-color: #C19A6B; /* Your brand bronze */
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid white;
+}
+
+.included-section h4 {
+    color: #C19A6B;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.included-list li {
+    font-size: 1.1rem;
+    padding: 0.5rem 0;
+    color: #495057;
+}
+
+.placeholder-image-dev {
+    background-color: #e9ecef;
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 400px;
+    color: #6c757d;
+}
+
+.faq-section .accordion-button {
+    font-weight: 600;
+}

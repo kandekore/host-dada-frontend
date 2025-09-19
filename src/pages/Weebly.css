@@ -1,0 +1,39 @@
+/* src/pages/Weebly.css */
+
+.weebly-hero-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1559028006-448665bd7c2f?q=80&w=2070&auto=format&fit=crop'); /* A relevant, modern background */
+    background-size: cover;
+    background-position: center;
+    padding: 5rem 0;
+}
+
+.placeholder-image-weebly {
+    background-color: #f8f9fa;
+    border: 1px dashed #ced4da;
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+    color: #6c757d;
+    font-weight: 500;
+}
+
+.feature-card-weebly {
+    border: none;
+    background-color: #f8f9fa;
+    border-radius: 0.75rem;
+    text-align: center;
+    padding: 1.5rem;
+    transition: transform 0.2s ease-in-out;
+}
+
+.feature-card-weebly:hover {
+    transform: translateY(-5px);
+}
+
+.faq-section {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
