@@ -1,0 +1,15 @@
+/* src/pages/Webmail.css */
+
+.webmail-container {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 80px); /* Adjust 80px to match your header's height */
+    overflow: hidden;
+}
+
+.webmail-iframe {
+    flex-grow: 1;
+    border: none;
+    width: 100%;
+    height: 100%;
+}

@@ -88,6 +88,7 @@ const Header = ({ handleLoginShow }) => {
           <Nav>
             <Link to="/support" className="nav-link" onClick={handleLinkClick}>Support</Link>
             <Link to="/knowledge-base" className="nav-link" onClick={handleLinkClick}>Knowledge Base</Link>
+            <Link to="/webmail" className="nav-link" onClick={handleLinkClick}>Webmail</Link> 
             <Link to="/cart" className="nav-link cart-icon-link">
               <i className="fas fa-shopping-cart"></i>
               {cartItems.length > 0 && 

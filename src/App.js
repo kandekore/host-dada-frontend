@@ -41,6 +41,7 @@ import Terms from './pages/Terms';
 import Privacy from './pages/Privacy';
 import AllTldsSearch from './pages/AllTldsSearch';
 import DomainExtensionPage from './pages/DomainExtensionPage';
+import Webmail from './pages/Webmail';
 
 
 function App() {
@@ -115,6 +116,7 @@ function App() {
                      <Route path="/domains/:extension" element={<DomainExtensionPage />} />
 
           <Route path="cart" element={<CartPage />} />
+            <Route path="webmail" element={<Webmail />} />
         </Route>
       </Routes>
        <ToastContainer />
