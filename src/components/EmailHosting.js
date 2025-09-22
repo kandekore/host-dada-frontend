@@ -3,7 +3,6 @@ import React from 'react';
 import { Container, Row, Col, Image, Button } from 'react-bootstrap';
 import './EmailHosting.css';
 import emailImage from '../assets/images/hosted-email.png'; // Ensure you have this image in the specified path
-import e from 'cors';
 
 const EmailHosting = () => {
   return (
