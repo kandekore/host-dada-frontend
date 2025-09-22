@@ -2,6 +2,8 @@
 import React from 'react';
 import { Container, Row, Col, Image, Button } from 'react-bootstrap';
 import './EmailHosting.css';
+import emailImage from '../assets/images/hosted-email.png'; // Ensure you have this image in the specified path
+import e from 'cors';
 
 const EmailHosting = () => {
   return (
@@ -22,10 +24,9 @@ const EmailHosting = () => {
           </Col>
           <Col md={6}>
             <Image
-              src="https://hostdada.uk/wp-content/uploads/2024/07/hosted-email.png"
+              src={emailImage}
               alt="Hosted Email"
-              fluid
-              className="section-image"
+            
             />
           </Col>
         </Row>

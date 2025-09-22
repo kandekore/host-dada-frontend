@@ -5,11 +5,11 @@ import './HostingFeatures.css';
 
 const items = [
     { icon: 'fas fa-server', title: '99.9% Uptime', description: 'Reliable hosting that keeps your website online.' },
-    { icon: 'fas fa-tachometer-alt', title: 'Blazing Fast Speeds', description: 'Optimized servers for maximum performance.' },
-    { icon: 'fas fa-cpanel', title: 'cPanel Included', description: 'Easy-to-use control panel for managing your site.' },
+    { icon: 'fas fa-bolt', title: 'Blazing Fast Speeds', description: 'Optimized servers for maximum performance.' },
+    { icon: 'fas fa-cogs', title: 'cPanel Included', description: 'Easy-to-use control panel for managing your site.' },
     { icon: 'fas fa-lock', title: 'Free SSL Certificates', description: 'Secure your website and build trust with visitors.' },
     { icon: 'fas fa-database', title: 'MySQL Databases', description: 'Unlimited databases for your applications.' },
-    { icon: 'fas fa-life-ring', title: '24/7 Support', description: 'Expert help is always available when you need it.' },
+    { icon: 'fas fa-question', title: '24/7 Support', description: 'Expert help is always available when you need it.' },
 ];
 
 const HostingFeatures = () => {

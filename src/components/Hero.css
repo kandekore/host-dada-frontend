@@ -39,3 +39,10 @@
     background-color: #a5835a;
     border-color: #a5835a;
 }
+p.lead.text-white-75.my-4 {
+    color: #fff;
+    text-align: left;
+}
+h1.display-3.fw-bold.text-white {
+    text-shadow: 2px 1px #c19A6b;
+}

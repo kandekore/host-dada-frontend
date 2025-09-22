@@ -158,21 +158,18 @@ const DomainSearch = () => {
           {/* ... rest of the JSX remains the same ... */}
           <Row className="align-items-center">
             <Col lg={7} className="mb-4 mb-lg-0">
-              <h2 className="domain-search-title">Find Your Perfect Domain Name</h2>
               <Form onSubmit={handleSearch} className="d-flex domain-search-form">
                 <Form.Control
                     type="search"
-                    placeholder="e.g., myawesomeidea"
+                    placeholder="Find Your Perfect Domain Name"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                 />
                 <Button type="submit" disabled={isLoading}>
-                    {isLoading ? <Spinner size="sm" /> : 'Search'}
+                    {isLoading ? <Spinner size="sm" /> : 'Check'}
                 </Button>
               </Form>
-              <div className="text-center text-lg-start mt-3">
-                <Link to="/domains/all-tlds">Or see a list of all TLDs and prices</Link>
-              </div>
+           
             </Col>
             <Col lg={5}>
               <Row className="justify-content-center">

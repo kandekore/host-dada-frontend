@@ -4,7 +4,7 @@ import { Container, Row, Col, Image, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 // We can reuse the same CSS file as the other promo sections
 import './EmailHosting.css'; 
-
+import WordPressLogo from '../assets/images/wordpress.svg';
 const WordPressPromo = () => {
   return (
     <section className="alternating-section bg-light">
@@ -14,7 +14,7 @@ const WordPressPromo = () => {
             <div className="text-content">
               <h2 className="section-title">Super-fast & Secure WordPress Hosting</h2>
               <p>
-                Get optimized hosting for the world's most popular website builder. Our platform includes daily backups, malware scanning, and page speed optimization to keep your WordPress site fast and secure.
+                Get optimised hosting for WordPress the world's most popular website builder. Our platform includes daily backups, malware scanning, and page speed optimization to keep your WordPress site fast and secure.
               </p>
               <ul className="fa-ul">
                 <li><span className="fa-li"><i className="fas fa-check-circle text-success"></i></span>Free Domain Name with yearly plans</li>
@@ -28,10 +28,9 @@ const WordPressPromo = () => {
           </Col>
           <Col md={{ span: 6, order: 'first' }}>
             <Image
-              src="https://hostdada.uk/wp-content/uploads/2024/07/wordpress.svg"
+              src={WordPressLogo}
               alt="WordPress Hosting"
-              fluid
-              className="section-image p-5"
+              
             />
           </Col>
         </Row>

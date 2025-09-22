@@ -11,12 +11,13 @@
 }
 
 .plan-item i {
-  font-size: 2rem;
-  color: #C19A6B; /* Brand bronze color */
-  margin-right: 1.5rem;
-  margin-top: 0.25rem;
-  width: 40px;
-  text-align: center;
+    font-size: 4rem;
+    color: #C19A6B;
+    margin-right: 2.8rem;
+    margin-top: 0.25rem;
+    width: 40px;
+    text-align: center;
+    text-shadow: 1px 1px black;
 }
 
 .item-content h4 {
@@ -27,4 +28,6 @@
 .item-content p {
   color: #6c757d;
   margin-bottom: 0;
+}
+h2.section-title {    text-shadow: 1px 1px #C19A6B!important;
 }

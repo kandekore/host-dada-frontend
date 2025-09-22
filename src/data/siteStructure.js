@@ -26,6 +26,7 @@ const siteStructure = [
         { title: "Search & Register", url: "/domains/search-register", icon: "🔍", description: "Find and register domains" },
         { title: "Transfer", url: "/domains/transfer", icon: "🔄", description: "Transfer your domain" },
         { title: "Whois", url: "/domains/whois", icon: "📜", description: "Domain lookup" },
+        { title: "All TLDs & Pricing", url: "/domains/all-tlds", icon: "💲", description: "View all TLDs and prices" },
       ],
     },
     {
