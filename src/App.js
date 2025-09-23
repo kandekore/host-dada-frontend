@@ -41,6 +41,7 @@ import Terms from './pages/Terms';
 import Privacy from './pages/Privacy';
 import AllTldsSearch from './pages/AllTldsSearch';
 import DomainExtensionPage from './pages/DomainExtensionPage';
+import ScrollToTop from "./components/ScrollToTop";
 
 
 function App() {
@@ -50,6 +51,8 @@ function App() {
 
   return (
     <Router>
+          <ScrollToTop />
+
       <Routes>
         <Route path="/" element={<MainLayout handleLoginShow={handleLoginShow} />}>
           <Route index element={<Home />} />

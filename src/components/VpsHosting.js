@@ -1,7 +1,6 @@
 // src/components/VpsHosting.js
 import React from 'react';
 import { Container, Row, Col, Image, Button } from 'react-bootstrap';
-// We can reuse the same CSS file since the styles are similar
 import './EmailHosting.css';
 
 const VpsHosting = () => {
@@ -9,7 +8,7 @@ const VpsHosting = () => {
     <section className="alternating-section bg-light">
       <Container>
         <Row className="align-items-center">
-          <Col md={{ span: 6, order: 'last' }}>
+          <Col xs={12} md={{ span: 6, order: 'last' }}>
             <div className="text-content">
               <h2 className="section-title">Powerful VPS Hosting Services</h2>
               <p>
@@ -21,12 +20,16 @@ const VpsHosting = () => {
               <Button variant="primary" className="mt-3">Explore VPS Plans</Button>
             </div>
           </Col>
-          <Col md={{ span: 6, order: 'first' }}>
+
+          <Col xs={12} md={{ span: 6, order: 'first' }} className="text-center">
             <Image
               src="https://hostdada.uk/wp-content/uploads/2024/07/Server.png"
               alt="VPS Hosting"
               fluid
               className="section-image"
+              loading="lazy"
+              decoding="async"
+              sizes="(max-width: 768px) 90vw, 520px"
             />
           </Col>
         </Row>

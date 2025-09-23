@@ -1,10 +1,11 @@
 /* src/components/EmailHosting.css */
 
-/* We'll use a shared class for the alternating sections for consistency */
+/* Section spacing */
 .alternating-section {
   padding: 4rem 0;
 }
 
+/* Typo-safe: keep headings & text styles */
 .alternating-section .text-content h2 {
   font-weight: 700;
   margin-bottom: 1.5rem;
@@ -15,25 +16,40 @@
   line-height: 1.7;
 }
 
+/* Button theme */
 .alternating-section .btn-primary {
-    background-color: #C19A6B;
-    border-color: #C19A6B;
-    font-weight: 500;
+  background-color: #C19A6B;
+  border-color: #C19A6B;
+  font-weight: 500;
 }
 
 .alternating-section .btn-primary:hover {
-    background-color: #a5835a;
-    border-color: #a5835a;
+  background-color: #a5835a;
+  border-color: #a5835a;
 }
 
+/* Image consistency */
 .alternating-section .section-image {
-    border-radius: 8px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  display: block;
+  margin: 0 auto;             /* center horizontally */
+  width: 100%;
+  height: auto;
+  max-width: 520px;           /* consistent max size on larger screens */
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  object-fit: contain;        /* keep SVG/PNGs nicely contained */
+  padding: 10px;              /* subtle breathing room */
 }
-img.section-image.img-fluid {
-    padding: 10px;
-}
-.img-fluid {
-    width: 80%;
-    height: auto;
+
+/* Remove risky global overrides from the original file:
+   (no generic .img-fluid width forcing site-wide) */
+
+/* Small screens spacing (optional) */
+@media (max-width: 767.98px) {
+  .alternating-section {
+    padding: 3rem 0;
+  }
+  .alternating-section .text-content {
+    margin-bottom: 1.25rem;
+  }
 }

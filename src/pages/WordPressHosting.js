@@ -8,6 +8,7 @@ import { API_BASE } from '../config'; // or wherever
 console.log('API_BASE =', API_BASE);
 
 const WordPressHosting = () => {
+    
     const [products, setProducts] = useState([]);
     const [loading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -20,6 +21,7 @@ const WordPressHosting = () => {
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({ gid: 62 }),
 });
+
 
 const ct = res.headers.get('content-type') || '';
 if (!ct.includes('application/json')) {
@@ -43,7 +45,9 @@ setProducts(data.products);
 
     const pageTitle = "Managed WordPress Hosting | Host Dada";
     const pageDescription = "Experience a superior, fully-managed WordPress hosting platform. Our service includes autoscaling resources, one-click staging, a global CDN, and comprehensive security to ensure your website excels.";
-
+   useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [])
     return (
         <>
             <Helmet>

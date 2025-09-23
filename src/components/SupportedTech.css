@@ -7,16 +7,18 @@
 }
 
 .tech-logo-col {
-  padding: 1rem;
+  padding: 1.5rem; /* a bit more space */
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .tech-logo {
-  max-height: 50px;
+  height: 100px;      /* force icons to be twice as tall */
+  width: auto;        /* keep proportions */
   transition: all 0.3s ease;
 }
+
 
 .tech-logo:hover {
   transform: scale(1.1);

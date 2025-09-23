@@ -2,19 +2,19 @@
 import React from 'react';
 import { Container, Row, Col, Image, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-// We can reuse the same CSS file as the other promo sections
-import './EmailHosting.css'; 
+import './EmailHosting.css';
 import WordPressLogo from '../assets/images/wordpress.svg';
+
 const WordPressPromo = () => {
   return (
     <section className="alternating-section bg-light">
       <Container>
         <Row className="align-items-center">
-          <Col md={{ span: 6, order: 'last' }}>
+          <Col xs={12} md={{ span: 6, order: 'last' }}>
             <div className="text-content">
-              <h2 className="section-title">Super-fast & Secure WordPress Hosting</h2>
+              <h2 className="section-title">Super-fast &amp; Secure WordPress Hosting</h2>
               <p>
-                Get optimised hosting for WordPress the world's most popular website builder. Our platform includes daily backups, malware scanning, and page speed optimization to keep your WordPress site fast and secure.
+                Get optimised hosting for WordPress, the world's most popular website builder. Our platform includes daily backups, malware scanning, and page speed optimization to keep your WordPress site fast and secure.
               </p>
               <ul className="fa-ul">
                 <li><span className="fa-li"><i className="fas fa-check-circle text-success"></i></span>Free Domain Name with yearly plans</li>
@@ -26,11 +26,16 @@ const WordPressPromo = () => {
               </Button>
             </div>
           </Col>
-          <Col md={{ span: 6, order: 'first' }}>
+
+          <Col xs={12} md={{ span: 6, order: 'first' }} className="text-center">
             <Image
               src={WordPressLogo}
               alt="WordPress Hosting"
-              
+              fluid
+              className="section-image"
+              loading="lazy"
+              decoding="async"
+              sizes="(max-width: 768px) 90vw, 520px"
             />
           </Col>
         </Row>

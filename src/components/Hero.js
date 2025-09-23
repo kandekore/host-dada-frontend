@@ -17,8 +17,7 @@ const Hero = () => {
             <h1 className="display-3 fw-bold text-white">
               Website & Email Hosting You Can Rely On
             </h1>
-            <p className="lead text-white-75 my-4">
-We are the platform for 100's of businesses, giving them the foundation they           </p>
+            <p className="lead text-white-75 my-4">Built for businesses who need stability, security, and growth online.</p>
             <Button variant="primary" size="lg">Get Started Now</Button>
           </Col>
         </Row>

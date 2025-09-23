@@ -50,7 +50,7 @@ function Home() {
       <EmailHosting />
       <VpsHosting />
       <SupportedTech />
-      <Testimonials />
+      
       <FooterPromo />
     </div>
   );
