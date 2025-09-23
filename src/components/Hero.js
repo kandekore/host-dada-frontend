@@ -15,7 +15,7 @@ const Hero = () => {
         <Row className="h-100 align-items-center">
           <Col md={7} className="text-start">
             <h1 className="display-3 fw-bold text-white">
-              Website & Email Hosting<br></br> You Can Rely On
+              Website & Email Hosting<br></br> You Can Depend On
             </h1>
             <p className="lead text-white-75 my-4">Built for businesses who need stability, security, and reliability online.</p>
             <Button variant="primary" size="lg">Get Started Now</Button>
