@@ -3,6 +3,7 @@ import React from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import './Hero.css';
 import heroBackground from '../assets/images/small-business-website-hosting.jpg'; // Ensure you have this image in the specified path
+import { Link } from 'react-router-dom';
 
 const Hero = () => {
   return (
@@ -18,7 +19,8 @@ const Hero = () => {
               Website & Email Hosting<br></br> You Can Depend On
             </h1>
             <p className="lead text-white-75 my-4">Built for businesses who need stability, security, and reliability online.</p>
-            <Button variant="primary" size="lg">Get Started Now</Button>
+            <Button  as={Link} to="/hosting/" variant="primary" size="lg">Get Started Now</Button>
+            
           </Col>
         </Row>
       </Container>

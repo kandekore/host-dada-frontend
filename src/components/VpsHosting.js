@@ -2,6 +2,8 @@
 import React from 'react';
 import { Container, Row, Col, Image, Button } from 'react-bootstrap';
 import './EmailHosting.css';
+import { Link } from 'react-router-dom';
+
 
 const VpsHosting = () => {
   return (
@@ -17,7 +19,8 @@ const VpsHosting = () => {
               <p>
                 Easily scale your VPS from a single server to a load-balanced cluster. Data protection is guaranteed with redundant hardware RAID. Deploy your choice of Windows or Linux in one click.
               </p>
-              <Button variant="primary" className="mt-3">Explore VPS Plans</Button>
+              <Button as={Link} to="/hosting/vps-hosting" variant="primary" className="mt-3">Explore VPS Plans</Button>
+              
             </div>
           </Col>
 
@@ -31,6 +34,7 @@ const VpsHosting = () => {
               decoding="async"
               sizes="(max-width: 768px) 90vw, 520px"
             />
+      
           </Col>
         </Row>
       </Container>

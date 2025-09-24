@@ -1,7 +1,7 @@
 // src/components/DomainSearch.js
 import React, { useState, useContext, useEffect } from 'react';
 import { Container, Row, Col, Form, Button, Spinner, Alert, Image } from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import CartContext from '../context/CartContext';
 import WhoisModal from './WhoisModal';
 import './DomainSearch.css';
@@ -155,7 +155,6 @@ const DomainSearch = () => {
     <>
       <div className="domain-search-section">
         <Container>
-          {/* ... rest of the JSX remains the same ... */}
           <Row className="align-items-center">
             <Col lg={7} className="mb-4 mb-lg-0">
               <Form onSubmit={handleSearch} className="d-flex domain-search-form">

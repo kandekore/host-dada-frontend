@@ -2,6 +2,7 @@
 import React from 'react';
 import { Container, Button } from 'react-bootstrap';
 import './FooterPromo.css';
+import { Link } from 'react-router-dom';
 
 const FooterPromo = () => {
   return (
@@ -9,7 +10,7 @@ const FooterPromo = () => {
       <Container className="text-center">
         <h2>Ready to Get Started?</h2>
         <p style={{ textAlign: 'center' }}>Join hundreds of satisfied customers and launch your website today.</p>
-        <Button variant="light" size="lg" className="promo-button">
+        <Button as={Link} to="/hosting/" variant="light" size="lg" className="promo-button">
           View Hosting Plans
         </Button>
       </Container>

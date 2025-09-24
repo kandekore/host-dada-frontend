@@ -39,6 +39,7 @@ const siteStructure = [
         { title: "WordPress Hosting", url: "/hosting/wordpress-hosting", icon: "📝", description: "Managed WordPress" },
         { title: "LiteSpeed Hosting", url: "/hosting/litespeed-hosting", icon: "⚡", description: "High-performance hosting" },
         { title: "Cloud App Hosting", url: "/hosting/cloud-app-hosting", icon: "☁️", description: "Cloud based hosting" },
+        { title: 'VPS Hosting', url: '/hosting/vps-hosting' },
         { title: "Transfer To us", url: "/hosting/transfer-to-us", icon: "➡️", description: "Transfer your hosting" },
       ],
     },

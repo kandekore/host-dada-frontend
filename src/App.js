@@ -18,7 +18,7 @@ import DomainsSearchRegister from './pages/DomainsSearchRegister';
 import DomainsTransfer from './pages/DomainsTransfer';
 import DomainsWhois from './pages/DomainsWhois';
 import LinuxHosting from './pages/LinuxHosting';
-
+import VpsHosting from './pages/VpsHosting'; 
 import WordPressHosting from './pages/WordPressHosting';
 import LiteSpeedHosting from './pages/LiteSpeedHosting';
 import CloudAppHosting from './pages/CloudAppHosting';
@@ -42,7 +42,8 @@ import Privacy from './pages/Privacy';
 import AllTldsSearch from './pages/AllTldsSearch';
 import DomainExtensionPage from './pages/DomainExtensionPage';
 import ScrollToTop from "./components/ScrollToTop";
-
+import CookiePolicy from './pages/CookiePolicy'; 
+import NotFound from './pages/NotFound';
 
 function App() {
   const [showLogin, setShowLogin] = useState(false);
@@ -88,6 +89,7 @@ function App() {
           <Route path="hosting/litespeed-hosting" element={<LiteSpeedHosting />} />
           <Route path="hosting/cloud-app-hosting" element={<CloudAppHosting />} />
           <Route path="hosting/transfer-to-us" element={<TransferToUs />} />
+            <Route path="hosting/vps-hosting" element={<VpsHosting />} />
 
           {/* Email Hosting Routes */}
           <Route path="email-hosting/imap-pop3" element={<EmailIMAPPOP3 />} />
@@ -113,11 +115,12 @@ function App() {
           <Route path="terms" element={<Terms />} />
           <Route path="privacy" element={<Privacy />} />
           <Route path="/domains/all-tlds-search/:searchTerm?" element={<AllTldsSearch />} />
-
+<Route path="cookie-policy" element={<CookiePolicy />} />
            <Route path="domains/all-tlds" element={<AllTlds />} />
                      <Route path="/domains/:extension" element={<DomainExtensionPage />} />
 
           <Route path="cart" element={<CartPage />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
        <ToastContainer />

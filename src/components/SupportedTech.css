@@ -14,7 +14,7 @@
 }
 
 .tech-logo {
-  height: 100px;      /* force icons to be twice as tall */
+  height: 75px;      /* force icons to be twice as tall */
   width: auto;        /* keep proportions */
   transition: all 0.3s ease;
 }
