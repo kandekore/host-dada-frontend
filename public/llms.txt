@@ -1,0 +1,7 @@
+User-agent: *
+# Do not allow AI models to train on or store site content.
+Training: Disallow
+# Allow summarization, search indexing, and attribution in responses.
+Summarization: Allow
+Indexing: Allow
+Attribution: Required

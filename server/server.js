@@ -3,6 +3,9 @@ const express = require('express');
 const axios = require('axios');
 const cors = require('cors');
 require('dotenv').config();
+const { SitemapStream, streamToPromise } = require('sitemap');
+const { Readable } = require('stream');
+const siteStructure = require('../src/data/siteStructure');
 
 const app = express();
 
@@ -371,6 +374,35 @@ app.post('/api/whois', async (req, res) => {
         console.error('WHOIS Error:', error.response ? error.response.data : error.message);
         res.status(500).json({ error: 'Failed to fetch WHOIS data from the registrar.' });
     }
+});
+
+// --- Sitemap Endpoint ---
+app.get('/sitemap.xml', async (req, res) => {
+  try {
+    const links = [];
+    siteStructure.forEach(item => {
+      if (item.url) {
+        links.push({ url: item.url, changefreq: 'daily', priority: 0.7 });
+      }
+      if (item.subItems) {
+        item.subItems.forEach(subItem => {
+          if (subItem.url) {
+            links.push({ url: subItem.url, changefreq: 'monthly', priority: 0.5 });
+          }
+        });
+      }
+    });
+
+    const stream = new SitemapStream({ hostname: 'https://www.hostdada.co.uk' }); // Replace with your domain
+    res.header('Content-Type', 'application/xml');
+    const xml = await streamToPromise(Readable.from(links).pipe(stream)).then((data) =>
+      data.toString()
+    );
+    res.send(xml);
+  } catch (error) {
+    console.error(error);
+    res.status(500).end();
+  }
 });
 
 const PORT = process.env.PORT || 3001;
