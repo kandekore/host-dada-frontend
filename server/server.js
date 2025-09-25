@@ -2,12 +2,15 @@
 const express = require('express');
 const axios = require('axios');
 const cors = require('cors');
+const path = require('path');
 require('dotenv').config();
 const { SitemapStream, streamToPromise } = require('sitemap');
 const { Readable } = require('stream');
 const siteStructure = require('../src/data/siteStructure');
 
 const app = express();
+
+app.use(express.static(path.join(__dirname, '../build'))); // <-- ADD THIS LINE
 
 
 app.set('trust proxy', true);            // you already have this
@@ -407,6 +410,10 @@ app.get('/sitemap.xml', async (req, res) => {
 
 const PORT = process.env.PORT || 3001;
 const HOST = process.env.HOST || '127.0.0.1';
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../build/index.html'));
+})
 
 app.listen(PORT, HOST, () => {
   console.log(`API listening on http://${HOST}:${PORT}`);
