@@ -3,4 +3,4 @@ User-agent: *
 Disallow: /cart # Disallow cart pages
 Disallow: /login # Disallow login pages
 
-Sitemap: https://www.hostdada.co.uk/sitemap.xml
+Sitemap: https://www.hostdada.co.uk/sitemap-index.xml
