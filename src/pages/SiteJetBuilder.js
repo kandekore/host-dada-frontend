@@ -3,6 +3,7 @@ import { Container, Row, Col, Card, Button, Accordion } from 'react-bootstrap';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom'; // CORRECTED: Added Link to imports
 import './SiteJetBuilder.css';
+import sitejet from '../assets/images/sitejet.webp';
 
 const SiteJetBuilder = () => {
     // NOTE: PricingTable is commented out as no gid was provided.
@@ -35,13 +36,12 @@ const SiteJetBuilder = () => {
                 {/* --- AI Generator Section --- */}
                 <Row className="mb-5 pb-5 align-items-center">
                     <Col lg={6} className="mb-4 mb-lg-0">
-                        <div className="placeholder-image-sitejet">
-                           <p>Image: AI Website Generator Interface</p>
-                        </div>
+                                                     <img src={sitejet} alt="Load balancing diagram" className="img-fluid rounded displaypic" />
+                        
                     </Col>
                     <Col lg={6}>
-                        <h4>The Power of AI</h4>
-                        <h2>Turn Your Ideas into a Website Instantly</h2>
+                        <h4 className="ctr">The Power of AI</h4>
+                        <h2 class="ctr">Turn Your Ideas into a Website Instantly</h2>
                         <p className="text-muted">
                             Say goodbye to writer's block and design paralysis. Just provide a few details about your project, and our AI Website Generator will build a fully tailored, mobile-ready site complete with SEO-ready text and professional imagery. Launch immediately or customize every detail to perfection.
                         </p>
@@ -89,7 +89,7 @@ const SiteJetBuilder = () => {
                 <div id="pricing" className="py-5 text-center">
                     <h2 className="text-center mb-4">Choose Your Sitejet Plan</h2>
                     <p className="text-muted">Please contact us for pricing information on our Sitejet Builder plans.</p>
-                    <Button as={Link} to="/contact" variant="primary" size="lg" className="mt-3">Contact Sales</Button>
+                    <Button as={Link} to="https://my.hostdada.co.uk/submitticket.php?step=2&deptid=4" variant="primary" size="lg" className="mt-3">Contact Sales</Button>
                     {/* WHEN READY, REPLACE THE ABOVE WITH THIS:
                         {loading ? (
                             <div className="text-center"><Spinner animation="border" /></div>

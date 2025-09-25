@@ -20,3 +20,11 @@
 p{
   text-align: justify;
 }
+.nav-fill .nav-item .nav-link, .nav-justified .nav-item .nav-link {
+    width: 100%;
+    color: #C19A6B;
+    font-weight: 600;
+}
+h4 {
+    text-shadow: 1px 1px #c19A6B;
+}

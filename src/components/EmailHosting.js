@@ -5,7 +5,6 @@ import './EmailHosting.css';
 import emailImage from '../assets/images/hosted-email.png';
 import { Link } from 'react-router-dom';
 
-
 const EmailHosting = () => {
   return (
     <section className="alternating-section">

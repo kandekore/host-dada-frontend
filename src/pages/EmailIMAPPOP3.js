@@ -3,6 +3,10 @@ import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import './EmailIMAPPOP3.css'; // New CSS file for styling
+import roundcube from '../assets/images/roundcube.png';
+import businessemail from '../assets/images/business-email.jpg';
+import emailsecurity from '../assets/images/emailsecurity.jpg';
+
 
 const EmailIMAPPOP3 = () => {
     const pageTitle = "Business Email Hosting | Host Dada";
@@ -29,7 +33,7 @@ const EmailIMAPPOP3 = () => {
                 {/* --- Introduction Section --- */}
                 <Row className="mb-5 align-items-center">
                     <Col md={6} className="mb-4 mb-md-0">
-                        <h2>Business-Class Email That Works for You</h2>
+                        <h2 className='ctr'>Business-Class Email That Works for You</h2>
                         <p className="text-muted">
                             Move beyond free email providers and give your business the professional image it deserves. Our email hosting is built on a robust, secure, and completely independent platform, ensuring your communication is always fast, reliable, and protected.
                         </p>
@@ -39,9 +43,7 @@ const EmailIMAPPOP3 = () => {
                     </Col>
                     <Col md={6}>
                         {/* Placeholder for a relevant image */}
-                        <div className="placeholder-image">
-                           <p>Image Placeholder: Illustration of secure email servers or devices</p>
-                        </div>
+                        <img src={businessemail} alt="Business Email" className="img-fluid rounded shadow" loading="lazy" decoding="async" sizes="(max-width: 768px) 90vw, 520px" />
                     </Col>
                 </Row>
 
@@ -95,9 +97,7 @@ const EmailIMAPPOP3 = () => {
                             </Col>
                             <Col md={6}>
                                {/* Placeholder for a relevant image */}
-                                <div className="placeholder-image">
-                                   <p>Image Placeholder: Security shield or lock icon graphic</p>
-                                </div>
+                              <img src={emailsecurity} alt="Email Security" className="img-fluid rounded shadow" loading="lazy" decoding="async" sizes="(max-width: 768px) 90vw, 520px" />
                             </Col>
                         </Row>
                     </Container>
@@ -113,9 +113,7 @@ const EmailIMAPPOP3 = () => {
                     </Col>
                     <Col md={6} className="order-md-1">
                         {/* Placeholder for an image */}
-                        <div className="placeholder-image text-center">
-                            <p><strong>[Screenshot of Roundcube Webmail Interface]</strong></p>
-                        </div>
+                     <img src={roundcube} alt="Roundcube Webmail" className="img-fluid rounded shadow" loading="lazy" decoding="async" sizes="(max-width: 768px) 90vw, 520px" />
                     </Col>
                 </Row>
                 
@@ -126,7 +124,7 @@ const EmailIMAPPOP3 = () => {
                         <p className="lead">
                             For the ultimate email experience, upgrade to Premium Email for a massive <strong>50GB</strong> mailbox and full Contact/Calendar Sync (CalDAV/CardDAV) with your favourite clients.
                         </p>
-                        <Button as={Link} to="/contact" variant="success" size="lg">Contact Us to Upgrade</Button>
+                        <Button as={Link} to="https://my.hostdada.co.uk/submitticket.php?step=2&deptid=4" variant="success" size="lg">Contact Us to Upgrade</Button>
                     </Col>
                 </Row>
 

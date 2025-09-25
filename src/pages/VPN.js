@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import PricingTable from '../components/PricingTable';
 import './VPN.css'; // New CSS for this page
 import { API_BASE } from '../config';
+import threatProtectionImage from '../assets/images/nordvpn.jpg'; // New image import
 
 const VPN = () => {
     const [products, setProducts] = useState([]);
@@ -105,7 +106,7 @@ const VPN = () => {
                     <Row className="align-items-center">
                         <Col lg={6} className="mb-4 mb-lg-0">
                              <div className="placeholder-image-vpn">
-                                <p>Image: Threat Protection Shield Graphic</p>
+                            <img src={threatProtectionImage} alt="Autoscaling server diagram" className="img-fluid rounded lslogo" />
                             </div>
                         </Col>
                         <Col lg={6}>

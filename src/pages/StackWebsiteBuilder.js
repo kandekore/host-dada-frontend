@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import PricingTable from '../components/PricingTable';
 import './StackWebsiteBuilder.css';
 import { API_BASE } from '../config';
+import stackimg from '../assets/images/stack.png';
 
 const StackWebsiteBuilder = () => {
     const [products, setProducts] = useState([]);
@@ -61,7 +62,7 @@ const StackWebsiteBuilder = () => {
                 {/* --- Intro / Why Offer Section --- */}
                 <Row className="mb-5 align-items-center">
                      <Col lg={7} className="mb-4 mb-lg-0">
-                        <h2>The Perfect DIY Solution for Any Project</h2>
+                        <h2 className='ctr'>The Perfect DIY Solution for Any Project</h2>
                         <p className="text-muted">
                             Whether you're a small business on a budget, a hobbyist sharing your passion, or just need a professional online presence without the complexity, our Stack Website Builder is for you. It’s included for free with your hosting, offering incredible value.
                         </p>
@@ -70,9 +71,7 @@ const StackWebsiteBuilder = () => {
                         </p>
                     </Col>
                     <Col lg={5}>
-                        <div className="placeholder-image-stack">
-                           <p>Image: A collage of diverse websites built with the builder</p>
-                        </div>
+                             <img src={stackimg} alt="Load balancing diagram" className="img-fluid rounded displaypic" />
                     </Col>
                 </Row>
 

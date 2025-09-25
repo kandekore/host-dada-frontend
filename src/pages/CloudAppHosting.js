@@ -30,7 +30,7 @@ const CloudAppHosting = () => {
                             <p>Spin up production-ready MongoDB, Express, React, and Node.js applications with a simple Git push. Our platform abstracts away the DevOps headaches, providing a seamless workflow from your local machine to a live, secure server. Set your environment variables, attach a custom domain, and get free, automated SSL. It's the developer experience you love, without the unpredictable pricing.</p>
                         </Col>
                         <Col md={6} className="text-center">
-                            <i className="fas fa-cubes" style={{ fontSize: '10rem', color: '#00729B' }}></i>
+                            <i className="fas fa-cloud" style={{ fontSize: '15rem', color: '#C19A6B', textShadow: '5px 5px #000' }}></i>
                         </Col>
                     </Row>
                 </Container>
@@ -47,7 +47,7 @@ const CloudAppHosting = () => {
                         <Col md={4} className="mb-4">
                             <Card className="h-100 text-center feature-card">
                                 <Card.Body>
-                                    <div className="feature-icon-top"><i className="fab fa-git-alt"></i></div>
+                                    <div className="feature-icon-top"><i className="fab fa-git-alt fa-icon"></i></div>
                                     <Card.Title as="h5">Heroku-like Workflow</Card.Title>
                                     <Card.Text>Use the `git push` command you know and love to deploy. Our platform supports Node buildpacks and custom Dockerfiles for ultimate flexibility.</Card.Text>
                                 </Card.Body>
@@ -56,7 +56,7 @@ const CloudAppHosting = () => {
                         <Col md={4} className="mb-4">
                             <Card className="h-100 text-center feature-card">
                                 <Card.Body>
-                                    <div className="feature-icon-top"><i className="fas fa-bolt"></i></div>
+                                    <div className="feature-icon-top"><i className="fas fa-bolt fa-icon"></i></div>
                                     <Card.Title as="h5">Fast & Isolated</Card.Title>
                                     <Card.Text>Your app runs in its own secure container on high-speed NVMe SSDs. Enforceable CPU/RAM limits prevent noisy neighbours, and zero-downtime releases keep your service online during updates.</Card.Text>
                                 </Card.Body>
@@ -65,7 +65,7 @@ const CloudAppHosting = () => {
                         <Col md={4} className="mb-4">
                             <Card className="h-100 text-center feature-card">
                                 <Card.Body>
-                                    <div className="feature-icon-top"><i className="fas fa-box-open"></i></div>
+                                    <div className="feature-icon-top"><i className="fas fa-box-open fa-icon"></i></div>
                                     <Card.Title as="h5">Batteries Included</Card.Title>
                                     <Card.Text>Get free, auto-renewing Let’s Encrypt SSL, easy custom domain mapping, persistent storage volumes, log streaming, and optional nightly backups to S3.</Card.Text>
                                 </Card.Body>

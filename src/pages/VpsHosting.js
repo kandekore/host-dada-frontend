@@ -3,6 +3,7 @@ import React from 'react';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import { Helmet } from 'react-helmet-async';
 import './VpsHosting.css';
+import vpsimage from '../assets/images/vps.jpg';
 
 const VpsHosting = () => {
     const pageTitle = "VPS Hosting | Super-Fast SSD Virtual Private Servers | Host Dada";
@@ -30,7 +31,7 @@ const VpsHosting = () => {
                             <p>Our Virtual Private Servers (VPS) offer the perfect balance of performance, control, and affordability. With full root access, you can install custom software and configure your server to your exact needs. Our VPS are built on enterprise-grade hardware with 100% SSD storage, ensuring the best possible performance for your websites and applications.</p>
                         </Col>
                         <Col md={6} className="text-center">
-                            <img src="https://i.imgur.com/3Z3L1Yh.png" alt="VPS Hosting" className="img-fluid rounded" />
+                            <img src={vpsimage} alt="Autoscaling server diagram" className="img-fluid rounded lslogo displaypic" />
                         </Col>
                     </Row>
                 </Container>
@@ -102,7 +103,7 @@ const VpsHosting = () => {
                     <h2 className="text-center mb-4">Choose Your VPS Hosting Plan</h2>
                     <div className="text-center">
                         <h3>Coming Soon!</h3>
-                        <p>Our VPS hosting plans will be available shortly. Stay tuned for our competitive pricing and powerful features.</p>
+                        <p className="ctr">Our VPS hosting plans will be available shortly. Stay tuned for our competitive pricing and powerful features.</p>
                     </div>
                 </Container>
             </Container>
@@ -118,7 +119,7 @@ const VpsHosting = () => {
                         <Col lg={4} md={6} className="mb-4">
                             <Card className="h-100 feature-card">
                                 <Card.Body>
-                                    <div className="feature-icon-top"><i className="fas fa-server"></i></div>
+                                    <div className="feature-icon-top"><i className="fas fa-server fa-icon"></i></div>
                                     <Card.Title as="h5">Web Hosting</Card.Title>
                                     <Card.Text className="text-muted">
                                        Give your website the dedicated resources it needs to handle high traffic and demanding applications.
@@ -129,7 +130,7 @@ const VpsHosting = () => {
                         <Col lg={4} md={6} className="mb-4">
                             <Card className="h-100 feature-card">
                                 <Card.Body>
-                                    <div className="feature-icon-top"><i className="fas fa-code"></i></div>
+                                    <div className="feature-icon-top"><i className="fas fa-code fa-icon"></i></div>
                                     <Card.Title as="h5">Development Server</Card.Title>
                                     <Card.Text className="text-muted">
                                         An isolated environment to test your code and experiment with new technologies.
@@ -140,7 +141,7 @@ const VpsHosting = () => {
                         <Col lg={4} md={6} className="mb-4">
                             <Card className="h-100 feature-card">
                                 <Card.Body>
-                                    <div className="feature-icon-top"><i className="fas fa-gamepad"></i></div>
+                                    <div className="feature-icon-top"><i className="fas fa-gamepad fa-icon"></i></div>
                                     <Card.Title as="h5">Gaming Server</Card.Title>
                                     <Card.Text className="text-muted">
                                         Host your own private gaming server for Minecraft, CS:GO, and more.

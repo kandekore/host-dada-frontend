@@ -5,6 +5,9 @@ import { Helmet } from 'react-helmet-async';
 import PricingTable from '../components/PricingTable'; // Ensure this component is imported
 import './LiteSpeedHosting.css';
 import { API_BASE } from '../config';
+import litepseedws from '../assets/images/litespeed.png';
+import ms365logo from '../assets/images/ms365.png';
+import aws from '../assets/images/aws.svg';
 
 const LiteSpeedHosting = () => {
     const [products, setProducts] = useState([]);
@@ -59,7 +62,7 @@ const LiteSpeedHosting = () => {
                             <p>This exclusive service is engineered for speed-critical websites, e-commerce stores, and businesses where every millisecond matters. By combining the raw power of an Intel Xeon Silver CPU with the unmatched efficiency of LiteSpeed Web Server, we deliver a hosting solution that is in a class of its own.</p>
                         </Col>
                         <Col md={6} className="text-center">
-                            <i className="fas fa-rocket" style={{ fontSize: '10rem', color: '#4CAF50' }}></i>
+                            <img src={litepseedws} alt="Autoscaling server diagram" className="img-fluid rounded lslogo" />
                         </Col>
                     </Row>
                 </Container>
@@ -86,19 +89,12 @@ const LiteSpeedHosting = () => {
             </Container>
             
             {/* --- Pricing Section --- */}
-            <Container fluid className="section-container py-5 bg-white">
-                <Container>
-                    <h2 className="text-center mb-4">Choose Your Premium Package</h2>
-                    <p className="text-center text-muted mb-4">Select a package that aligns with your performance and communication needs.</p>
-                    {loading ? (
-                        <div className="text-center"><Spinner animation="border" /></div>
-                    ) : error ? (
-                        <Alert variant="danger">{error}</Alert>
-                    ) : (
-                        <PricingTable products={products} />
-                    )}
-                </Container>
-            </Container>
+
+            
+           <div className="text-center">
+                        <h3>Coming Soon!</h3>
+                        <p className="ctr">Our VPS hosting plans will be available shortly. Stay tuned for our competitive pricing and powerful features.</p>
+                    </div>
 
             {/* --- The Powerhouse Hardware Section --- */}
             <Container fluid className="section-container py-5 bg-light">
@@ -137,7 +133,7 @@ const LiteSpeedHosting = () => {
                             <p>You benefit from an enterprise-grade email solution with a global reputation for security, reliability, and advanced features like calendaring, contacts, and seamless integration with the entire Microsoft Office suite. It's the professional communication tool your business deserves.</p>
                         </Col>
                         <Col md={6} className="text-center">
-                            <i className="fab fa-microsoft fa-6x text-primary"></i>
+                            <img src={ms365logo} alt="Autoscaling server diagram" className="img-fluid rounded lslogo" />
                         </Col>
                     </Row>
                     <Row className="mt-5">
@@ -163,7 +159,7 @@ const LiteSpeedHosting = () => {
                     <h2 className="text-center mb-4">Unwavering Reliability & Data Protection</h2>
                     <Row className="align-items-center">
                         <Col md={6} className="text-center">
-                             <i className="fab fa-aws fa-6x text-primary mb-4"></i>
+                            <img src={aws} alt="Autoscaling server diagram" className="img-fluid rounded lslogo2" />
                         </Col>
                         <Col md={6}>
                             <p>Your peace of mind is our priority. We perform comprehensive backups of your entire cPanel account every single day. These backups are then securely stored on the world-class Amazon Web Services (AWS) infrastructure, completely separate from the primary server. This provides a robust disaster recovery solution, ensuring that your valuable data is always safe, secure, and ready to be restored in a worst-case scenario.</p>

@@ -14,23 +14,22 @@ const DataCenters = () => (
       </p>
       <DataCenterrMap />
       <div className="image-container">
-        <img src={dataCenterMap} alt="A global map showing Host Dada's data center locations" className="data-center-map-image" />
       </div>
       <p>
         The CDN is free for all Host Dada customers, with unlimited traffic and no throttling. It is fully integrated into our platform for easy management and includes advanced features to optimize your site's performance:
       </p>
       <ul>
         <li>
-          **Image Optimization:** Our CDN automatically scans and optimizes your images, resizing and converting them to fast-loading formats like WebP with no visible loss in quality.
+          <strong>Image Optimization:</strong> Our CDN automatically scans and optimizes your images, resizing and converting them to fast-loading formats like WebP with no visible loss in quality.
         </li>
         <li>
-          **Edge Caching:** Website files are cached on our network of edge servers, making your content available to visitors much faster.
+          <strong>Edge Caching:</strong> Website files are cached on our network of edge servers, making your content available to visitors much faster.
         </li>
         <li>
-          **Code Minification:** We automatically compress HTML, CSS, and JavaScript files to reduce their size and improve loading times.
+          <strong>Code Minification:</strong> We automatically compress HTML, CSS, and JavaScript files to reduce their size and improve loading times.
         </li>
         <li>
-          **Enhanced Security:** The CDN provides enterprise-level security, including DDoS protection and the ability to block IPs and geolocations to keep your websites secure.
+          <strong>Enhanced Security:</strong> The CDN provides enterprise-level security, including DDoS protection and the ability to block IPs and geolocations to keep your websites secure.
         </li>
       </ul>
     </div>

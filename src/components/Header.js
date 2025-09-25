@@ -83,14 +83,14 @@ const Header = ({ handleLoginShow }) => {
                 </NavDropdown.Item>
               ))}
             </NavDropdown>
-            <Nav.Link href="tel:+441215555555">+44 121 555 5555</Nav.Link>
+            <Nav.Link href="tel:+4402035199310">+44 203 519 9310</Nav.Link>
           </Nav>
           <Nav>
-            <Link to="/support" className="nav-link" onClick={handleLinkClick}>Support</Link>
-            <Link to="/knowledge-base" className="nav-link" onClick={handleLinkClick}>Knowledge Base</Link>
+            <Link to="https://my.hostdada.co.uk/submitticket.php" className="nav-link" target="_blank" onClick={handleLinkClick}>Support</Link>
+            <Link to="https://my.hostdada.co.uk/index.php?rp=/knowledgebase" className="nav-link" target="_blank" onClick={handleLinkClick}>Knowledge Base</Link>
             <a href="https://webmail.hostdada.uk" className="nav-link" target="_blank" rel="noopener noreferrer">Webmail</a>
             <Link to="/cart" className="nav-link cart-icon-link">
-              <i className="fas fa-shopping-cart"></i>
+              <i className="fa fa-shopping-cart"></i>
               {cartItems.length > 0 && 
                 <Badge pill bg="primary" className="cart-badge">{cartItems.length}</Badge>
               }

@@ -8,6 +8,7 @@ const siteStructure = [
     {
       title: "About Us",
       url: "/about-us",
+        megaMenuDescription: 'Learn more about Host Dada, our mission, values, and the global infrastructure that powers our reliable hosting services.', // New property
       subItems: [
         { title: "Who We Are", url: "/about-us/who-we-are", icon: "👥", description: "Find out about us" },
         { title: "Our Values", url: "/about-us/our-values", icon: "💡", description: "Our core values" },
@@ -39,7 +40,7 @@ const siteStructure = [
         { title: "WordPress Hosting", url: "/hosting/wordpress-hosting", icon: "📝", description: "Managed WordPress" },
         { title: "LiteSpeed Hosting", url: "/hosting/litespeed-hosting", icon: "⚡", description: "High-performance hosting" },
         { title: "Cloud App Hosting", url: "/hosting/cloud-app-hosting", icon: "☁️", description: "Cloud based hosting" },
-        { title: 'VPS Hosting', url: '/hosting/vps-hosting' },
+        { title: 'VPS Hosting', icon: '💻', url: '/hosting/vps-hosting', description: "Virtual Private Servers"},
         { title: "Transfer To us", url: "/hosting/transfer-to-us", icon: "➡️", description: "Transfer your hosting" },
       ],
     },
@@ -56,6 +57,7 @@ const siteStructure = [
     {
       title: "SSL",
       url: "/ssl",
+      megaMenuDescription: 'Secure your website and protect your visitors with our range of SSL certificates, from standard to wildcard and extended validation options.', // New property
       subItems: [
         { title: "Standard SSL (DV)", url: "/ssl/standard", icon: "🔐", description: "Domain Validated SSL" },
         { title: "Organisation Validation (OV)", url: "/ssl/ov", icon: "🏢", description: "Organisation Validated SSL" },
@@ -66,6 +68,7 @@ const siteStructure = [
     {
       title: "Websites",
       url: "/websites",
+      megaMenuDescription: 'Create stunning, professional websites quickly and easily with our range of website building solutions, including drag-and-drop and AI-powered tools.', // New property
       subItems: [
         { title: "Hire a Developer", url: "/websites/hire-developer", icon: "👨‍💻", description: "Custom website development" },
         { title: "Weebly", url: "/websites/weebly", icon: "🛠", description: "Easy drag-and-drop website builder" },

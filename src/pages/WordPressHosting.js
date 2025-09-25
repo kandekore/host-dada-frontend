@@ -73,7 +73,7 @@ setProducts(data.products);
                             <p>From our autoscaling architecture that handles traffic spikes without breaking a sweat, to our integrated toolset that simplifies management, every aspect of our service is designed to let you focus on what you do best: creating incredible online experiences.</p>
                         </Col>
                         <Col md={6} className="text-center">
-                            <i className="fab fa-wordpress-simple" style={{ fontSize: '12rem', color: '#00729B' }}></i>
+                            <i className="fab fa-wordpress-simple" style={{ fontSize: '20rem', color: '#00729B' }}></i>
                         </Col>
                     </Row>
                 </Container>
@@ -205,7 +205,7 @@ setProducts(data.products);
                         <Col lg={4} md={6} className="mb-4">
                             <Card className="h-100 feature-card">
                                 <Card.Body>
-                                    <div className="feature-icon-top"><i className="fas fa-clone"></i></div>
+                                    <div className="feature-icon-top"><i className="fas fa-clone fa-icon"></i></div>
                                     <Card.Title as="h5">One-Click Staging</Card.Title>
                                     <Card.Text className="text-muted">
                                         Safely test any changes before they go live. Create a complete, private replica of your site with a single click. Experiment with new plugins, update your theme, or revise content in a secure environment without affecting your visitors. When you're ready, deploy your changes to the live site seamlessly.
@@ -216,8 +216,8 @@ setProducts(data.products);
                         <Col lg={4} md={6} className="mb-4">
                             <Card className="h-100 feature-card">
                                 <Card.Body>
-                                    <div className="feature-icon-top"><i className="fas fa-tasks"></i></div>
-                                    <Card.Title as="h5">Central WordPress Manager</Card.Title>
+                                    <div className="feature-icon-top"><i className="fas fa-tasks fa-icon"></i></div>
+                                    <Card.Title as="h5">Central WordPress Manager</Card.Title> 
                                     <Card.Text className="text-muted">
                                         Manage all your WordPress sites from a single, powerful dashboard. Activate, deactivate, and update themes or plugins across multiple installations in bulk. This centralized control panel is a massive time-saver for anyone managing more than one website.
                                     </Card.Text>
@@ -227,7 +227,7 @@ setProducts(data.products);
                         <Col lg={4} md={6} className="mb-4">
                             <Card className="h-100 feature-card">
                                 <Card.Body>
-                                    <div className="feature-icon-top"><i className="fas fa-tachometer-alt"></i></div>
+                                    <div className="feature-icon-top"><i className="fas fa-tachometer-alt fa-icon"></i></div>
                                     <Card.Title as="h5">StackCache Optimisation</Card.Title>
                                     <Card.Text className="text-muted">
                                         Our proprietary caching technology is engineered to make your pages fly. It works automatically from the moment your site is live to speed up loading times significantly for all your users. For those who like to tinker, advanced settings can be managed directly from the StackCache plugin.
@@ -238,7 +238,7 @@ setProducts(data.products);
                         <Col lg={4} md={6} className="mb-4">
                             <Card className="h-100 feature-card">
                                 <Card.Body>
-                                    <div className="feature-icon-top"><i className="fas fa-sync-alt"></i></div>
+                                    <div className="feature-icon-top"><i className="fas fa-sync-alt fa-icon"></i></div>
                                     <Card.Title as="h5">Automatic Core Updates</Card.Title>
                                     <Card.Text className="text-muted">
                                         We handle the core maintenance so you don't have to. Your WordPress website will always be kept on the latest version, with all critical security patches applied automatically by our system, ensuring your site remains secure and up-to-date.
@@ -249,7 +249,7 @@ setProducts(data.products);
                         <Col lg={4} md={6} className="mb-4">
                             <Card className="h-100 feature-card">
                                 <Card.Body>
-                                    <div className="feature-icon-top"><i className="fas fa-file-code"></i></div>
+                                    <div className="feature-icon-top"><i className="fas fa-file-code fa-icon"></i></div>
                                     <Card.Title as="h5">WordPress Checksum Report</Card.Title>
                                     <Card.Text className="text-muted">
                                         Maintain the integrity of your installation. Our system automatically checks your core WordPress files against the official repository. If any file has been modified or appears suspicious, we'll alert you immediately so you can take action.
@@ -260,7 +260,7 @@ setProducts(data.products);
                         <Col lg={4} md={6} className="mb-4">
                             <Card className="h-100 feature-card">
                                 <Card.Body>
-                                    <div className="feature-icon-top"><i className="fas fa-terminal"></i></div>
+                                    <div className="feature-icon-top"><i className="fas fa-terminal fa-icon"></i></div>
                                     <Card.Title as="h5">Developer Tools</Card.Title>
                                     <Card.Text className="text-muted">
                                         We provide a full suite of tools for advanced users and developers. Get direct access to WP-CLI, SSH, and SFTP. Manage your environment with PHP version control, phpMyAdmin for databases, and set up scheduled scripts (cron jobs).
@@ -282,7 +282,7 @@ setProducts(data.products);
                     <Row>
                         <Col lg={4} md={6} className="mb-4">
                             <div className="security-feature-item">
-                                <div className="security-feature-icon"><i className="fas fa-network-wired"></i></div>
+                                <div className="security-feature-icon"><i className="fas fa-network-wired fa-icon"></i></div>
                                 <h5>Enterprise-Grade DDoS Defence</h5>
                                 <p className="text-muted">
                                     Our network is shielded by a massive 1 Tbps+ DDoS mitigation capacity. This system automatically detects and routes malicious attack traffic away from your site, ensuring that your genuine users can always get through, even during a large-scale attack.
@@ -291,7 +291,7 @@ setProducts(data.products);
                         </Col>
                         <Col lg={4} md={6} className="mb-4">
                             <div className="security-feature-item">
-                                <div className="security-feature-icon"><i className="fas fa-shield-alt"></i></div>
+                                <div className="security-feature-icon"><i className="fas fa-shield-alt fa-icon"></i></div>
                                 <h5>Intelligent Web Application Firewall (WAF)</h5>
                                 <p className="text-muted">
                                     The Host Dada WAF proactively protects your data and software by intelligently blocking suspicious activity. It defends against common WordPress exploits like SQL injection and cross-site scripting, neutralizing threats before they can reach your website.
@@ -300,7 +300,7 @@ setProducts(data.products);
                         </Col>
                         <Col lg={4} md={6} className="mb-4">
                             <div className="security-feature-item">
-                                <div className="security-feature-icon"><i className="fas fa-lock"></i></div>
+                                <div className="security-feature-icon"><i className="fas fa-lock fa-icon"></i></div>
                                 <h5>Universal SSL Encryption</h5>
                                 <p className="text-muted">
                                     Boost customer confidence and improve your SEO with free, automatically-renewing SSL certificates for every website you host with us. This ensures all data transferred between your site and its visitors is fully encrypted and secure.
@@ -309,7 +309,7 @@ setProducts(data.products);
                         </Col>
                         <Col lg={4} md={6} className="mb-4">
                             <div className="security-feature-item">
-                                <div className="security-feature-icon"><i className="fas fa-bug"></i></div>
+                                <div className="security-feature-icon"><i className="fas fa-bug fa-icon"></i></div>
                                 <h5>Automatic & On-Demand Malware Scans</h5>
                                 <p className="text-muted">
                                     We automatically scan your website's files for malware every day and provide a detailed report of any issues found. After you've cleaned any files, you can initiate a re-scan instantly from your control panel to confirm your site is clean.
@@ -318,7 +318,7 @@ setProducts(data.products);
                         </Col>
                         <Col lg={4} md={6} className="mb-4">
                             <div className="security-feature-item">
-                                <div className="security-feature-icon"><i className="fas fa-user-lock"></i></div>
+                                <div className="security-feature-icon"><i className="fas fa-user-lock fa-icon"></i></div>
                                 <h5>Comprehensive Login Security</h5>
                                 <p className="text-muted">
                                     We provide multiple layers of access control to prevent unauthorized entry. This includes two-factor authentication (2FA), an FTP security lock, brute-force login protection, and the ability to block access from specific IP addresses or entire countries.
@@ -327,7 +327,7 @@ setProducts(data.products);
                         </Col>
                         <Col lg={4} md={6} className="mb-4">
                             <div className="security-feature-item">
-                                <div className="security-feature-icon"><i className="fas fa-credit-card"></i></div>
+                                <div className="security-feature-icon"><i className="fas fa-credit-card fa-icon"></i></div>
                                 <h5>PCI Compliant Servers</h5>
                                 <p className="text-muted">
                                     For e-commerce sites, security is paramount. Our servers are fully compliant with the Payment Card Industry Data Security Standard (PCI DSS), providing the safe and secure environment required to process online payments and handle sensitive customer data.

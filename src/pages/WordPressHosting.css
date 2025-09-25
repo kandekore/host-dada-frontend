@@ -44,7 +44,7 @@
 .feature-icon-top {
     font-size: 2rem;
     margin-bottom: 1rem;
-    color: #00729B; /* WordPress Blue */
+    color: #000000; /* WordPress Blue */
     width: 60px;
     height: 60px;
     background-color: #eaf6fa;
@@ -66,11 +66,11 @@
 
 .security-feature-icon {
     font-size: 1.5rem;
-    color: #00729B; /* WordPress Blue */
-    width: 60px;
-    height: 60px;
+    color: #000000; /* WordPress Blue */
+    width: 100px;
+    height: 100px;
     line-height: 60px;
-    background-color: #eaf6fa;
+    background-color: #fff;
     border-radius: 50%;
     margin: 0 auto 1rem auto;
 }
@@ -78,4 +78,31 @@
 .security-feature-item h5 {
     font-weight: bold;
     margin-bottom: 0.75rem;
+}
+.text-primary {
+    --bs-text-opacity: 1;
+    color: #a5835a !important;
+    /* float: right; */
+    padding: 10px;
+    font-size: 80px;
+    /* text-align: center!important; */
+}
+i.fas.fa-6x.text-primary {
+    font-size: 200px;
+}
+.use-case-item {
+    padding: 1.5rem;
+    border-left: 4px solid #c19a6b;
+    height: 100%;
+}
+.fas {
+   /* font-size: 2.5em; */
+    color: #C19A6B;
+    margin-bottom: 0;
+
+}
+
+.text-primary {
+    --bs-text-opacity: 1;
+    color: #a5835a !important;
 }

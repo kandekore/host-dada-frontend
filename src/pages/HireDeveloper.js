@@ -116,9 +116,7 @@ const HireDeveloper = () => {
                     <Row className="align-items-center">
                         <Col lg={6} className="mb-4 mb-lg-0">
                              {/* Placeholder for an image of a finished website */}
-                             <div className="placeholder-image-dev">
-                                <p>Image Placeholder</p>
-                            </div>
+                            <img src="https://darrenk.uk/wp-content/uploads/2024/05/web-design-1024x676.jpg" alt="Finished Website Example" className="img-fluid rounded shadow" />
                         </Col>
                         <Col lg={6}>
                             <h4>A Complete Website Solution</h4>

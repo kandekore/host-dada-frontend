@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import PricingTable from '../components/PricingTable';
 import './Weebly.css'; // New CSS for this page
 import { API_BASE } from '../config';
+import weeblypic from '../assets/images/dragdropeditor.png';
 
 const Weebly = () => {
     const [products, setProducts] = useState([]);
@@ -62,7 +63,7 @@ const Weebly = () => {
                 {/* --- Intro Section --- */}
                 <Row className="mb-5 align-items-center">
                      <Col md={6} className="mb-4 mb-md-0">
-                        <h2>Your Vision, Brought to Life</h2>
+                        <h2 className='ctr'>Your Vision, Brought to Life</h2>
                         <p className="text-muted">
                             Weebly’s intuitive drag-and-drop builder makes it easy to create a powerful, professional website without any technical skills. Over 40 million people have already used Weebly to build their online presence.
                         </p>
@@ -72,9 +73,8 @@ const Weebly = () => {
                     </Col>
                     <Col md={6}>
                         {/* Placeholder for an image of the builder interface */}
-                        <div className="placeholder-image-weebly">
-                           <p>Image: Weebly Drag & Drop Interface</p>
-                        </div>
+                                                <img src={weeblypic} alt="Load balancing diagram" className="img-fluid rounded displaypic" />
+                   
                     </Col>
                 </Row>
 

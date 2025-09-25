@@ -5,6 +5,9 @@ import { Helmet } from 'react-helmet-async';
 import PricingTable from '../components/PricingTable';
 import './LinuxHosting.css';
 import { API_BASE } from '../config';
+import servepic from '../assets/images/server.jpg';
+import loadbalpic from '../assets/images/loadbalance.jpg';
+import linuxpic from '../assets/images/linux.svg';
 console.log('API_BASE =', API_BASE);
 const LinuxHosting = () => {
     const [products, setProducts] = useState([]);
@@ -66,7 +69,8 @@ const LinuxHosting = () => {
                             <p>Our Linux platform is the ultimate choice for almost any website. Built for speed and flexibility by our in-house experts, we've fine-tuned the Apache web server for peak performance. It's the perfect foundation for your project, offering a stable, secure, and highly customisable environment, complete with over 80 one-click installers for popular applications like Joomla!, Drupal, and Magento.</p>
                         </Col>
                         <Col md={6} className="text-center">
-                            <img src="https://hostdada.uk/wp-content/uploads/2024/07/linux.svg" alt="Linux Logo" style={{ width: '20rem' }} />
+                            <img src={linuxpic} alt="Linux Logo" style={{ width: '20rem' }} />
+                            
                         </Col>
                     </Row>
                 </Container>
@@ -166,7 +170,8 @@ const LinuxHosting = () => {
                             <p>This is possible because your site isn't confined to one or two servers. Instead, it can draw from the resources of our entire multi-server platform. Crucially, this isolates your site from "noisy neighbours," a common problem with traditional cPanel hosts where a busy site can slow down all others on the same server.</p>
                         </Col>
                         <Col md={6}>
-                            <img src="https://i.imgur.com/3Z3L1Yh.png" alt="Autoscaling server diagram" className="img-fluid rounded" />
+                            <img src={servepic} alt="Autoscaling server diagram" className="img-fluid rounded displaypic" />
+                            
                         </Col>
                     </Row>
                      <Row className="align-items-center mt-5 flex-row-reverse">
@@ -175,7 +180,7 @@ const LinuxHosting = () => {
                             <p>While other hosts use load balancing for simple failover (moving your site if a server fails), our system is far more advanced. Our global load balancing uses intelligent monitors that respond to traffic load in real-time, distributing requests across multiple servers *before* any single one becomes overwhelmed. This proactive approach means your site doesn't just stay online; it stays consistently fast, no matter the load on the platform.</p>
                         </Col>
                         <Col md={6}>
-                             <img src="https://i.imgur.com/yV8Vj9k.png" alt="Load balancing diagram" className="img-fluid rounded" />
+                             <img src={loadbalpic} alt="Load balancing diagram" className="img-fluid rounded displaypic" />
                         </Col>
                     </Row>
                 </Container>
@@ -220,7 +225,7 @@ const LinuxHosting = () => {
                         <Col lg={4} md={6} className="mb-4">
                             <Card className="h-100 feature-card">
                                 <Card.Body>
-                                    <div className="feature-icon-top"><i className="fas fa-images"></i></div>
+                                    <div className="feature-icon-top"><i className="fas fa-images fa-icon"></i></div>
                                     <Card.Title as="h5">Automatic Image Optimisation</Card.Title>
                                     <Card.Text className="text-muted">
                                        Our CDN automatically scans, resizes, and compresses your images, converting them to next-gen formats like WebP with no visible loss in quality for faster loading.
@@ -231,7 +236,7 @@ const LinuxHosting = () => {
                         <Col lg={4} md={6} className="mb-4">
                             <Card className="h-100 feature-card">
                                 <Card.Body>
-                                    <div className="feature-icon-top"><i className="fas fa-file-code"></i></div>
+                                    <div className="feature-icon-top"><i className="fas fa-file-code fa-icon"></i></div>
                                     <Card.Title as="h5">Code Minification</Card.Title>
                                     <Card.Text className="text-muted">
                                         To reduce browser processing time, our CDN can automatically minify your HTML, CSS, and JavaScript files by stripping out unnecessary whitespace and comments.
@@ -242,7 +247,7 @@ const LinuxHosting = () => {
                         <Col lg={4} md={6} className="mb-4">
                             <Card className="h-100 feature-card">
                                 <Card.Body>
-                                    <div className="feature-icon-top"><i className="fas fa-layer-group"></i></div>
+                                    <div className="feature-icon-top"><i className="fas fa-layer-group fa-icon"></i></div>
                                     <Card.Title as="h5">Edge Caching & Lazy Loading</Card.Title>
                                     <Card.Text className="text-muted">
                                         We cache your static content at our global edge nodes, closer to your visitors. Lazy loading defers off-screen images, ensuring the visible part of your page loads first.
