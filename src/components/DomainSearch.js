@@ -171,7 +171,7 @@ const DomainSearch = () => {
            
             </Col>
             <Col lg={5}>
-              <Row className="justify-content-center">
+              <Row className="justify-content-center gx-2">
                 {PRIMARY_TLDS.map((tld) => {
                   const logo = tldLogos[tld];
                   const price = tldPrices[tld]?.price;

@@ -31,7 +31,7 @@
 }
 
 .tld-item {
-  padding: 0.5rem;
+  padding: 0.5rem 0.25rem;
 }
 
 .tld-logo {
@@ -42,4 +42,5 @@
 .tld-price {
   font-weight: 600;
   color: #495057;
+  font-size: 0.9rem;
 }
