@@ -72,9 +72,8 @@ const Footer = () => {
         >
           <h5>Support</h5>
           <ul className="list-unstyled footer-links">
-            <li><Link to="/support">Contact Us</Link></li>
-            <li><Link to="/knowledge-base">Knowledge Base</Link></li>
-          </ul>
+            <li> <Link to="https://my.hostdada.co.uk/submitticket.php"  target="_blank" >Contact Us</Link></li>
+ <Link to="https://my.hostdada.co.uk/index.php?rp=/knowledgebase"  target="_blank" >Knowledge Base</Link>          </ul>
           <h5>Legal</h5>
           <ul className="list-unstyled footer-links">
             <li><Link to="/terms">Terms & Conditions</Link></li>
