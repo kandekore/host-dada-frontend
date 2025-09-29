@@ -16,7 +16,7 @@ app.set('trust proxy', true);            // you already have this
 
 app.use((req, res, next) => {
   // Check if the request path starts with /knowledgebase/
-  if (req.path.startsWith('/knowledgebase/')) {
+  if (req.path.startsWith('/index.php/knowledgebase/')) {
     // Construct the new URL, preserving the path and any query strings
     const newUrl = `https://my.hostdada.co.uk${req.originalUrl}`;
     
