@@ -12,21 +12,30 @@ const app = express();
 
 
 
-app.set('trust proxy', true);            // you already have this
+// If you're behind a proxy/load balancer, keep this so req.hostname honors X-Forwarded-*.
+app.set('trust proxy', true);
+
+const KB_SEGMENT = '/index.php/knowledgebase';
 
 app.use((req, res, next) => {
-  // Check if the request path starts with /knowledgebase/
-  if (req.path.startsWith('/index.php/knowledgebase/')) {
-    // Construct the new URL, preserving the path and any query strings
-    const newUrl = `https://my.hostdada.co.uk${req.originalUrl}`;
-    
-    // Issue a 301 Permanent Redirect
-    return res.redirect(301, newUrl);
+  // Only touch knowledgebase URLs (with or without trailing slash, with or without query)
+  if (req.originalUrl.startsWith(KB_SEGMENT)) {
+    // Guard against any chance of running this on the subdomain in the future
+    const host = (req.headers['x-forwarded-host'] || req.headers.host || '')
+      .split(',')[0].trim().toLowerCase();
+
+    if (host !== 'my.hostdada.co.uk') {
+      // Preserve full path + query string exactly as-is
+      const target = `https://my.hostdada.co.uk${req.originalUrl}`;
+      return res.redirect(301, target);
+    }
   }
-  
-  // If the path doesn't match, continue to the next middleware (your app)
+
   next();
 });
+
+
+
 app.use(express.static(path.join(__dirname, '../build'))); // <-- ADD THIS LINE
 
 const allowedOrigins = [
