@@ -408,12 +408,13 @@ app.get('/sitemap.xml', async (req, res) => {
   }
 });
 
+
+app.get(/^\/(?!api).*/, (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../build', 'index.html'));
+});
+
 const PORT = process.env.PORT || 3001;
 const HOST = process.env.HOST || '127.0.0.1';
-
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../build/index.html'));
-})
 
 app.listen(PORT, HOST, () => {
   console.log(`API listening on http://${HOST}:${PORT}`);
