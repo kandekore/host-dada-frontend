@@ -10,24 +10,11 @@ const siteStructure = require('../src/data/siteStructure');
 
 const app = express();
 
+app.use(express.static(path.join(__dirname, '../build'))); // <-- ADD THIS LINE
 
 
 app.set('trust proxy', true);            // you already have this
 
-app.use((req, res, next) => {
-  // Check if the request path starts with /knowledgebase/
-  if (req.path.startsWith('/knowledgebase/')) {
-    // Construct the new URL, preserving the path and any query strings
-    const newUrl = `https://my.hostdada.co.uk${req.originalUrl}`;
-    
-    // Issue a 301 Permanent Redirect
-    return res.redirect(301, newUrl);
-  }
-  
-  // If the path doesn't match, continue to the next middleware (your app)
-  next();
-});
-app.use(express.static(path.join(__dirname, '../build'))); // <-- ADD THIS LINE
 
 const allowedOrigins = [
   'http://localhost:3000', 
@@ -39,7 +26,6 @@ const allowedOrigins = [
   'https://my.hostdada.co.uk'
   // Add your production domain here when you go live, e.g., 'https://www.your-site.com'
 ];
-
 
 app.use(cors({
   origin: function (origin, callback) {
