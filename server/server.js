@@ -14,19 +14,19 @@ const app = express();
 
 app.set('trust proxy', true);            // you already have this
 
-// app.use((req, res, next) => {
-//   // Check if the request path starts with /knowledgebase/
-//   if (req.path.startsWith('/knowledgebase/')) {
-//     // Construct the new URL, preserving the path and any query strings
-//     const newUrl = `https://my.hostdada.co.uk${req.originalUrl}`;
+app.use((req, res, next) => {
+  // Check if the request path starts with /knowledgebase/
+  if (req.path.startsWith('/knowledgebase/')) {
+    // Construct the new URL, preserving the path and any query strings
+    const newUrl = `https://my.hostdada.co.uk${req.originalUrl}`;
     
-//     // Issue a 301 Permanent Redirect
-//     return res.redirect(301, newUrl);
-//   }
+    // Issue a 301 Permanent Redirect
+    return res.redirect(301, newUrl);
+  }
   
-//   // If the path doesn't match, continue to the next middleware (your app)
-//   next();
-//});
+  // If the path doesn't match, continue to the next middleware (your app)
+  next();
+});
 app.use(express.static(path.join(__dirname, '../build'))); // <-- ADD THIS LINE
 
 const allowedOrigins = [
