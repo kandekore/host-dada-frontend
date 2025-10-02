@@ -30,7 +30,7 @@ const DomainExtensionPage = () => {
     <Container className="my-5 domains">
       <Row>
         <Col>
-          <div className='domain-extension-container'><p className="domain-extension">.{domain.title.rendered}</p></div><h1>.{domain.title.rendered} Domain Extension</h1>
+          <h1>.{domain.title.rendered} Domain Extension</h1>
           <hr />
           <div dangerouslySetInnerHTML={createMarkup(domain.content.rendered)} />
         </Col>
