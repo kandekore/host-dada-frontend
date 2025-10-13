@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Container, Row, Col, Form, Button, Card, Spinner, Alert } from 'react-bootstrap';
 import { Helmet } from 'react-helmet-async';
-import { useSearchParams } from 'react-router-dom'; // Import useSearchParams
+import { useSearchParams } from 'react-router-dom';
 import { API_BASE } from '../config';
 
 const DomainsWhois = () => {
@@ -9,21 +9,11 @@ const DomainsWhois = () => {
     const [whoisData, setWhoisData] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
-    const [searchParams] = useSearchParams(); // Get the search params from the URL
+    const [searchParams] = useSearchParams();
 
-    // This effect runs when the component loads
-    useEffect(() => {
-        const domainFromUrl = searchParams.get('domain'); // Look for a 'domain' parameter
-        if (domainFromUrl) {
-            setDomain(domainFromUrl);
-            // Optional: Automatically trigger the search if you want
-            // handleSubmit(new Event('submit'), domainFromUrl); 
-        }
-    }, [searchParams]);
-
-    const handleSubmit = async (e, domainToSearch = domain) => {
-        e.preventDefault();
-        if (!domainToSearch.trim()) {
+    // Define the submit handler using useCallback to prevent it from being recreated on every render
+    const handleSearch = useCallback(async (domainToSearch) => {
+        if (!domainToSearch || !domainToSearch.trim()) {
             setError('Please enter a domain name.');
             return;
         }
@@ -48,6 +38,22 @@ const DomainsWhois = () => {
         } finally {
             setIsLoading(false);
         }
+    }, []); // Empty dependency array means this function is created only once
+
+    // This effect runs when the component loads or searchParams change
+    useEffect(() => {
+        const domainFromUrl = searchParams.get('domain');
+        if (domainFromUrl) {
+            setDomain(domainFromUrl);
+            // Automatically trigger the search with the domain from the URL
+            handleSearch(domainFromUrl);
+        }
+    }, [searchParams, handleSearch]);
+
+    // Form submission handler
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        handleSearch(domain);
     };
 
     return (
